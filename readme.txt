@@ -1,0 +1,77 @@
+=== Ninja Forms - Layout & Styles Extension ===
+Contributors: kstover, jameslaws
+Donate link: http://wpninjas.com
+Tags: form, forms, CSS
+Requires at least: 3.3
+Tested up to: 3.5
+Stable tag: 0.9
+
+License: GPLv2 or later
+
+== Description ==
+The Ninja Forms Layout & Styles Extension allows users to create very complex layouts and styles with liitle to no experience with CSS right in their WordPress admin.
+
+== Screenshots ==
+
+To see up to date screenshots, visit the [Ninja Forms](http://wpninjas.com/ninja-forms/) page.
+
+== Installation ==
+
+This section describes how to install the plugin and get it working.
+
+1. Upload the `ninja-forms-style` directory to your `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
+== Use ==
+
+For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://wpninjas.com/ninja-forms/docs/)
+
+== Changelog ==
+
+= 0.9 =
+
+*Changes:*
+		
+* The selector used for the "next" and "previous" buttons in Multi-Part Forms has been changed.
+* Added "Page" styles for use with AJAX submissions and Mult-Part Forms.
+
+= 0.8 =
+
+*Features:*
+
+* Added new AJAX submissions and Multi-Part Forms styling options.
+
+= 0.7 =
+
+*Changes:*
+		
+* Added a filter to the fields array that is output on the layout editing screen.
+
+= 0.6 =
+
+*Bugs:*
+
+*Bugs:*
+
+* Fixed a bug that could cause the "Error Message Styles" from saving properly.
+
+= 0.5 =
+
+*Bugs:*
+
+* The admin JS file should now include properly on sites using versions of WordPress before 3.5.
+
+= 0.4 =
+
+*Features:*
+
+* Added styling options for Multi-Part Forms elements.
+
+= 0.3 =
+* Fixed a bug in the minified JS.
+
+= 0.2 =
+* Fixed a bug that prevented some users from activating their installations.
+
+= 0.1 =
+* Initial release
