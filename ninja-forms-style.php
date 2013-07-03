@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms - Layout & Styles
 Plugin URI: http://ninjaforms.com
 Description: Form layout and styling add-on for Ninja Forms.
-Version: 0.9
+Version: 1.0
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -11,7 +11,7 @@ global $wpdb;
 
 define("NINJA_FORMS_STYLE_DIR", WP_PLUGIN_DIR."/ninja-forms-style");
 define("NINJA_FORMS_STYLE_URL", plugins_url()."/ninja-forms-style");
-define("NINJA_FORMS_STYLE_VERSION", "0.9");
+define("NINJA_FORMS_STYLE_VERSION", "1.0");
 
 
 // this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
@@ -47,6 +47,7 @@ $edd_updater = new EDD_SL_Plugin_Updater( NINJA_FORMS_STYLE_EDD_SL_STORE_URL, __
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/admin.php");
 
 require_once(NINJA_FORMS_STYLE_DIR."/includes/license-option.php");
+require_once(NINJA_FORMS_STYLE_DIR."/includes/functions.php");
 
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms-style/tabs/form-settings/form-settings.php");
 
