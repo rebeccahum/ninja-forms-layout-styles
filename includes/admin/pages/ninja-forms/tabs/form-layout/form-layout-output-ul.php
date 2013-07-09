@@ -35,6 +35,7 @@ function ninja_forms_style_output_layout_ul( $form_id, $cols, $fields = '', $pag
 				}else{
 					$label = '';
 				}
+				$label = strip_tags( $label );
 				if( $label == '' AND isset( $ninja_forms_fields[$type]['name'] ) ){
 					$label = $ninja_forms_fields[$type]['name'];
 				}
