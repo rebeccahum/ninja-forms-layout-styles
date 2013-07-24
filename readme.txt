@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms, CSS
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 License: GPLv2 or later
 
@@ -27,6 +27,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://wpninjas.com/ninja-forms/docs/)
 
 == Changelog ==
+
+= 1.0.1 =
+
+*Bugs:*
+
+* Fixed a visual bug with the placement of the Form Settings metabox.
 
 = 1.0 =
 

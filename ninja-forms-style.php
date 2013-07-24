@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Ninja Forms - Layout & Styles
-Plugin URI: http://ninjaforms.com
+Plugin URI: http://wpninjas.com
 Description: Form layout and styling add-on for Ninja Forms.
-Version: 1.0
+Version: 1.0.1
 Author: The WP Ninjas
-Author URI: http://wpninjas.net
+Author URI: http://wpninjas.com
 */
 global $wpdb;
 
 define("NINJA_FORMS_STYLE_DIR", WP_PLUGIN_DIR."/ninja-forms-style");
 define("NINJA_FORMS_STYLE_URL", plugins_url()."/ninja-forms-style");
-define("NINJA_FORMS_STYLE_VERSION", "1.0");
+define("NINJA_FORMS_STYLE_VERSION", "1.0.1");
 
 
 // this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
