@@ -91,6 +91,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$(".ninja-forms-style-expand").live("click", function(event){
+		event.preventDefault();
 		if( $("#mp_form").val() == "1" ){
 			var page = $("#mp_page").val();
 			var cols = $("#cols_" + page).val();
