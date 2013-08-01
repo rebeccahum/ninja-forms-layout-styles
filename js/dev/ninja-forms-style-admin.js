@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 
-	$("#advanced_css").live("change", function(){
+	$(document).on( 'change', '#advanced_css', function(){
 		if( this.checked ){
 			$("tr.advanced").removeClass("hidden");
 		}else{
@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 	});	
 
 	//Field Styling Thickbox Controls
-	$(".field-styling").live("click", function(event){
+	$(document).on( 'click', '.field-styling', function(event){
 		var field_id = this.id.replace("styling_", "");
 		$("#ninja_forms_field_styling").prop("innerHTML", "");
 		$("#loading_style").show();
@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
 		//return false;
 	});
 
-	$(".ninja-forms-style-expand").live("click", function(event){
+	$(document).on( 'click', '.ninja-forms-style-expand', function(event){
 		event.preventDefault();
 		if( $("#mp_form").val() == "1" ){
 			var page = $("#mp_page").val();
@@ -144,7 +144,7 @@ jQuery(document).ready(function($) {
 
 	});
 
-	$(".style-mp-page").live("click", function(e){
+	$(document).on( 'click', '.style-mp-page', function(e){
 		e.preventDefault();
 		var page_number = this.title;
 		var new_page = jQuery("#ninja_forms_style_mp_" + page_number).position().left;
