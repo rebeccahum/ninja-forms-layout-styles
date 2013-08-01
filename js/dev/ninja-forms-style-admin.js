@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 	});	
 
 	//Field Styling Thickbox Controls
-	$(document).on( 'click', '.field-styling', function(event){
+	$('body').on( 'click', '.field-styling', function(event){
 		var field_id = this.id.replace("styling_", "");
 		$("#ninja_forms_field_styling").prop("innerHTML", "");
 		$("#loading_style").show();
