@@ -111,6 +111,22 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					ninja_forms_register_tab_metabox($args);
 				}
 			}
+
+			if( $_REQUEST['field_type'] == '_submit' ){
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'submit-hover',
+					'title' => __( 'Element Hover Styles', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field:hover',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox($args);
+				}
+			}
 		}
 	}else{
 		$args = array(
@@ -195,6 +211,20 @@ function ninja_forms_register_style_field_type_metaboxes(){
 			'display_function' => 'ninja_forms_style_field_type_field_display',
 			'save_page' => 'field_type',
 			'css_selector' => 'div.[type_slug]-wrap ul li input',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox($args);
+		}
+
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'submit-hover',
+			'title' => __( 'Element Hover Styles', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field:hover',
 		);
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 			ninja_forms_register_tab_metabox($args);

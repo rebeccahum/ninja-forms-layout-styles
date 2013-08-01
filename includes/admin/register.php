@@ -12,7 +12,7 @@ function ninja_forms_register_css_option( $slug, $args ){
 
 function ninja_forms_register_style_metabox( $slug, $args ){
 	global $ninja_forms_style_metaboxes;
-	
+
 	if( isset( $args['field_type'] ) AND $args['field_type'] != '' ){
 		$field_type = $args['field_type'];
 		$ninja_forms_style_metaboxes['field'][$field_type][$slug] = $args;
@@ -24,7 +24,7 @@ function ninja_forms_register_style_metabox( $slug, $args ){
 
 function ninja_forms_unregister_style_metabox( $slug, $args ){
 	global $ninja_forms_style_metaboxes;
-	
+
 	if( isset( $args['field_type'] ) AND $args['field_type'] != '' ){
 		$field_type = $args['field_type'];
 		unset( $ninja_forms_style_metaboxes['field'][$field_type][$slug] );
@@ -71,7 +71,7 @@ function ninja_forms_css_options(){
 			'desc' => '',
 			'class' => 'color-picker',
 			'group' => 'basic',
-			'css_property' => 'background-color',
+			'css_property' => 'background',
 		),
 		array(
 			'name' => 'border',

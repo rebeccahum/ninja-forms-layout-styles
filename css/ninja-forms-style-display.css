@@ -48,6 +48,6 @@
         width: 100%;
         margin-right: 0;
     }
-    .ninja-row { psdding: 30px; }
+    .ninja-row { padding: 30px; }
     .ninja-row  > [class*='ninja-col-']:last-of-type { padding-right: 0; }
 }
