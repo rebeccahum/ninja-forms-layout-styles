@@ -43,11 +43,9 @@
 /* =Responsive Structure
 ----------------------------------------------- */
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    .ninja-col-1, .ninja-col-2, .ninja-col-3, .ninja-col-4 {
+@media  only screen and (max-width: 600px) {
+    .ninja-row [class*='ninja-col-'] {
         width: 100%;
         margin-right: 0;
     }
-    .ninja-row { padding: 30px; }
-    .ninja-row  > [class*='ninja-col-']:last-of-type { padding-right: 0; }
 }
