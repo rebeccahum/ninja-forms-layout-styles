@@ -159,7 +159,7 @@ function ninja_forms_form_style_tab(){
 			}
 		</style>
 	<?php
-
+	
 }
 
 function ninja_forms_style_form_metabox_output( $metabox ){

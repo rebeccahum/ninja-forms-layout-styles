@@ -2,7 +2,6 @@
 
 add_action( 'admin_init', 'ninja_forms_register_style_sidebar_select_field' );
 function ninja_forms_register_style_sidebar_select_field(){
-	global $ninja_forms_fields;
 	$args = array(
 		'name' => 'Select A Field Type',
 		'page' => 'ninja-forms-style',
@@ -18,9 +17,53 @@ function ninja_forms_register_style_sidebar_select_field(){
 }
 
 function ninja_forms_style_sidebar_select_field_display(){
+	global $ninja_forms_fields;
+	$ninja_forms_fields['_list']['type_dropdown_function'] = 'ninja_forms_list_field_type_dropdown';
 	$args = array();
 	if( isset( $_REQUEST['field_type'] ) ){
 		$args['selected'] = $_REQUEST['field_type'];
 	}
 	ninja_forms_field_type_dropdown( $args );
+}
+
+/*
+ *
+ * Function that outputs select options for our "list" field type, since it has sub-types.
+ *
+ * @since 1.0.3
+ * @returns string $output
+ */
+
+function ninja_forms_list_field_type_dropdown( $selected ){
+	$output = '<option value="" disabled>List</option>';
+
+	if ( $selected == '_list-dropdown' ) {
+		$select = 'selected="selected"';
+	} else {
+		$select = '';
+	}
+	$output .= '<option value="_list-dropdown" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Dropdown (Select)</option>';
+
+	if ( $selected == '_list-radio' ) {
+		$select = 'selected="selected"';
+	} else {
+		$select = '';
+	}
+	$output .= '<option value="_list-radio" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Radio</option>';
+
+	if ( $selected == '_list-checkbox' ) {
+		$select = 'selected="selected"';
+	} else {
+		$select = '';
+	}
+	$output .= '<option value="_list-checkbox" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Checkboxes</option>';
+
+	if ( $selected == '_list-multi' ) {
+		$select = 'selected="selected"';
+	} else {
+		$select = '';
+	}
+	$output .= '<option value="_list-multi" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Multi-Select</option>';
+
+	return $output;
 }

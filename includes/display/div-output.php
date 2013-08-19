@@ -1,11 +1,5 @@
 <?php
 
-add_action( 'init', 'ninja_forms_register_style_ul_output' );
-function ninja_forms_register_style_ul_output(){
-	add_action( 'ninja_forms_display_before_field', 'ninja_forms_style_ul_open', 11, 2);
-	add_action( 'ninja_forms_display_after_field', 'ninja_forms_style_ul_close', 9, 2 );
-}
-
 function ninja_forms_style_ul_open( $field_id, $data ){
 	global $ninja_forms_style_row_col, $ninja_forms_processing;
 
@@ -72,8 +66,9 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 		
  		<?php
    	}
-
 }
+
+add_action( 'ninja_forms_display_before_field', 'ninja_forms_style_ul_open', 11, 2);
 
 function ninja_forms_style_ul_close( $field_id, $data ){
 	global $ninja_forms_style_row_col, $ninja_forms_processing;
@@ -140,5 +135,6 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 			$ninja_forms_style_row_col = 0;
 		}
 	}
-
 }
+
+add_action( 'ninja_forms_display_after_field', 'ninja_forms_style_ul_close', 9, 2 );

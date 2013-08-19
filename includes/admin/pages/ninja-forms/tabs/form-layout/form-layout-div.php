@@ -7,7 +7,7 @@ function ninja_forms_register_style_layout_tab_div(){
 
 function ninja_forms_style_layout_tab_div( $form_id ){
 	if( $form_id != '' ){
-
+		
 		$form_row = ninja_forms_get_form_by_id( $form_id );
 		$form_data = $form_row['data'];
 
@@ -15,7 +15,11 @@ function ninja_forms_style_layout_tab_div( $form_id ){
 			$cols = $form_data['style']['cols'];
 		}else{
 			$cols = 1;
-		}		
+		}
+
+		if ( !is_numeric( $cols ) OR $cols == 0 ) {
+			$cols = 1;
+		}
 
 		$all_fields = ninja_forms_get_fields_by_form_id( $form_id );
 		?>
@@ -32,11 +36,13 @@ function ninja_forms_style_layout_tab_div( $form_id ){
 		<input type="hidden" name="order" id="order" value="">
 		<div id="col_fields">
 			<?php
+
 			for ($x=1; $x <= $cols; $x++) { 
 				?>
 				<input type="hidden" name="col_<?php echo $x;?>" id="col_<?php echo $x;?>" value="">
 				<?php
 			}
+
 			?>
 		</div>
 		<div class="layout">
