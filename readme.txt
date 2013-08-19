@@ -28,6 +28,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
+= 1.0.3 =
+
+*Bugs:*
+
+* Fixed a bug that prevented List fields from working properly on the Default Field Styles tab.
+
 = 1.0.2 =
 
 *Changes:*
