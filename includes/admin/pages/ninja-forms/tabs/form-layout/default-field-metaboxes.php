@@ -46,14 +46,16 @@ function ninja_forms_style_default_metaboxes(){
 add_action( 'init', 'ninja_forms_style_submit_metaboxes' );
 function ninja_forms_style_submit_metaboxes(){
 	add_action( 'ninja_forms_style_field_metaboxes', 'ninja_forms_style_modify_submit_metaboxes', 10, 1 );
-	if( !is_admin() ){
-		$field_id = '';
-		ninja_forms_style_modify_submit_metaboxes($field_id);
-	}
 }
 
-function ninja_forms_style_modify_submit_metaboxes( $field_id ){
+function ninja_forms_style_submit_front_end( $field_id ){
+	ninja_forms_style_modify_submit_metaboxes( $field_id );
+}
 
+add_action( 'ninja_forms_display_after_field', 'ninja_forms_style_submit_front_end' );
+
+
+function ninja_forms_style_modify_submit_metaboxes( $field_id ){
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_type = $field_row['type'];
 	if( $field_type == '_submit' ){
