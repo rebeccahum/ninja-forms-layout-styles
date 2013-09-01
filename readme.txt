@@ -1,19 +1,15 @@
 === Ninja Forms - Layout & Styles Extension ===
 Contributors: kstover, jameslaws
-Donate link: http://wpninjas.com
+Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.2
+Stable tag: 1.0.5
 
 License: GPLv2 or later
 
 == Description ==
 The Ninja Forms Layout & Styles Extension allows users to create very complex layouts and styles with liitle to no experience with CSS right in their WordPress admin.
-
-== Screenshots ==
-
-To see up to date screenshots, visit the [Ninja Forms](http://wpninjas.com/ninja-forms/) page.
 
 == Installation ==
 
@@ -24,9 +20,21 @@ This section describes how to install the plugin and get it working.
 
 == Use ==
 
-For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://wpninjas.com/ninja-forms/docs/)
+For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.0.5 =
+
+*Changes:*
+
+* Changed references to wpninjas.com to the new ninjaforms.com.
+
+= 1.0.4 =
+
+*Bugs:*
+
+* Fixed a bug that prevented the per form hover state styles being applied to submit buttons.
 
 = 1.0.3 =
 
