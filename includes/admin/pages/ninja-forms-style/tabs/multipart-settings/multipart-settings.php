@@ -3,7 +3,7 @@
 add_action( 'init', 'ninja_forms_register_tab_style_mp_settings' );
 function ninja_forms_register_tab_style_mp_settings(){
 	$args = array(
-		'name' => 'Multi-Part Styles',
+		'name' => __( 'Multi-Part Styles', 'ninja-forms-style' ),
 		'page' => 'ninja-forms-style',
 		'display_function' => 'ninja_forms_style_advanced_checkbox_display',
 		'save_function' => 'ninja_forms_save_style_mp_settings',

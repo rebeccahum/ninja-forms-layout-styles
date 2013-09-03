@@ -3,7 +3,7 @@
 add_action( 'init', 'ninja_forms_register_tab_impexp_style', 11 );
 function ninja_forms_register_tab_impexp_style(){
 	$args = array(
-		'name' => 'Styles',
+		'name' => __( 'Styles', 'ninja-forms-style' ),
 		'page' => 'ninja-forms-impexp',
 		'display_function' => '',
 		'save_function' => 'ninja_forms_save_impexp_style',

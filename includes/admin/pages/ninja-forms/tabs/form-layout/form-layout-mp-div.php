@@ -91,7 +91,7 @@ function ninja_forms_style_layout_tab_mp_div( $form_id ){
 					?>
 					<div id="ninja_forms_style_mp_<?php echo $page;?>" class="style-layout">
 						<div>
-							Columns: 
+							<?php _e( 'Columns', 'ninja-forms-style' ); ?>: 
 							<select name="cols_<?php echo $page;?>" id="cols_<?php echo $page;?>" class="ninja-forms-style-col">
 								<option value="1" <?php selected( $cols, 1 );?>>1</option>
 								<option value="2" <?php selected( $cols, 2 );?>>2</option>

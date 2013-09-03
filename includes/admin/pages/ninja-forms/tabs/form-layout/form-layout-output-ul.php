@@ -50,8 +50,8 @@ function ninja_forms_style_output_layout_ul( $form_id, $cols, $fields = '', $pag
 				}
 				if( $display_function != '' ){
 					?>
-					<li class="ui-state-default span-<?php echo $colspan;?>" rel="<?php echo $colspan;?>" id="ninja_forms_field_<?php echo $field['id'];?>_li"><span class="style-handle"><?php echo $label;?><br />Field:<?php echo $field['id'];?></span>
-						<a href="#" class="ninja-forms-style-expand ninja-forms-style-button">resize</a><br /><a href="#TB_inline?height=750&width=400&height=400&inlineId=ninja_forms_field_style_div&modal=true" class="thickbox field-styling ninja-forms-style-button" id="styling_<?php echo $field['id'];?>">styling</a>
+					<li class="ui-state-default span-<?php echo $colspan;?>" rel="<?php echo $colspan;?>" id="ninja_forms_field_<?php echo $field['id'];?>_li"><span class="style-handle"><?php echo $label;?><br /><?php _e( 'Field ID', 'ninja-forms-style' ); ?>: <?php echo $field['id'];?></span>
+						<a href="#" class="ninja-forms-style-expand ninja-forms-style-button"><?php _e( 'resize', 'ninja-forms-style' ); ?></a><br /><a href="#TB_inline?height=750&width=400&height=400&inlineId=ninja_forms_field_style_div&modal=true" class="thickbox field-styling ninja-forms-style-button" id="styling_<?php echo $field['id'];?>"><?php _e( 'styling', 'ninja-forms-style' ); ?></a>
 					</li>
 					<input type="hidden" name="colspan[<?php echo $field['id'];?>]" id="ninja_forms_field_<?php echo $field['id'];?>_colspan" value="<?php echo $colspan;?>">
 					<?php

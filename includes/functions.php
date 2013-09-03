@@ -18,7 +18,7 @@ if ( !function_exists( 'ninja_forms_field_type_dropdown' ) ) {
 		ksort( $groups );
 
 		$output = '<select name="field_type" id="field_type">
-			<option value="">- Field Type</option>';
+			<option value="">' . __( '- Field Type', 'ninja-forms-style' ) . '</option>';
 			foreach( $groups as $gslug => $group ){
 				$group_name = $group['name'];
 				$output .= '<optgroup label="'.$group_name.'">';

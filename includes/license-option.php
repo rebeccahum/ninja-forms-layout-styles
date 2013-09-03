@@ -8,10 +8,10 @@ function ninja_forms_register_tab_metabox_option_style_license(){
 		'slug' => 'license_settings',
 		'settings' => array(
 			array(
-				'name' => 'style_license',
-				'type' => 'text',
-				'label' => __( 'Layout & Styles License Key', 'ninja-forms-style' ),
-				'desc' => __( 'You will find this included with your purchase email.', 'ninja-forms-style' ),
+				'name'          => 'style_license',
+				'type'          => 'text',
+				'label'         => __( 'Layout & Styles License Key', 'ninja-forms-style' ),
+				'desc'          => __( 'You will find this included with your purchase email.', 'ninja-forms-style' ),
 				'save_function' => 'ninja_forms_style_activate_license',
 			),
 		),

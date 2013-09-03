@@ -217,7 +217,7 @@ function ninja_forms_style_metabox_options_output( $metabox ){
 				?>
 				<tr class="<?php echo $tr_class;?>">
 					<th>
-						<label for="<?php echo $name;?>_select_all">- <?php _e( 'Select All', 'ninja-forms' );?></label>
+						<label for="<?php echo $name;?>_select_all">- <?php _e( 'Select All', 'ninja-forms-style' );?></label>
 					</th>
 					<td>
 						<input type="checkbox" name="" value="" id="<?php echo $name;?>_select_all" class="ninja-forms-select-all" title="ninja-forms-<?php echo $name;?>">
