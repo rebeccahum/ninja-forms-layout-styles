@@ -3,7 +3,7 @@
 add_action( 'admin_init', 'ninja_forms_register_style_sidebar_select_field' );
 function ninja_forms_register_style_sidebar_select_field(){
 	$args = array(
-		'name' => 'Select A Field Type',
+		'name' => __( 'Select A Field Type', 'ninja-forms-style' ),
 		'page' => 'ninja-forms-style',
 		'tab' => 'field_type_settings',
 		'display_function' => 'ninja_forms_style_sidebar_select_field_display',

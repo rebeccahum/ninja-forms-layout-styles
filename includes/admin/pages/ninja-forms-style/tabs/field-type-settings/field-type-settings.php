@@ -3,7 +3,7 @@
 add_action( 'init', 'ninja_forms_register_tab_style_field_type_settings' );
 function ninja_forms_register_tab_style_field_type_settings(){
 	$args = array(
-		'name' => 'Field Type Styles',
+		'name' => __( 'Field Type Styles', 'ninja-forms-style' ),
 		'page' => 'ninja-forms-style',
 		'display_function' => 'ninja_forms_style_advanced_checkbox_display',
 		'save_function' => 'ninja_forms_save_style_field_type_settings',

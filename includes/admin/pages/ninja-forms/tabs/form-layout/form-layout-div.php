@@ -25,7 +25,7 @@ function ninja_forms_style_layout_tab_div( $form_id ){
 		?>
 		<br />
 		<div>
-			Columns: 
+			<?php _e( 'Columns', 'ninja-forms-style' ); ?>: 
 			<select name="cols" id="cols">
 				<option value="1" <?php selected( $cols, 1 );?>>1</option>
 				<option value="2" <?php selected( $cols, 2 );?>>2</option>

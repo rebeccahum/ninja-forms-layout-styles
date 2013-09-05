@@ -13,10 +13,10 @@ function ninja_forms_style_admin_js(){
 				NINJA_FORMS_STYLE_URL .'/js/min/color-picker.min.js' );
 
 			wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
-				'clear' => __( 'Clear' ),
-				'defaultString' => __( 'Default' ),
-				'pick' => __( 'Select Color' ),
-				'current' => __( 'Current Color' ),
+				'clear' => __( 'Clear', 'ninja-forms-style' ),
+				'defaultString' => __( 'Default', 'ninja-forms-style' ),
+				'pick' => __( 'Select Color', 'ninja-forms-style' ),
+				'current' => __( 'Current Color', 'ninja-forms-style' ),
 				) );
 		}else{
 			wp_enqueue_script( 'wp-color-picker' );

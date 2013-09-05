@@ -2,7 +2,7 @@
 
 function ninja_forms_register_tab_form_style(){
 	$args = array(
-		'name' => 'Layout & Styles',
+		'name' => __( 'Layout & Styles', 'ninja-forms-style' ),
 		'page' => 'ninja-forms',
 		'display_function' => 'ninja_forms_form_style_tab',
 		'save_function' => 'ninja_forms_save_form_style',
@@ -25,7 +25,7 @@ function ninja_forms_form_style_tab(){
 		$form_id = '';
 	}
 	?>
-	<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_top" type="submit" value="<?php _e('Save Layout', 'ninja-forms-style'); ?>" />
+	<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_top" type="submit" value="<?php _e( 'Save Layout', 'ninja-forms-style' ); ?>" />
 	<a href="#TB_inline?height=750&width=400&height=400&inlineId=ninja_forms_form_style_div&modal=true" class="thickbox button-secondary"><?php _e( 'Modify Form Styles', 'ninja-forms-style' );?></a>
 	<br />
 	<br />
@@ -259,6 +259,6 @@ function ninja_forms_save_form_style( $form_id, $data ){
 		}
 	}
 
-	$update_msg = __( 'Form Layout Saved', 'ninja-forms' );
+	$update_msg = __( 'Form Layout Saved', 'ninja-forms-style' );
 	return $update_msg;
 }
