@@ -2,9 +2,9 @@
 Contributors: kstover, jameslaws
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
-Requires at least: 3.3
-Tested up to: 3.5
-Stable tag: 1.0.5
+Requires at least: 3.4
+Tested up to: 3.6
+Stable tag: 1.0.6
 
 License: GPLv2 or later
 
@@ -23,6 +23,16 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.0.6 =
+
+*Bugs:*
+
+* Fixed a bug that prevented previous and next button in multi-part forms to be styles.
+
+*Changes:*
+
+* improved i18n compatability.
 
 = 1.0.5 =
 
@@ -63,7 +73,7 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 = 0.9 =
 
 *Changes:*
-		
+
 * The selector used for the "next" and "previous" buttons in Multi-Part Forms has been changed.
 * Added "Page" styles for use with AJAX submissions and Mult-Part Forms.
 
@@ -76,7 +86,7 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 = 0.7 =
 
 *Changes:*
-		
+
 * Added a filter to the fields array that is output on the layout editing screen.
 
 = 0.6 =
