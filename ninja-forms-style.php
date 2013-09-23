@@ -3,12 +3,25 @@
 Plugin Name: Ninja Forms - Layout & Styles
 Plugin URI: http://ninjaforms.com/downloads/layout-styles/
 Description: Form layout and styling add-on for Ninja Forms.
-Version: 1.0.6
+Version: 1.0.7
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms-style
 Domain Path: /languages/
 */
+
+define("NINJA_FORMS_STYLE_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
+define("NINJA_FORMS_STYLE_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
+define("NINJA_FORMS_STYLE_VERSION", "1.0.7");
+
+function ninja_forms_style_setup_license() {
+	if ( class_exists( 'NF_Extension_Updater' ) ) {
+		$NF_Extension_Updater = new NF_Extension_Updater( 'Layout and Styles', NINJA_FORMS_STYLE_VERSION, 'WP Ninjas', __FILE__, 'style' );
+	}
+}
+
+add_action( 'admin_init', 'ninja_forms_style_setup_license' );
+
 
 /**
  * Load translations for add-on.
@@ -42,44 +55,8 @@ add_action( 'plugins_loaded', 'ninja_forms_style_load_translations' );
 
 global $wpdb;
 
-define("NINJA_FORMS_STYLE_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_STYLE_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_STYLE_VERSION", "1.0.6");
-
-
-// this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
-define( 'NINJA_FORMS_STYLE_EDD_SL_STORE_URL', 'http://ninjaforms.com' ); // IMPORTANT: change the name of this constant to something unique to prevent conflicts with other plugins using this system
-
-// the name of your product. This is the title of your product in EDD and should match the download title in EDD exactly
-define( 'NINJA_FORMS_STYLE_EDD_SL_ITEM_NAME', 'Layout and Styles' ); // IMPORTANT: change the name of this constant to something unique to prevent conflicts with other plugins using this system
-
-//Require EDD autoupdate file
-if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
-	// load our custom updater if it doesn't already exist
-	require_once( NINJA_FORMS_STYLE_DIR.'/includes/EDD_SL_Plugin_Updater.php' );
-}
-
-$plugin_settings = get_option( 'ninja_forms_settings' );
-
-// retrieve our license key from the DB
-if( isset( $plugin_settings['style_license'] ) ){
-	$style_license = $plugin_settings['style_license'];
-}else{
-	$style_license = '';
-}
-
-// setup the updater
-$edd_updater = new EDD_SL_Plugin_Updater( NINJA_FORMS_STYLE_EDD_SL_STORE_URL, __FILE__, array(
-		'version' 	=> NINJA_FORMS_STYLE_VERSION, 		// current version number
-		'license' 	=> $style_license, 	// license key (used get_option above to retrieve from DB)
-		'item_name'     => NINJA_FORMS_STYLE_EDD_SL_ITEM_NAME, 	// name of this plugin
-		'author' 	=> 'WP Ninjas'  // author of this plugin
-	)
-);
-
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/admin.php");
 
-require_once(NINJA_FORMS_STYLE_DIR."/includes/license-option.php");
 require_once(NINJA_FORMS_STYLE_DIR."/includes/functions.php");
 
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms-style/tabs/form-settings/form-settings.php");
