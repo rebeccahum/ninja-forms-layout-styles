@@ -50,3 +50,16 @@ if ( !function_exists( 'ninja_forms_field_type_dropdown' ) ) {
 		}
 	}
 }
+
+
+function ninja_forms_style_filter_submit_css_selecter( $css_selector, $field_type ) {
+
+	if ( $css_selector == 'submit_hover' ) {
+		$css_selector = '.ninja-forms-form-wrap .ninja-forms-form input[type=submit]:hover';
+	} elseif ( $field_type == 'submit' ) {
+		$css_selector = '.ninja-forms-form-wrap .ninja-forms-form input[type=submit]';
+	}
+
+	return $css_selector;
+}
+add_filter( 'ninja_forms_style_field_type_css_selector', 'ninja_forms_style_filter_submit_css_selecter', 10, 2 );

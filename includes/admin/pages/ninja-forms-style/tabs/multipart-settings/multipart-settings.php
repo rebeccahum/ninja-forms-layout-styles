@@ -131,6 +131,22 @@ function ninja_forms_register_style_mp_settings_metaboxes(){
 	$args = array(
 		'page' => 'ninja-forms-style',
 		'tab' => 'mp_settings',
+		'slug' => 'mp_page_title',
+		'title' => __( 'Page Titles', 'ninja-forms-style' ),
+		'state' => 'closed',
+		'display_function' => 'ninja_forms_style_metabox_output',
+		'save_page' => 'form_settings',
+		'css_selector' => 'h3.ninja-forms-mp-page-title',
+		//'css_exclude' => array( 'float' ),
+	);
+
+	if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+		ninja_forms_register_tab_metabox($args);
+	}
+
+	$args = array(
+		'page' => 'ninja-forms-style',
+		'tab' => 'mp_settings',
 		'slug' => 'mp_prevnext_container',
 		'title' => __( 'Prev/Next Container', 'ninja-forms-style' ),
 		'state' => 'closed',
@@ -175,6 +191,22 @@ function ninja_forms_register_style_mp_settings_metaboxes(){
 	if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 		ninja_forms_register_tab_metabox($args);
 	}
+
+	$args = array(
+		'page' => 'ninja-forms-style',
+		'tab' => 'mp_settings',
+		'slug' => 'mp_button_hover',
+		'title' => __( 'Prev / Next Button Hover', 'ninja-forms-style' ),
+		'state' => 'closed',
+		'display_function' => 'ninja_forms_style_metabox_output',
+		'save_page' => 'form_settings',
+		'css_selector' => 'form.ninja-forms-form div.ninja-forms-mp-nav-wrap .ninja-forms-mp-nav:hover',
+		//'css_exclude' => array( 'float' ),
+	);
+
+	if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+		ninja_forms_register_tab_metabox($args);
+	}
 }
 
 function ninja_forms_save_style_mp_settings( $data ){
@@ -186,9 +218,11 @@ function ninja_forms_save_style_mp_settings( $data ){
 	$plugin_settings['style']['form_settings']['mp_breadcrumb_hover'] = $data['mp_breadcrumb_hover'];
 	$plugin_settings['style']['form_settings']['mp_progress_container'] = $data['mp_progress_container'];
 	$plugin_settings['style']['form_settings']['mp_progressbar_fill'] = $data['mp_progressbar_fill'];
+	$plugin_settings['style']['form_settings']['mp_page_title'] = $data['mp_page_title'];
 	$plugin_settings['style']['form_settings']['mp_prevnext_container'] = $data['mp_prevnext_container'];
 	$plugin_settings['style']['form_settings']['mp_prev'] = $data['mp_prev'];
 	$plugin_settings['style']['form_settings']['mp_next'] = $data['mp_next'];
+	$plugin_settings['style']['form_settings']['mp_button_hover'] = $data['mp_button_hover'];
 	$plugin_settings['style']['form_settings']['mp_page'] = $data['mp_page'];
 
 	update_option( 'ninja_forms_settings', $plugin_settings);

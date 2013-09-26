@@ -64,9 +64,9 @@ function ninja_forms_style_display_css( $form_id ){
 									}
 								}
 							}
-						echo '}';						
+						echo '}';
 					}
-					
+
 				}
 			}
 		}
@@ -98,7 +98,7 @@ function ninja_forms_style_display_css( $form_id ){
 					if( isset( $ninja_forms_tabs_metaboxes['ninja-forms-style']['field_type_settings'][$group] ) ){
 						$css_selector = $ninja_forms_tabs_metaboxes['ninja-forms-style']['field_type_settings'][$group]['css_selector'];
 						$css_selector = str_replace( '[type_slug]', $type_slug, $css_selector );
-					
+						$css_selector = apply_filters( 'ninja_forms_style_field_type_css_selector', $css_selector, $type_slug );
 						if( is_array( $props ) AND !empty( $props ) ){
 							echo $css_selector.'{';
 							foreach( $props as $prop => $value ){
@@ -113,9 +113,9 @@ function ninja_forms_style_display_css( $form_id ){
 									}
 								}
 							}
-							echo '}';						
+							echo '}';
 						}
-					}					
+					}
 				}
 			}
 		}
@@ -149,7 +149,7 @@ function ninja_forms_style_display_css( $form_id ){
 						echo '#ninja_forms_form_'.$form_id.'_wrap div.ninja-forms-error-msg {';
 						break;
 				}
-				
+
 				foreach( $props as $prop => $value ){
 					if( $value != '' ){
 						if( isset( $ninja_forms_css_options[$prop]['css_property'] ) ){
@@ -218,13 +218,13 @@ function ninja_forms_style_display_css( $form_id ){
 								}
 							}
 						}
-						echo '}';						
+						echo '}';
 					}
 				}
 			}
 		}
 	}
-	
+
 	?>
 	</style>
 	<?php
