@@ -168,7 +168,7 @@ function ninja_forms_register_style_mp_settings_metaboxes(){
 		'state' => 'closed',
 		'display_function' => 'ninja_forms_style_metabox_output',
 		'save_page' => 'form_settings',
-		'css_selector' => 'div.ninja-forms-mp-nav-wrap .ninja-forms-mp-prev',
+		'css_selector' => 'form.ninja-forms-form div.ninja-forms-mp-nav-wrap .ninja-forms-mp-prev',
 		//'css_exclude' => array( 'float' ),
 	);
 
@@ -184,7 +184,7 @@ function ninja_forms_register_style_mp_settings_metaboxes(){
 		'state' => 'closed',
 		'display_function' => 'ninja_forms_style_metabox_output',
 		'save_page' => 'form_settings',
-		'css_selector' => 'div.ninja-forms-mp-nav-wrap .ninja-forms-mp-next',
+		'css_selector' => 'form.ninja-forms-form div.ninja-forms-mp-nav-wrap .ninja-forms-mp-next',
 		//'css_exclude' => array( 'float' ),
 	);
 
