@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.0.8 =
+
+*Changes:*
+
+* Added additional styles for core such as an error selector fix, form title, button and hover. Also added styles for MP Page Titles, and pre / next hovers.
 
 = 1.0.7 =
 
