@@ -87,7 +87,7 @@ function ninja_forms_register_style_error_settings_metaboxes(){
 		'state' => 'closed',
 		'display_function' => 'ninja_forms_style_metabox_output',
 		'save_page' => 'form_settings',
-		'css_selector' => 'div.ninja-forms-error div',
+		'css_selector' => 'div.ninja-forms-error div.ninja-forms-field-error',
 		'css_exclude' => array( 'float' ),
 	);
 

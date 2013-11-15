@@ -121,7 +121,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					'state' => 'closed',
 					'display_function' => 'ninja_forms_style_field_type_field_display',
 					'save_page' => 'field_type',
-					'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field:hover',
+					'css_selector' => 'submit_hover',
 				);
 				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 					ninja_forms_register_tab_metabox($args);
@@ -224,7 +224,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 			'state' => 'closed',
 			'display_function' => 'ninja_forms_style_field_type_field_display',
 			'save_page' => 'field_type',
-			'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field:hover',
+			'css_selector' => 'submit_hover',
 		);
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 			ninja_forms_register_tab_metabox($args);

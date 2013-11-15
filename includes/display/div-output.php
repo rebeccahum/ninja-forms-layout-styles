@@ -14,22 +14,15 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
 
-		if( $ajax == 1 AND !is_object( $ninja_forms_processing ) ){
-			$pages = ninja_forms_mp_get_pages( $form_id );
-			foreach( $pages as $page => $fields ){
-				foreach( $fields as $field ){
-					if( $field['id'] == $field_id ){
-						$current_page = $page;
-						break 2;
-					}
+		$pages = ninja_forms_mp_get_pages( $form_id );
+		foreach( $pages as $page => $fields ){
+			foreach( $fields as $field ){
+				if( $field['id'] == $field_id ){
+					$current_page = $page;
+					break 2;
 				}
 			}
-		}else if( is_object( $ninja_forms_processing ) ){
-			$current_page = $ninja_forms_processing->get_extra_value( '_current_page' );
-		}else{
-			$current_page = 1;
 		}
-
 
 		if( isset( $form_data['style']['mp'][$current_page]['cols'] ) ){
 			$cols = $form_data['style']['mp'][$current_page]['cols'];
@@ -86,20 +79,14 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 	
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
 
-		if( $ajax == 1 AND !is_object( $ninja_forms_processing ) ){
-			$pages = ninja_forms_mp_get_pages( $form_id );
-			foreach( $pages as $page => $fields ){
-				foreach( $fields as $field ){
-					if( $field['id'] == $field_id ){
-						$current_page = $page;
-						break 2;
-					}
+		$pages = ninja_forms_mp_get_pages( $form_id );
+		foreach( $pages as $page => $fields ){
+			foreach( $fields as $field ){
+				if( $field['id'] == $field_id ){
+					$current_page = $page;
+					break 2;
 				}
 			}
-		}else if( is_object( $ninja_forms_processing ) ){
-			$current_page = $ninja_forms_processing->get_extra_value( '_current_page' );
-		}else{
-			$current_page = 1;
 		}
 
 		if( isset( $form_data['style']['mp'][$current_page]['cols'] ) ){
