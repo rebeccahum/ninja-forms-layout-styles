@@ -36,6 +36,27 @@
     clear: both;
 }
 
+.nf-2col-list-checkbox-wrap li,
+.nf-2col-list-radio-wrap li {
+    float: left;
+    padding: 0 5px;
+    width: 50%;
+}
+
+.nf-3col-list-checkbox-wrap li,
+.nf-3col-list-radio-wrap li {
+    float: left;
+    padding: 0 5px;
+    width: 33.33%;
+}
+
+.nf-4col-list-checkbox-wrap li,
+.nf-4col-list-radio-wrap li {
+    float: left;
+    padding: 0 5px;
+    width: 25%;
+}
+
 /*.ninja-row  > [class*='ninja-col-']:last-of-type {
     padding-right: 5px;
 }*/
@@ -44,7 +65,13 @@
 ----------------------------------------------- */
 
 @media  only screen and (max-width: 600px) {
-    .ninja-row [class*='ninja-col-'] {
+    .ninja-row [class*='ninja-col-'],
+    .nf-2col-list-checkbox-wrap li,
+    .nf-2col-list-radio-wrap li,
+    .nf-3col-list-checkbox-wrap li,
+    .nf-3col-list-radio-wrap li,
+    .nf-4col-list-checkbox-wrap li,
+    .nf-4col-list-radio-wrap li {
         width: 100%;
         margin-right: 0;
     }
