@@ -55,7 +55,7 @@ function ninja_forms_register_style_form_settings_metaboxes(){
 		'state' => 'closed',
 		'display_function' => 'ninja_forms_style_metabox_output',
 		'save_page' => 'form_settings',
-		'css_selector' => '.ninja_forms_required_items',
+		'css_selector' => '.ninja-forms-required-items',
 		'css_exclude' => '',
 	);
 
