@@ -26,7 +26,7 @@ function ninja_forms_form_style_tab(){
 	}
 	?>
 	<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_top" type="submit" value="<?php _e( 'Save Layout', 'ninja-forms-style' ); ?>" />
-	<a href="#TB_inline?height=750&width=400&height=400&inlineId=ninja_forms_form_style_div&modal=true" class="thickbox button-secondary"><?php _e( 'Modify Form Styles', 'ninja-forms-style' );?></a>
+	<a href="#TB_inline?height=750&width=600&height=600&inlineId=ninja_forms_form_style_div&modal=true" class="thickbox button-secondary"><?php _e( 'Modify Form Styles', 'ninja-forms-style' );?></a>
 	<br />
 	<br />
 	<?php
@@ -159,7 +159,7 @@ function ninja_forms_form_style_tab(){
 			}
 		</style>
 	<?php
-	
+
 }
 
 function ninja_forms_style_form_metabox_output( $metabox ){

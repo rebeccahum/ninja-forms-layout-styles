@@ -22,50 +22,68 @@ add_action( 'init', 'ninja_forms_register_style_field_type_metaboxes', 1001 );
 function ninja_forms_register_style_field_type_metaboxes(){
 
 	if( is_admin() ){
-		if( isset( $_REQUEST['field_type'] ) AND $_REQUEST['field_type'] != '' ){
-			$args = array(
-				'page' => 'ninja-forms-style',
-				'tab' => 'field_type_settings',
-				'slug' => 'wrap',
-				'title' => __( 'Wrap Styles', 'ninja-forms-style' ),
-				'state' => 'closed',
-				'display_function' => 'ninja_forms_style_field_type_wrap_display',
-				'save_page' => 'field_type',
-				'css_selector' => 'div.[type_slug]-wrap',
-			);
+		if( isset( $_REQUEST['field_type'] ) AND $_REQUEST['field_type'] != '' ) {
+			if( $_REQUEST['field_type'] != '_hr' ) {
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'wrap',
+					'title' => __( 'Wrap Styles', 'ninja-forms-style' ),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_wrap_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.[type_slug]-wrap',
+				);
+
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox($args);
+				}
+
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'label',
+					'title' => __( 'Label Styles', 'ninja-forms-style' ),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_label_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.[type_slug]-wrap label',
+				);
+
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox($args);
+				}
+
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'field',
+					'title' => __( 'Element Styles', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field',
+				);
+			}
 
 			if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 				ninja_forms_register_tab_metabox($args);
 			}
 
-			$args = array(
-				'page' => 'ninja-forms-style',
-				'tab' => 'field_type_settings',
-				'slug' => 'label',
-				'title' => __( 'Label Styles', 'ninja-forms-style' ),
-				'state' => 'closed',
-				'display_function' => 'ninja_forms_style_field_type_label_display',
-				'save_page' => 'field_type',
-				'css_selector' => 'div.[type_slug]-wrap label',
-			);
-
-			if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
-				ninja_forms_register_tab_metabox($args);
-			}
-
-			$args = array(
-				'page' => 'ninja-forms-style',
-				'tab' => 'field_type_settings',
-				'slug' => 'field',
-				'title' => __( 'Element Styles', 'ninja-forms-style'),
-				'state' => 'closed',
-				'display_function' => 'ninja_forms_style_field_type_field_display',
-				'save_page' => 'field_type',
-				'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field',
-			);
-
-			if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
-				ninja_forms_register_tab_metabox($args);
+			if( $_REQUEST['field_type'] == '_hr' ){
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'hr-element',
+					'title' => __( 'HR Element', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'hr.ninja-forms-field',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox($args);
+				}
 			}
 
 			if( $_REQUEST['field_type'] == '_list-radio' || $_REQUEST['field_type'] == '_list-checkbox' ){
@@ -225,6 +243,20 @@ function ninja_forms_register_style_field_type_metaboxes(){
 			'display_function' => 'ninja_forms_style_field_type_field_display',
 			'save_page' => 'field_type',
 			'css_selector' => 'submit_hover',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox($args);
+		}
+
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'hr-element',
+			'title' => __( 'HR Element', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'hr.ninja-forms-field',
 		);
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 			ninja_forms_register_tab_metabox($args);

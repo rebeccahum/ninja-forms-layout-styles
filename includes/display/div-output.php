@@ -12,7 +12,7 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 		$ajax = 0;
 	}
 
-	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
+	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
 
 		$pages = ninja_forms_mp_get_pages( $form_id );
 		foreach( $pages as $page => $fields ){
