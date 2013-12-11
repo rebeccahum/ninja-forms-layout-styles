@@ -55,6 +55,7 @@ function ninja_forms_register_style_field_settings_metaboxes(){
 		'display_function' => 'ninja_forms_style_metabox_output',
 		'save_page' => 'field_settings',
 		'css_selector' => '.ninja-forms-field',
+		'css_exclude' => array( 'width', 'height', 'etc' ),
 	);
 
 	if( function_exists( 'ninja_forms_register_tab_metabox' ) ){

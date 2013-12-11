@@ -32,7 +32,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					'state' => 'closed',
 					'display_function' => 'ninja_forms_style_field_type_wrap_display',
 					'save_page' => 'field_type',
-					'css_selector' => 'div.[type_slug]-wrap',
+					'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap',
 				);
 
 				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
@@ -47,7 +47,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					'state' => 'closed',
 					'display_function' => 'ninja_forms_style_field_type_label_display',
 					'save_page' => 'field_type',
-					'css_selector' => 'div.[type_slug]-wrap label',
+					'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap label',
 				);
 
 				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
@@ -62,7 +62,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					'state' => 'closed',
 					'display_function' => 'ninja_forms_style_field_type_field_display',
 					'save_page' => 'field_type',
-					'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field',
+					'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap .ninja-forms-field',
 				);
 			}
 
@@ -155,7 +155,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 			'state' => 'closed',
 			'display_function' => 'ninja_forms_style_field_type_wrap_display',
 			'save_page' => 'field_type',
-			'css_selector' => 'div.[type_slug]-wrap',
+			'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap',
 		);
 
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
@@ -170,7 +170,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 			'state' => 'closed',
 			'display_function' => 'ninja_forms_style_field_type_label_display',
 			'save_page' => 'field_type',
-			'css_selector' => 'div.[type_slug]-wrap label',
+			'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap label',
 		);
 
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
@@ -185,7 +185,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 			'state' => 'closed',
 			'display_function' => 'ninja_forms_style_field_type_field_display',
 			'save_page' => 'field_type',
-			'css_selector' => 'div.[type_slug]-wrap .ninja-forms-field',
+			'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap .ninja-forms-field',
 		);
 
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
