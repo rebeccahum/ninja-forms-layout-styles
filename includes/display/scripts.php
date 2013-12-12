@@ -2,7 +2,7 @@
 
 add_action( 'init', 'ninja_forms_register_style_display_css' );
 function ninja_forms_register_style_display_css(){
-	add_action( 'ninja_forms_display_css', 'ninja_forms_style_display_css' );
+	add_action( 'ninja_forms_before_form_display', 'ninja_forms_style_display_css' );
 }
 
 function ninja_forms_style_display_css( $form_id ){

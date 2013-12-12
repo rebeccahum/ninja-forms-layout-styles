@@ -202,7 +202,9 @@ jQuery(document).ready(function($) {
 		var form_id = $("#_form_id").val();
 		$(".spinner").show();
 		
-		$.post( ajaxurl, { type: type, form_id: form_id, action:"ninja_forms_new_field"}, ninja_forms_style_mp_add( response ) );
+		$.post( ajaxurl, { type: type, form_id: form_id, action:"ninja_forms_new_field"}, function(response) {
+			ninja_forms_style_mp_add( response );
+		 });
     });
 
     function ninja_forms_style_mp_add( response ){
@@ -329,9 +331,14 @@ jQuery(document).ready(function($) {
 						$("#mp_page").val(move_to_page);	
 
 						$(".spinner").hide();
-				    	
 
-				    	//ninja_forms_mp_change_page(move_to_page, ninja_forms_mp_hide_spinner);
+				   		var new_page = jQuery("#ninja_forms_style_mp_" + move_to_page).position().left;
+						if(jQuery("#ninja-forms-slide").position().left != -new_page ){
+							jQuery("#ninja-forms-slide").animate({left: -new_page},"300" );
+							$(".style-mp-page").removeClass("active");
+							$("#ninja_forms_style_mp_page_" + move_to_page).addClass("active");
+							$("#mp_page").val(move_to_page);		
+						}
 					}
 			    });
 			}

@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 1.1
+Stable tag: 1.1.1
 
 License: GPLv2 or later
 
@@ -23,6 +23,21 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.1.1 =
+
+*Bugs:*
+
+* Fixed a bug that prevented multi-part pages from being added on the Layout and Styles tab.
+* Fixed some CSS specificity errors with textboxes and textareas.
+
+*Changes:*
+
+* Admin scripts should now load the min or dev versions based on the NINJA_FORMS_JS_DEBUG constant.
+* Added display selector.
+* Adjusted what's advanced and what's basic.
+* Limitted some secectors from Default Field Styles. 
+* Moved styles to be output before form and not after.
 
 = 1.1 =
 
