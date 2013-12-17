@@ -78,6 +78,7 @@ require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms/tabs/form-
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms/tabs/form-layout/form-layout-output-ul.php");
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms/tabs/form-layout/default-field-metaboxes.php");
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms/tabs/form-layout/list-field-metaboxes.php");
+require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms/tabs/form-layout/rating-field-metaboxes.php");
 
 require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/pages/ninja-forms-impexp/tabs/style/impexp-style.php");
 

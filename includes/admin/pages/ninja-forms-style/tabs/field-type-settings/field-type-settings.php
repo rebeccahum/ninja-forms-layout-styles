@@ -54,21 +54,24 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					ninja_forms_register_tab_metabox($args);
 				}
 
-				$args = array(
-					'page' => 'ninja-forms-style',
-					'tab' => 'field_type_settings',
-					'slug' => 'field',
-					'title' => __( 'Element Styles', 'ninja-forms-style'),
-					'state' => 'closed',
-					'display_function' => 'ninja_forms_style_field_type_field_display',
-					'save_page' => 'field_type',
-					'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap .ninja-forms-field',
-				);
+				if ( $_REQUEST['field_type'] != '_rating' ) {
+					$args = array(
+						'page' => 'ninja-forms-style',
+						'tab' => 'field_type_settings',
+						'slug' => 'field',
+						'title' => __( 'Element Styles', 'ninja-forms-style'),
+						'state' => 'closed',
+						'display_function' => 'ninja_forms_style_field_type_field_display',
+						'save_page' => 'field_type',
+						'css_selector' => '.ninja-forms-form div.[type_slug]-wrap.field-wrap .ninja-forms-field',
+					);
+
+					if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+						ninja_forms_register_tab_metabox($args);
+					}
+				}
 			}
 
-			if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
-				ninja_forms_register_tab_metabox($args);
-			}
 
 			if( $_REQUEST['field_type'] == '_hr' ){
 				$args = array(
@@ -82,7 +85,75 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					'css_selector' => 'hr.ninja-forms-field',
 				);
 				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
-					ninja_forms_register_tab_metabox($args);
+					ninja_forms_register_tab_metabox( $args );
+				}
+			}
+
+			if( $_REQUEST['field_type'] == '_rating' ){
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'rating-item',
+					'title' => __( 'Rating Item', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.ninja-forms-star-rating a',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox( $args );
+				}
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'rating-item-hover',
+					'title' => __( 'Rating Item Hover', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.ninja-forms-star-rating-hover a',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox( $args );
+				}
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'rating-item-selected',
+					'title' => __( 'Rating Item Selected', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.ninja-forms-star-rating-on a',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox( $args );
+				}
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'rating-cancel',
+					'title' => __( 'Cancel Ratings', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.rating-cancel a',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox( $args );
+				}
+				$args = array(
+					'page' => 'ninja-forms-style',
+					'tab' => 'field_type_settings',
+					'slug' => 'rating-cancel-hover',
+					'title' => __( 'Cancel Ratings Hover', 'ninja-forms-style'),
+					'state' => 'closed',
+					'display_function' => 'ninja_forms_style_field_type_field_display',
+					'save_page' => 'field_type',
+					'css_selector' => 'div.rating-cancel a:hover',
+				);
+				if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+					ninja_forms_register_tab_metabox( $args );
 				}
 			}
 
@@ -260,6 +331,72 @@ function ninja_forms_register_style_field_type_metaboxes(){
 		);
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 			ninja_forms_register_tab_metabox($args);
+		}
+
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'rating-item',
+			'title' => __( 'Rating Item', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'div.ninja-forms-star-rating a',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox( $args );
+		}
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'rating-item-hover',
+			'title' => __( 'Rating Item Hover', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'div.ninja-forms-star-rating-hover a',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox( $args );
+		}
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'rating-item-selected',
+			'title' => __( 'Rating Item Selected', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'div.ninja-forms-star-rating-on a',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox( $args );
+		}
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'rating-cancel',
+			'title' => __( 'Cancel Ratings', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'div.rating-cancel a',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox( $args );
+		}
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'rating-cancel-hover',
+			'title' => __( 'Cancel Ratings Hover', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => 'div.rating-cancel a:hover',
+		);
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox( $args );
 		}
 	}
 }
