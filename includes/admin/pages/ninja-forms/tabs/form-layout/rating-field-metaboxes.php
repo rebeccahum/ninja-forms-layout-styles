@@ -1,11 +1,11 @@
 <?php
 
-add_action( 'init', 'ninja_forms_style_rating_metaboxes' );
+add_action( 'init', 'ninja_forms_style_rating_metaboxes', 9 );
 function ninja_forms_style_rating_metaboxes(){
 	add_action( 'ninja_forms_style_field_metaboxes', 'ninja_forms_style_modify_rating_metaboxes' );
-	if( is_admin() ){
+	//if( is_admin() ){
 		ninja_forms_style_add_rating_metaboxes();
-	}
+	//}
 }
 
 function ninja_forms_style_modify_rating_metaboxes( $field_id ){
@@ -24,7 +24,7 @@ function ninja_forms_style_add_rating_metaboxes(){
 	$args = array(
 		'page' => 'field',
 		'tab' => 'form_layout',
-		'slug' => 'rating-field-item',
+		'slug' => 'rating_field_item',
 		'field_type' => '_rating',
 		'title' => __( 'Rating Item', 'ninja-forms-style' ),
 		'state' => 'closed',

@@ -174,6 +174,7 @@ function ninja_forms_style_display_css( $form_id ){
 			$field_type = $field['type'];
 			if( isset( $field['data']['style']['groups'] ) AND is_array( $field['data']['style']['groups'] ) ){
 				foreach( $field['data']['style']['groups'] as $group => $props ){
+					
 					$output = false;
 					foreach( $props as $prop => $value ){
 						if( $value != '' ){
@@ -182,7 +183,6 @@ function ninja_forms_style_display_css( $form_id ){
 						}
 					}
 					if( $output ){
-
 						if( isset( $ninja_forms_style_metaboxes['field'][$field_type][$group] ) ){
 							$css_selector = $ninja_forms_style_metaboxes['field'][$field_type][$group]['css_selector'];
 							$css_selector = str_replace( '[field_id]', $field_id, $css_selector );
