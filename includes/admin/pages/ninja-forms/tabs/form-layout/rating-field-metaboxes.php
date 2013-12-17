@@ -24,45 +24,16 @@ function ninja_forms_style_add_rating_metaboxes(){
 	$args = array(
 		'page' => 'field',
 		'tab' => 'form_layout',
-		'slug' => 'rating_item_row_field',
+		'slug' => 'rating-field-item',
 		'field_type' => '_rating',
-		'title' => __( 'Rating Item Row', 'ninja-forms-style' ),
+		'title' => __( 'Rating Item', 'ninja-forms-style' ),
 		'state' => 'closed',
 		'display_function' => 'ninja_forms_style_field_metabox_output',
 		'save_page' => 'field',
-		'css_selector' => '#ninja_forms_field_[field_id]_div_wrap ul li',
+		'css_selector' => '#ninja_forms_field_[field_id]_div_wrap div.ninja-forms-star-rating a',
 		//'css_exclude' => array( 'float', 'padding', 'margin' ),
 	);
 
-	ninja_forms_register_style_metabox( 'rating_item_row_field', $args );		
+	ninja_forms_register_style_metabox( 'rating_field_item', $args );		
 
-	$args = array(
-		'page' => 'field',
-		'tab' => 'form_layout',
-		'slug' => 'rating_item_label_field',
-		'field_type' => '_rating',
-		'title' => __( 'Rating Item Label', 'ninja-forms-style' ),
-		'state' => 'closed',
-		'display_function' => 'ninja_forms_style_field_metabox_output',
-		'save_page' => 'field',
-		'css_selector' => '#ninja_forms_field_[field_id]_div_wrap ul li label',
-		//'css_exclude' => array( 'float', 'padding', 'margin' ),
-	);
-
-	ninja_forms_register_style_metabox( 'rating_item_label_field', $args );
-
-	$args = array(
-		'page' => 'field',
-		'tab' => 'form_layout',
-		'slug' => 'rating_item_element_field',
-		'field_type' => '_rating',
-		'title' => __( 'Rating Item Element', 'ninja-forms-style' ),
-		'state' => 'closed',
-		'display_function' => 'ninja_forms_style_field_metabox_output',
-		'save_page' => 'field',
-		'css_selector' => '#ninja_forms_field_[field_id]_div_wrap ul li input',
-		//'css_exclude' => array( 'float', 'padding', 'margin' ),
-	);
-
-	ninja_forms_register_style_metabox( 'rating_item_element_field', $args );
 }
