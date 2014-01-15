@@ -6,7 +6,7 @@ function ninja_forms_style_field_styling(){
 	$field_id = $_REQUEST['field_id'];
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_type = $field_row['type'];
-	
+
 	?>
 	<input type="hidden" name="field_id" value="<?php echo $field_id;?>">
 	<?php
@@ -51,7 +51,7 @@ function ninja_forms_style_field_styling_save(){
 	foreach( $data as $group => $d ){
 		$field_data['style']['groups'][$group] = $d;
 	}
-	
+
 	$field_data = serialize( $field_data );
 
 	$args = array(
@@ -67,7 +67,7 @@ function ninja_forms_style_field_styling_save(){
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 
 	$plugin_settings['style']['advanced'] = $advanced;
-	
+
 	update_option( 'ninja_forms_settings', $plugin_settings);
 
 	die();
@@ -87,6 +87,10 @@ function ninja_forms_style_form_styling_save(){
 
 	if( isset( $data['container'] ) ){
 		$form_data['style']['groups']['container'] = $data['container'];
+	}
+
+	if( isset( $data['title'] ) ){
+		$form_data['style']['groups']['title'] = $data['title'];
 	}
 
 	if( isset( $data['row'] ) ){
@@ -121,7 +125,7 @@ function ninja_forms_style_form_styling_save(){
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 
 	$plugin_settings['style']['advanced'] = $advanced;
-	
+
 	update_option( 'ninja_forms_settings', $plugin_settings);
 
 	die();
