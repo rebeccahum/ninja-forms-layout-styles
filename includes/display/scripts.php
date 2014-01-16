@@ -136,6 +136,9 @@ function ninja_forms_style_display_css( $form_id ){
 					case 'container':
 						echo '#ninja_forms_form_'.$form_id.'_wrap {';
 						break;
+					case 'title':
+						echo '#ninja_forms_form_'.$form_id.'_wrap h2.ninja-forms-form-title {';
+						break;
 					case 'row':
 						echo '#ninja_forms_form_'.$form_id.'_wrap div.ninja-row {';
 						break;
@@ -174,7 +177,7 @@ function ninja_forms_style_display_css( $form_id ){
 			$field_type = $field['type'];
 			if( isset( $field['data']['style']['groups'] ) AND is_array( $field['data']['style']['groups'] ) ){
 				foreach( $field['data']['style']['groups'] as $group => $props ){
-					
+
 					$output = false;
 					foreach( $props as $prop => $value ){
 						if( $value != '' ){
