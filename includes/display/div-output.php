@@ -63,7 +63,7 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 		}
 		?>
 				<div class="ninja-col-<?php echo $colspan;?>-<?php echo $cols;?>">
-		
+
  		<?php
    	}
 }
@@ -91,7 +91,7 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 		$ajax = 0;
 	}
 
-	
+
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
 
 		foreach( $pages as $page => $fields ){

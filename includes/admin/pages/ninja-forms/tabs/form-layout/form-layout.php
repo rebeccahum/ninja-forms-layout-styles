@@ -71,7 +71,23 @@ function ninja_forms_form_style_tab(){
 							'display_function' => 'ninja_forms_style_form_metabox_output',
 							'save_page' => 'form',
 							'css_selector' => 'div.ninja-forms-form-wrap',
-							'css_exclude' => array( 'height', 'width', 'float' ),
+							'css_exclude' => '',
+						);
+
+						if( function_exists( 'ninja_forms_output_tab_metabox' ) ){
+							ninja_forms_output_tab_metabox('', 'container', $args);
+						}
+
+						$args = array(
+							'page' => 'ninja-forms-style',
+							'tab' => 'form_settings',
+							'slug' => 'title',
+							'title' => __( 'Title Styles', 'ninja-forms-style' ),
+							'state' => 'closed',
+							'display_function' => 'ninja_forms_style_form_metabox_output',
+							'save_page' => 'form',
+							'css_selector' => 'div.ninja-forms-form-wrap .ninja-forms-form-title',
+							'css_exclude' => '',
 						);
 
 						if( function_exists( 'ninja_forms_output_tab_metabox' ) ){
@@ -218,6 +234,10 @@ function ninja_forms_save_form_style( $form_id, $data ){
 
 	if( isset( $data['container'] ) ){
 		$form_data['style']['groups']['container'] = $data['container'];
+	}
+
+	if( isset( $data['title'] ) ){
+		$form_data['style']['groups']['title'] = $data['title'];
 	}
 
 	if( isset( $data['row'] ) ){
