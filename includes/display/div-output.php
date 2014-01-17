@@ -1,11 +1,20 @@
 <?php
 
 function ninja_forms_style_ul_open( $field_id, $data ){
-	global $ninja_forms_style_row_col, $ninja_forms_processing;
+	global $ninja_forms_style_row_col, $ninja_forms_loading, $ninja_forms_processing;
 
-	$form_row = ninja_forms_get_form_by_field_id( $field_id );
-	$form_id = $form_row['id'];
-	$form_data = $form_row['data'];
+	if ( isset ( $ninja_forms_loading ) ) {
+		$form_id = $ninja_forms_loading->get_form_ID();
+		$form_data = $ninja_forms_loading->get_all_form_settings();
+		$pages = $ninja_forms_loading->get_form_setting( 'mp_pages' );
+		$field_row = $ninja_forms_loading->get_field_settings();
+	} else {
+		$form_id = $ninja_forms_processing->get_form_ID();
+		$form_data = $ninja_forms_processing->get_all_form_settings();
+		$pages = $ninja_forms_processing->get_form_setting( 'mp_pages' );
+		$field_row = $ninja_forms_processing->get_field_settings();
+	}
+
 	if( isset( $form_data['ajax'] ) ){
 		$ajax = $form_data['ajax'];
 	}else{
@@ -14,7 +23,6 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
 
-		$pages = ninja_forms_mp_get_pages( $form_id );
 		foreach( $pages as $page => $fields ){
 			foreach( $fields as $field ){
 				if( $field['id'] == $field_id ){
@@ -37,7 +45,6 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 		}
 	}
 
-	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_data = $field_row['data'];
 	if( isset( $field_data['style']['colspan'] ) ){
 		$colspan = $field_data['style']['colspan'];
@@ -64,11 +71,19 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 add_action( 'ninja_forms_display_before_field', 'ninja_forms_style_ul_open', 11, 2);
 
 function ninja_forms_style_ul_close( $field_id, $data ){
-	global $ninja_forms_style_row_col, $ninja_forms_processing;
+	global $ninja_forms_style_row_col, $ninja_forms_loading, $ninja_forms_processing;
 
-	$form_row = ninja_forms_get_form_by_field_id( $field_id );
-	$form_id = $form_row['id'];
-	$form_data = $form_row['data'];
+	if ( isset ( $ninja_forms_loading ) ) {
+		$form_id = $ninja_forms_loading->get_form_ID();
+		$form_data = $ninja_forms_loading->get_all_form_settings();
+		$pages = $ninja_forms_loading->get_form_setting( 'mp_pages' );
+		$field_row = $ninja_forms_loading->get_field_settings();
+	} else {
+		$form_id = $ninja_forms_processing->get_form_ID();
+		$form_data = $ninja_forms_processing->get_all_form_settings();
+		$pages = $ninja_forms_processing->get_form_setting( 'mp_pages' );
+		$field_row = $ninja_forms_processing->get_field_settings();
+	}
 
 	if( isset( $form_data['ajax'] ) ){
 		$ajax = $form_data['ajax'];
@@ -79,7 +94,6 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 	
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
 
-		$pages = ninja_forms_mp_get_pages( $form_id );
 		foreach( $pages as $page => $fields ){
 			foreach( $fields as $field ){
 				if( $field['id'] == $field_id ){
@@ -102,7 +116,6 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 		}
 	}
 
-	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_data = $field_row['data'];
 	if( isset( $field_data['style']['colspan'] ) ){
 		$colspan = $field_data['style']['colspan'];
