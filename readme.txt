@@ -3,8 +3,8 @@ Contributors: kstover, jameslaws
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 1.1.1
+Tested up to: 3.8.1
+Stable tag: 1.2
 
 License: GPLv2 or later
 
@@ -23,6 +23,19 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.2 =
+
+*Bugs:*
+
+* Fixed a bug that prevented the new options from showing up.
+
+*Changes:*
+
+* Added rating-specific styles on a per-field basis.
+* Added individual styling to rating fields.
+* Converting Layout and Styles over to the new Ninja Forms loading class.
+* Added per form title styling.
 
 = 1.1.1 =
 
