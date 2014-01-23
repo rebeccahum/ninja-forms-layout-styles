@@ -3,9 +3,9 @@
 add_action( 'init', 'ninja_forms_style_list_metaboxes' );
 function ninja_forms_style_list_metaboxes(){
 	add_action( 'ninja_forms_style_field_metaboxes', 'ninja_forms_style_modify_list_metaboxes' );
-	if( !is_admin() ){
+	//if( is_admin() ){
 		ninja_forms_style_add_list_metaboxes();
-	}
+	//}
 }
 
 function ninja_forms_style_modify_list_metaboxes( $field_id ){
