@@ -7,12 +7,12 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 		$form_id = $ninja_forms_loading->get_form_ID();
 		$form_data = $ninja_forms_loading->get_all_form_settings();
 		$pages = $ninja_forms_loading->get_form_setting( 'mp_pages' );
-		$field_row = $ninja_forms_loading->get_field_settings();
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
 	} else {
 		$form_id = $ninja_forms_processing->get_form_ID();
 		$form_data = $ninja_forms_processing->get_all_form_settings();
 		$pages = $ninja_forms_processing->get_form_setting( 'mp_pages' );
-		$field_row = $ninja_forms_processing->get_field_settings();
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 
 	if( isset( $form_data['ajax'] ) ){
@@ -23,14 +23,7 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
 
-		foreach( $pages as $page => $fields ){
-			foreach( $fields as $field ){
-				if( $field['id'] == $field_id ){
-					$current_page = $page;
-					break 2;
-				}
-			}
-		}
+		$current_page = $field_row['data']['page'];
 
 		if( isset( $form_data['style']['mp'][$current_page]['cols'] ) ){
 			$cols = $form_data['style']['mp'][$current_page]['cols'];
@@ -77,12 +70,12 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 		$form_id = $ninja_forms_loading->get_form_ID();
 		$form_data = $ninja_forms_loading->get_all_form_settings();
 		$pages = $ninja_forms_loading->get_form_setting( 'mp_pages' );
-		$field_row = $ninja_forms_loading->get_field_settings();
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
 	} else {
 		$form_id = $ninja_forms_processing->get_form_ID();
 		$form_data = $ninja_forms_processing->get_all_form_settings();
 		$pages = $ninja_forms_processing->get_form_setting( 'mp_pages' );
-		$field_row = $ninja_forms_processing->get_field_settings();
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 
 	if( isset( $form_data['ajax'] ) ){
@@ -94,14 +87,7 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 
 	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
 
-		foreach( $pages as $page => $fields ){
-			foreach( $fields as $field ){
-				if( $field['id'] == $field_id ){
-					$current_page = $page;
-					break 2;
-				}
-			}
-		}
+		$current_page = $field_row['data']['page'];
 
 		if( isset( $form_data['style']['mp'][$current_page]['cols'] ) ){
 			$cols = $form_data['style']['mp'][$current_page]['cols'];
