@@ -35,35 +35,35 @@ function ninja_forms_style_sidebar_select_field_display(){
  */
 
 function ninja_forms_list_field_type_dropdown( $selected ){
-	$output = '<option value="" disabled>List</option>';
+	$output = '<option value="" disabled>' . __( 'List', 'ninja-forms-style' ) . '</option>';
 
 	if ( $selected == '_list-dropdown' ) {
 		$select = 'selected="selected"';
 	} else {
 		$select = '';
 	}
-	$output .= '<option value="_list-dropdown" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Dropdown (Select)</option>';
+	$output .= '<option value="_list-dropdown" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;' . __( 'Dropdown (Select)', 'ninja-forms-style' ) . '</option>';
 
 	if ( $selected == '_list-radio' ) {
 		$select = 'selected="selected"';
 	} else {
 		$select = '';
 	}
-	$output .= '<option value="_list-radio" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Radio</option>';
+	$output .= '<option value="_list-radio" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;' . __( 'Radio', 'ninja-forms-style' ) . '</option>';
 
 	if ( $selected == '_list-checkbox' ) {
 		$select = 'selected="selected"';
 	} else {
 		$select = '';
 	}
-	$output .= '<option value="_list-checkbox" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Checkboxes</option>';
+	$output .= '<option value="_list-checkbox" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;' . __( 'Checkboxes', 'ninja-forms-style' ) . '</option>';
 
 	if ( $selected == '_list-multi' ) {
 		$select = 'selected="selected"';
 	} else {
 		$select = '';
 	}
-	$output .= '<option value="_list-multi" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;Multi-Select</option>';
+	$output .= '<option value="_list-multi" '.$select.'>&nbsp;&nbsp;&nbsp;&nbsp;' . __( 'Multi-Select', 'ninja-forms-style' ) . '</option>';
 
 	return $output;
 }

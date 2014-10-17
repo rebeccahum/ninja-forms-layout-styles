@@ -89,7 +89,3 @@ require_once(NINJA_FORMS_STYLE_DIR."/includes/admin/style-metabox-output.php");
 
 require_once(NINJA_FORMS_STYLE_DIR."/includes/display/div-output.php");
 require_once(NINJA_FORMS_STYLE_DIR."/includes/display/scripts.php");
-
-/*
-register_activation_hook( __FILE__, 'ninja_forms_style_activation' );
-*/
