@@ -71,6 +71,8 @@ jQuery(document).ready(function($) {
 
 		connectWith: ".ninja-forms-style-sortable",
 	  start: function(e,ui){
+	  		// Remove any error messages
+	  		$( '.layout-error' ).remove();
             ui.placeholder.height(ui.item.height());
             ui.placeholder.width(ui.item.width());
         }
@@ -78,20 +80,49 @@ jQuery(document).ready(function($) {
 
 	$( ".ninja-forms-style-sortable" ).disableSelection();
 
-	$( "#ninja_forms_admin").submit(function(){
+	$( "#ninja_forms_admin" ).submit( function( e ){
+		var error = false;
 		if( $("#mp_form").val() == "1" ){
 			$(".field-order").each(function(){
 				var page = this.id.replace("order_", "");
 				ninja_forms_style_mp_update_field_pos(page);
+				var col_count = $("#cols_" + page).val();
+				var col_1 = $("#col_1_" + page).val();
+				var order = $("#order_" + page).val();
+				nf_style_error_check( col_count, col_1, order );
 			});
+
+			// Find our page with the first layout error and scroll to that page.
+			var first_error = $( '#ninja-forms-style-viewport' ).find( '.layout-error:first' );
+			if ( first_error.length > 0 ) { // If there are any errors, scroll to the specific page.
+				// Get the page number that the first error is on.
+				var div_id = $( first_error ).parent().parent().prop( 'id' );
+				var page_number = div_id.replace( 'ninja_forms_style_mp_', '' );
+				// Check to see if this page number is currently active.
+				if ( ! $( '#ninja_forms_style_mp_page_' + page_number ).hasClass( 'active' ) ) {
+					// If this page isn't active, scroll to it.
+					$( '#ninja_forms_style_mp_page_' + page_number ).click();
+				}
+				error = true;
+			}
 		}else{
 			ninja_forms_style_update_field_pos();
+			var col_count = $( "#cols" ).val();
+			var col_1 = $( "#col_1" ).val();
+			var order = $( "#order" ).val();
+			var error = nf_style_error_check( col_count, col_1, order );
 		}
-		//return false;
+
+		if ( error ) {
+			return false;
+		}
 	});
 
 	$(document).on( 'click', '.ninja-forms-style-expand', function(event){
 		event.preventDefault();
+		// Remove any error messages
+		$( '.layout-error' ).remove();
+
 		if( $("#mp_form").val() == "1" ){
 			var page = $("#mp_page").val();
 			var cols = $("#cols_" + page).val();
@@ -114,10 +145,12 @@ jQuery(document).ready(function($) {
 		$(this).parent().addClass("span-" + new_span)
 		$(this).parent().attr("rel", new_span);
 		$("#" + id).val(new_span);
-		//ninja_forms_style_update_field_pos();
 	});
 
 	$("#cols").change(function(){
+		// Remove any error messages
+		$( '.layout-error' ).remove();
+
 		var current_cols = $(".ninja-forms-style-sortable").attr("rel");
 		var new_cols = this.value;
 		new_cols = parseInt(new_cols);
@@ -140,7 +173,6 @@ jQuery(document).ready(function($) {
 			var html = '<input type="hidden" name="col_' + i + '" id="col_' + i + '" value="">';
 			$("#col_fields").append(html);
 		}
-		//ninja_forms_style_update_field_pos();
 
 	});
 
@@ -459,14 +491,15 @@ jQuery(document).ready(function($) {
 
 		var order = $("#ninja_forms_style_list_" + page).sortable("toArray");
 		$("#order_" + page).val(order);
-
 	}
 
 	function ninja_forms_style_update_field_pos(){
 		var col_1 = "";
 		var col_2 = "";
 		var col_3 = "";
-		var col_4 = "";		
+		var col_4 = "";
+
+		var col_count = $( "#cols" ).val();
 
 		$(".ninja-forms-style-sortable li").each(function(){
 			var pos = $(this).position();
@@ -511,9 +544,83 @@ jQuery(document).ready(function($) {
 		$("#col_4").val(col_4);
 
 		var order = $(".ninja-forms-style-sortable").sortable("toArray");
-		//alert( order );
-		$("#order").val(order);
 
+		$("#order").val(order);
+	}
+
+	function nf_style_error_check( cols, col_1, order ) {
+		var error = false;
+		// Get our current cols width
+		var cols_width = cols * 100;
+
+		// Get our first column. These fields will be the first in each row.
+		var col_1 = col_1.split( ',' );
+		// Get all of our fields in their current order.
+		// var order = $( "#order" ).val();
+		// Turn our order string in to an array.
+		order = order.split( ',' );
+		// Get rid of the text in our order value so that we're left with just the field id.
+		for (var i = 0; i < order.length; i++) {
+			order[i] = order[i].replace( /ninja_forms_field_/g, '' );
+			order[i] = order[i].replace( /_li/g, '' );
+		};
+		
+		// Setup our rows value as an empty array.
+		var rows = [];
+		var row_index = 0;
+		// Loop through each of our first column fields and create a row.
+		for ( var i = 0; i < col_1.length; i++ ) {
+			// Setup our this_row variable as an empty array. 
+			var this_row = [];
+			// Add our current field id to the row, if it isn't disabled.
+			if ( ! $( '#ninja_forms_field_' + col_1[i] ).hasClass( 'ui-disabled' ) ) {
+				this_row.push( col_1[i] );
+			}
+			
+			// Figure out what index our current field id is in the order array.
+			var index = order.indexOf( col_1[i] );
+			// Loop through our order array, beginning with the field after our first column id.
+			for ( var x = index + 1; x < order.length; x++ ) {
+				if ( order[x] != col_1[ i + 1 ] ) { // If this field id isn't equal to our next row's first field, add it to this row.
+					if ( $( '#ninja_forms_field_' + order[x] ).hasClass( 'ui-disabled' ) == false ) {
+						this_row.push( order[x] );
+					}
+				} else { // Break if we hit the first field of the next row.
+					break;
+				}
+			};
+
+			if ( this_row.length != 0 ) {
+				rows[ row_index ] = this_row;
+				row_index++;
+			}
+			
+		};
+
+		// Loop through each of our rows and figure out if we have a complete row based upon the number of columns.
+		for (var i = 0; i < rows.length; i++) {
+			// We need to check that our row width is equal to the expected row width for our current column count.
+			// Set our initial row_width to 0.
+			var row_width = 0;
+			// Loop through each field in this row and add up their widths.
+			for (var x = 0; x < rows[i].length; x++) {
+				row_width += $( '#ninja_forms_field_' + rows[i][x] + '_li' ).width();
+			};
+
+			var diff = cols_width - row_width;
+			diff = ( Math.ceil( diff / 100 ) * 100 ) / 100;
+
+			if ( diff > 0 ) {
+				$( '#message' ).remove();
+				$( '.nav-tab-wrapper' ).after( '<div id="message" class="error below-h2"><p>' + nf_style.layout_error + '</p></div>' );
+				var html = '<li class="ui-state-default layout-error span-' + diff + '" rel="' + diff + '"><div class="layout-error-msg">ERROR</div></li>';
+				var error_width = diff;
+				$( '#ninja_forms_field_' + rows[i][ rows[i].length - 1 ] + '_li' ).after( html );
+				error = true;
+			}
+		};
+
+		return error;
 	}
 });
 
