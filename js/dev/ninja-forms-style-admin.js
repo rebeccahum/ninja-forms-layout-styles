@@ -9,11 +9,11 @@ jQuery(document).ready(function($) {
 	});
 
 	$(".color-picker").wpColorPicker();
-	
+
 	$("#field_type").change(function(){
 		var field_type = $("#field_type").val();
 		reloadWithQueryStringVars({"field_type": field_type});
-	});	
+	});
 
 	//Field Styling Thickbox Controls
 	$('body').on( 'click', '.field-styling', function(event){
@@ -37,18 +37,18 @@ jQuery(document).ready(function($) {
 			tb_remove();
 			$("#ninja_forms_field_styling").prop("innerHTML", '');
 			$("#loading_style").hide();
-		});		
+		});
 	});
 
 	$(".cancel-field-styling").click(function(){
 		tb_remove();
 		$("#ninja_forms_field_styling").prop("innerHTML", "");
-	});	
+	});
 
 	//Form Styling Thickbox Controls
 	$(".cancel-form-styling").click(function(){
 		tb_remove();
-	});	
+	});
 
 	$(".save-form-styling").click(function(){
 		var data = $("#ninja_forms_form_style_inputs").find(":input").serializeFullArray();
@@ -184,7 +184,7 @@ jQuery(document).ready(function($) {
 			jQuery("#ninja-forms-slide").animate({left: -new_page},"300" );
 			$(".style-mp-page").removeClass("active");
 			$(this).addClass("active");
-			$("#mp_page").val(page_number);		
+			$("#mp_page").val(page_number);
 		}
 	});
 
@@ -196,9 +196,9 @@ jQuery(document).ready(function($) {
 			var type = "_page_divider";
 			var form_id = $("#_form_id").val();
 			$(".spinner").show();
-			
+
 			$.post( ajaxurl, { type: type, form_id: form_id, action:"ninja_forms_new_field"}, function(response){
-				ninja_forms_style_mp_add( response ) 
+				ninja_forms_style_mp_add( response )
 				var page = jQuery(".style-mp-page").length;
 				ui.draggable.hide( "slow", function() {
 					var cols = $("#cols_" + page).val();
@@ -221,7 +221,7 @@ jQuery(document).ready(function($) {
 						$("#mp_page").val(page);
 					}
 					$(".spinner").hide();
-					//ninja_forms_mp_change_page( page_number );   
+					//ninja_forms_mp_change_page( page_number );
 	            });
 
 
@@ -233,7 +233,7 @@ jQuery(document).ready(function($) {
     	var type = "_page_divider";
 		var form_id = $("#_form_id").val();
 		$(".spinner").show();
-		
+
 		$.post( ajaxurl, { type: type, form_id: form_id, action:"ninja_forms_new_field"}, function(response) {
 			ninja_forms_style_mp_add( response );
 		 });
@@ -242,7 +242,7 @@ jQuery(document).ready(function($) {
     function ninja_forms_style_mp_add( response ){
     	var last_page = jQuery(".style-mp-page").length;
 		var new_page = last_page + 1;
-		
+
 		var html = '<li class="style-mp-page" title="' + new_page + '" id="ninja_forms_style_mp_page_' + new_page + '">' + new_page + '</li>';
 		$("#style-mp-page-list").append(html);
 
@@ -287,7 +287,7 @@ jQuery(document).ready(function($) {
 					}
 					$( this ).show( "slow" );
 					$(".spinner").hide();
-					//ninja_forms_mp_change_page( page_number );   
+					//ninja_forms_mp_change_page( page_number );
 	            });
 			}
 	    });
@@ -324,7 +324,7 @@ jQuery(document).ready(function($) {
 				    		move_to_page = 1;
 				    	}
 
-						
+
 
 				    	$("#ninja_forms_style_list_" + current_page).remove();
 				    	$("#ninja_forms_style_mp_page_" + current_page).remove();
@@ -354,13 +354,13 @@ jQuery(document).ready(function($) {
 				    		var new_page = jQuery("#ninja_forms_style_mp_" + move_to_page).position().left;
 							if(jQuery("#ninja-forms-slide").position().left != -new_page ){
 								jQuery("#ninja-forms-slide").animate({left: -new_page},"300" );
-								
+
 							}
 				    	}
 
 		    			$(".style-mp-page").removeClass("active");
 						$("#ninja_forms_style_mp_page_" + move_to_page).addClass("active");
-						$("#mp_page").val(move_to_page);	
+						$("#mp_page").val(move_to_page);
 
 						$(".spinner").hide();
 
@@ -369,7 +369,7 @@ jQuery(document).ready(function($) {
 							jQuery("#ninja-forms-slide").animate({left: -new_page},"300" );
 							$(".style-mp-page").removeClass("active");
 							$("#ninja_forms_style_mp_page_" + move_to_page).addClass("active");
-							$("#mp_page").val(move_to_page);		
+							$("#mp_page").val(move_to_page);
 						}
 					}
 			    });
@@ -422,7 +422,7 @@ jQuery(document).ready(function($) {
 				}
 				$( this ).show( "slow" );
 				$(".spinner").hide();
-				//ninja_forms_mp_change_page( page_number );   
+				//ninja_forms_mp_change_page( page_number );
             });
 		}
     });
@@ -431,19 +431,19 @@ jQuery(document).ready(function($) {
 		var col_1 = "";
 		var col_2 = "";
 		var col_3 = "";
-		var col_4 = "";		
+		var col_4 = "";
 
 		var add_px = ( page - 1 ) * 450;
 
 		var col_count = $("#cols_" + page).val();
 
 		$("#col_fields_" + page).prop("innerHTML", "");
-		
+
 		for (var i = col_count; i >= 1; i--) {
 			var html = '<input type="hidden" name="col_' + i + '_' + page + '" id="col_' + i + '_' + page + '" value="">';
 			$("#col_fields_" + page).append(html);
 		}
-	
+
 		$("#ninja_forms_style_list_" + page + " li").each(function(){
 			var pos = $(this).position();
 			var field_id = this.id.replace("ninja_forms_field_", "");
@@ -467,7 +467,7 @@ jQuery(document).ready(function($) {
 				}else{
 					col_2 = col_2 + "," + field_id;
 				}
-			}			
+			}
 			if( left > col_2_left && left < col_3_left ){
 				if( col_3 == "" ){
 					col_3 = field_id;
@@ -521,7 +521,7 @@ jQuery(document).ready(function($) {
 				}else{
 					col_2 = col_2 + "," + field_id;
 				}
-			}			
+			}
 			if( left > 150 && left < 250 ){
 				if( col_3 == "" ){
 					col_3 = field_id;
@@ -564,19 +564,19 @@ jQuery(document).ready(function($) {
 			order[i] = order[i].replace( /ninja_forms_field_/g, '' );
 			order[i] = order[i].replace( /_li/g, '' );
 		};
-		
+
 		// Setup our rows value as an empty array.
 		var rows = [];
 		var row_index = 0;
 		// Loop through each of our first column fields and create a row.
 		for ( var i = 0; i < col_1.length; i++ ) {
-			// Setup our this_row variable as an empty array. 
+			// Setup our this_row variable as an empty array.
 			var this_row = [];
 			// Add our current field id to the row, if it isn't disabled.
 			if ( ! $( '#ninja_forms_field_' + col_1[i] ).hasClass( 'ui-disabled' ) ) {
 				this_row.push( col_1[i] );
 			}
-			
+
 			// Figure out what index our current field id is in the order array.
 			var index = order.indexOf( col_1[i] );
 			// Loop through our order array, beginning with the field after our first column id.
@@ -594,7 +594,7 @@ jQuery(document).ready(function($) {
 				rows[ row_index ] = this_row;
 				row_index++;
 			}
-			
+
 		};
 
 		// Loop through each of our rows and figure out if we have a complete row based upon the number of columns.
@@ -613,7 +613,7 @@ jQuery(document).ready(function($) {
 			if ( diff > 0 ) {
 				$( '#message' ).remove();
 				$( '.nav-tab-wrapper' ).after( '<div id="message" class="error below-h2"><p>' + nf_style.layout_error + '</p></div>' );
-				var html = '<li class="ui-state-default layout-error span-' + diff + '" rel="' + diff + '"><div class="layout-error-msg">ERROR</div></li>';
+				var html = '<li class="ui-state-default layout-error span-' + diff + '" rel="' + diff + '"><div class="layout-error-msg">Row has empty space</div></li>';
 				var error_width = diff;
 				$( '#ninja_forms_field_' + rows[i][ rows[i].length - 1 ] + '_li' ).after( html );
 				error = true;
@@ -640,7 +640,7 @@ function reloadWithQueryStringVars (queryStringVars) {
             newQueryVars[queryStringVar] = queryStringVars[queryStringVar];
         }
     }
-    if(newQueryVars) { 
+    if(newQueryVars) {
         for (var newQueryVar in newQueryVars) {
             newUrl += newQueryVar + "=" + newQueryVars[newQueryVar] + "&";
         }
