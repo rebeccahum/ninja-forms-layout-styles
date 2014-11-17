@@ -14,7 +14,7 @@ function ninja_forms_register_tab_form_style(){
 	}
 }
 
-add_action( 'admin_init', 'ninja_forms_register_tab_form_style', 11 );
+add_action( 'admin_init', 'ninja_forms_register_tab_form_style', 12 );
 
 function ninja_forms_form_style_tab(){
 	global $ninja_forms_fields;

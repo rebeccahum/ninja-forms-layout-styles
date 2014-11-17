@@ -75,7 +75,6 @@ function ninja_forms_style_add_submit_metaboxes(){
 		'display_function' => 'ninja_forms_style_field_metabox_output',
 		'save_page' => 'field',
 		'css_selector' => '#ninja_forms_field_[field_id]_div_wrap .ninja-forms-field:hover',
-		//'css_exclude' => array( 'float', 'padding', 'margin' ),
 	);
 
 	ninja_forms_register_style_metabox( 'submit_element_hover', $args );
