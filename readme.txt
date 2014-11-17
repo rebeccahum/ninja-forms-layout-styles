@@ -24,6 +24,17 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 
 == Changelog ==
 
+= 1.2.1 (17 November 2014) =
+
+*Changes:*
+
+* Adding a warning for a common invalid column layout error.
+
+*Bugs:*
+
+* Fixed a bug with default styling.
+* Updated support for i18n.
+
 = 1.2 =
 
 *Bugs:*
