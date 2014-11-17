@@ -24,6 +24,7 @@ function ninja_forms_style_display_css( $form_id ){
 	$form_row = ninja_forms_get_form_by_id( $form_id );
 	$form_data = $form_row['data'];
 
+
 	?>
 	<style type="text/css" media="screen">
 	<?php
@@ -174,6 +175,8 @@ function ninja_forms_style_display_css( $form_id ){
 	if( !empty( $all_fields ) ){
 		foreach( $all_fields as $field ){
 			$field_id = $field['id'];
+			do_action( 'ninja_forms_style_field_metaboxes', $field_id );
+
 			$field_type = $field['type'];
 			if( isset( $field['data']['style']['groups'] ) AND is_array( $field['data']['style']['groups'] ) ){
 				foreach( $field['data']['style']['groups'] as $group => $props ){
@@ -195,20 +198,6 @@ function ninja_forms_style_display_css( $form_id ){
 						}
 
 						echo $css_selector."{";
-						/*
-						switch( $group ){
-							case 'wrap':
-								echo '#ninja_forms_field_'.$field_id.'_div_wrap {';
-								break;
-							case 'label':
-								echo '#ninja_forms_field_'.$field_id.'_label {';
-								break;
-							case 'field':
-								echo '#ninja_forms_field_'.$field_id.' {';
-								break;
-						}
-						*/
-
 						foreach( $props as $prop => $value ){
 							if( $value != '' ){
 								if( isset( $ninja_forms_css_options[$prop]['css_property'] ) ){
@@ -228,7 +217,9 @@ function ninja_forms_style_display_css( $form_id ){
 		}
 	}
 
+
 	?>
 	</style>
 	<?php
+
 }
