@@ -3,8 +3,8 @@ Contributors: kstover, jameslaws
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.4
-Tested up to: 3.8.1
-Stable tag: 1.2
+Tested up to: 4.0.1
+Stable tag: 1.2.2
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.2.2 (24 November 2014) =
+
+*Bugs:*
+
+* Fixed a bug that could prevent field layouts from saving properly.
 
 = 1.2.1 (17 November 2014) =
 
