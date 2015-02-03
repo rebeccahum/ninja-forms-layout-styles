@@ -256,7 +256,20 @@ function ninja_forms_save_form_style( $form_id, $data ){
 		$form_data['style']['groups']['error_msg'] = $data['error_msg'];
 	}
 
-	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
+	$mp_enabled = false;
+	if ( function_exists( 'nf_mp_get_page_count' ) ) {
+		if ( nf_mp_get_page_count( $form_id ) > 1 ) {
+			$mp_enabled = true;
+		}
+	} else {
+		$form_row = ninja_forms_get_form_by_id( $form_id );
+		$form_data = $form_row['data'];
+		if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
+			$mp_enabled = true;
+		}
+	}
+
+	if( $mp_enabled ){
 		$form_data['style']['cols'] = $cols;
 		unset( $form_data['style']['mp'] );
 		for ($i=1; $i <= $page_count; $i++) {
@@ -266,8 +279,16 @@ function ninja_forms_save_form_style( $form_id, $data ){
 		$form_data['style']['cols'] = $data['cols'];
 	}
 
-	$form_data = array('data' => serialize($form_data));
-	$wpdb->update( NINJA_FORMS_TABLE_NAME, $form_data, array( 'id' => $form_id ));
+	$args = array(
+		'update_array' => array(
+			'data' => serialize( $form_data ),
+			),
+		'where' => array(
+			'id' => $form_id,
+			),
+	);
+
+	ninja_forms_update_form( $args );
 
 	if( !empty( $data['colspan'] ) ){
 		foreach( $data['colspan'] as $field_id => $span ){

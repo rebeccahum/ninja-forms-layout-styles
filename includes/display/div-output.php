@@ -21,7 +21,20 @@ function ninja_forms_style_ul_open( $field_id, $data ){
 		$ajax = 0;
 	}
 
-	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
+	$mp_enabled = false;
+	if ( function_exists( 'nf_mp_get_page_count' ) ) {
+		if ( nf_mp_get_page_count( $form_id ) > 1 ) {
+			$mp_enabled = true;
+		}
+	} else {
+		$form_row = ninja_forms_get_form_by_id( $form_id );
+		$form_data = $form_row['data'];
+		if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
+			$mp_enabled = true;
+		}
+	}
+
+	if ( $mp_enabled ) {
 
 		$current_page = $field_row['data']['page'];
 
@@ -84,8 +97,20 @@ function ninja_forms_style_ul_close( $field_id, $data ){
 		$ajax = 0;
 	}
 
+	$mp_enabled = false;
+	if ( function_exists( 'nf_mp_get_page_count' ) ) {
+		if ( nf_mp_get_page_count( $form_id ) > 1 ) {
+			$mp_enabled = true;
+		}
+	} else {
+		$form_row = ninja_forms_get_form_by_id( $form_id );
+		$form_data = $form_row['data'];
+		if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
+			$mp_enabled = true;
+		}
+	}
 
-	if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 AND function_exists( 'ninja_forms_mp_get_pages' ) ){
+	if( $mp_enabled ){
 
 		$current_page = $field_row['data']['page'];
 
