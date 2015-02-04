@@ -23,7 +23,7 @@ function ninja_forms_register_style_field_type_metaboxes(){
 
 	if( is_admin() ){
 		if( isset( $_REQUEST['field_type'] ) AND $_REQUEST['field_type'] != '' ) {
-			if( $_REQUEST['field_type'] != '_hr' ) {
+			if( $_REQUEST['field_type'] != '_hr' && $_REQUEST['field_type'] != '_desc' ) {
 				$args = array(
 					'page' => 'ninja-forms-style',
 					'tab' => 'field_type_settings',
@@ -386,6 +386,23 @@ function ninja_forms_register_style_field_type_metaboxes(){
 					ninja_forms_register_tab_metabox($args);
 				}
 			}
+
+			if ( $_REQUEST['field_type'] == '_desc' ) {
+					$args = array(
+						'page' => 'ninja-forms-style',
+						'tab' => 'field_type_settings',
+						'slug' => 'desc_field',
+						'title' => __( 'Element Styles', 'ninja-forms-style'),
+						'state' => 'closed',
+						'display_function' => 'ninja_forms_style_field_type_field_display',
+						'save_page' => 'field_type',
+						'css_selector' => '.ninja-forms-field .nf-[type_slug]',
+					);
+
+					if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+						ninja_forms_register_tab_metabox($args);
+					}
+			}
 		}
 	}else{
 		$args = array(
@@ -733,6 +750,21 @@ function ninja_forms_register_style_field_type_metaboxes(){
 		);
 		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
 			ninja_forms_register_tab_metabox( $args );
+		}
+
+		$args = array(
+			'page' => 'ninja-forms-style',
+			'tab' => 'field_type_settings',
+			'slug' => 'desc_field',
+			'title' => __( 'Element Styles', 'ninja-forms-style'),
+			'state' => 'closed',
+			'display_function' => 'ninja_forms_style_field_type_field_display',
+			'save_page' => 'field_type',
+			'css_selector' => '.nf-[type_slug]',
+		);
+
+		if( function_exists( 'ninja_forms_register_tab_metabox' ) ){
+			ninja_forms_register_tab_metabox($args);
 		}
 	}
 }
