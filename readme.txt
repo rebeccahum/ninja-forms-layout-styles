@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.4
 Tested up to: 4.0.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 License: GPLv2 or later
 
@@ -23,6 +23,11 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.2.3 (4 February 2015) =
+*Changes:*
+
+* Preparing for compatibility with Ninja Forms version 2.9.
 
 = 1.2.2 (24 November 2014) =
 

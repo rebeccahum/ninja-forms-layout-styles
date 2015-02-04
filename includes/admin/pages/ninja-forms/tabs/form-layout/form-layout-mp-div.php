@@ -8,10 +8,21 @@ function ninja_forms_register_style_layout_tab_mp_div(){
 		$form_id = '';
 	}
 
-	if( $form_id != '' ){
+	$enabled = false;
+	if ( function_exists( 'nf_mp_get_page_count' ) ) {
+		if ( nf_mp_get_page_count( $form_id ) > 1 ) {
+			$enabled = true;
+		}
+	} else {
 		$form_row = ninja_forms_get_form_by_id( $form_id );
 		$form_data = $form_row['data'];
 		if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
+			$enabled = true;
+		}
+	}
+
+	if( $form_id != '' ){
+		if ( $enabled ) {
 			remove_action( 'ninja_forms_style_layout_tab_div', 'ninja_forms_style_layout_tab_div' );
 			add_action( 'ninja_forms_style_layout_tab_div', 'ninja_forms_style_layout_tab_mp_div' );	
 		}
