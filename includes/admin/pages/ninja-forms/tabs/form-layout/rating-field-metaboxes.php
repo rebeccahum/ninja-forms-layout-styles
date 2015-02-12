@@ -14,13 +14,14 @@ function ninja_forms_style_modify_rating_metaboxes( $field_id ){
 	$field_data = $field_row['data'];
 	if( $field_type == '_rating' ){
 		$args = array( 'page' => 'field' );
-		ninja_forms_unregister_style_metabox( 'field', $args );
+		// ninja_forms_unregister_style_metabox( 'field', $args );
 		ninja_forms_style_add_rating_metaboxes();
 	}
 
 }
 
 function ninja_forms_style_add_rating_metaboxes(){
+
 	$args = array(
 		'page' => 'field',
 		'tab' => 'form_layout',
