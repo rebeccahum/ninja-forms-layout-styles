@@ -89,6 +89,7 @@ jQuery(document).ready(function($) {
 				var col_count = $("#cols_" + page).val();
 				var col_1 = $("#col_1_" + page).val();
 				var order = $("#order_" + page).val();
+
 				nf_style_error_check( col_count, col_1, order );
 			});
 
@@ -564,6 +565,15 @@ jQuery(document).ready(function($) {
 			order[i] = order[i].replace( /ninja_forms_field_/g, '' );
 			order[i] = order[i].replace( /_li/g, '' );
 		};
+
+		var tmp = [];
+		for (var i = 0; i < col_1.length; i++ ) {
+			if ( $( '#ninja_forms_field_' + col_1[i] ).hasClass( 'ui-disabled' ) == false ) {
+				tmp.push( col_1[i] );
+			}
+		}
+
+		col_1 = tmp;
 
 		// Setup our rows value as an empty array.
 		var rows = [];
