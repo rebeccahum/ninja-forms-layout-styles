@@ -13,7 +13,7 @@ function ninja_forms_register_style_layout_tab_mp_div(){
 		if ( nf_mp_get_page_count( $form_id ) > 1 ) {
 			$enabled = true;
 		}
-	} else {
+	} else if ( function_exists( 'ninja_forms_get_form_by_id' ) ) {
 		$form_row = ninja_forms_get_form_by_id( $form_id );
 		$form_data = $form_row['data'];
 		if( isset( $form_data['multi_part'] ) AND $form_data['multi_part'] == 1 ){
@@ -30,6 +30,9 @@ function ninja_forms_register_style_layout_tab_mp_div(){
 }
 
 function ninja_forms_style_layout_tab_mp_div( $form_id ){
+	if ( ! function_exists( 'ninja_forms_get_form_by_id' ) )
+		return false;
+
 	$form_row = ninja_forms_get_form_by_id( $form_id );
 	$form_data = $form_row['data'];
 	$all_fields = ninja_forms_get_fields_by_form_id( $form_id );
