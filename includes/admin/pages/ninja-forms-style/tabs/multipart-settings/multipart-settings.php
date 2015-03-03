@@ -8,7 +8,7 @@ function ninja_forms_register_tab_style_mp_settings(){
 		'display_function' => 'ninja_forms_style_advanced_checkbox_display',
 		'save_function' => 'ninja_forms_save_style_mp_settings',
 	);
-	if( function_exists( 'ninja_forms_register_tab' ) && function_exists( 'ninja_forms_mp_new_form_add_page' ) ){
+	if( function_exists( 'ninja_forms_register_tab' ) && function_exists( 'ninja_forms_mp_load_translations' ) ){
 		ninja_forms_register_tab( 'mp_settings', $args );
 	}
 }
