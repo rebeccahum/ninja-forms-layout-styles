@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 3.4
 Tested up to: 4.1.1
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.2.5 (4 March 2015) =
+
+*Bugs:*
+
+* Fixed a bug that removed the Multi-Part Styles section if that extension was also activated.
 
 = 1.2.4 (3 March 2015) =
 
