@@ -30,6 +30,8 @@ function ninja_forms_register_style_layout_tab_mp_div(){
 }
 
 function ninja_forms_style_layout_tab_mp_div( $form_id ){
+	global $ninja_forms_fields;
+
 	if ( ! function_exists( 'ninja_forms_get_form_by_id' ) )
 		return false;
 
@@ -42,6 +44,8 @@ function ninja_forms_style_layout_tab_mp_div( $form_id ){
 		$this_page = array();
 		$x = 0;
 		foreach( $all_fields as $field ){
+			if ( ! isset ( $ninja_forms_fields[ $field['type'] ] ) )
+				continue;
 			if( $field['type'] == '_page_divider' ){
 				$x++;
 			}
