@@ -27,7 +27,7 @@ function ninja_forms_style_admin_css(){
 		wp_enqueue_style( 'wp-color-picker' );		
 		wp_enqueue_style( 'wp-jquery-ui-dialog' );
 		wp_enqueue_style( 'ninja-forms-style-admin',
-			NINJA_FORMS_STYLE_URL.'/css/ninja-forms-style-admin.css?nf_ver' = NINJA_FORMS_STYLE_VERSION );
+			NINJA_FORMS_STYLE_URL.'/css/ninja-forms-style-admin.css?nf_ver=' . NINJA_FORMS_STYLE_VERSION );
 	}
 
 }
