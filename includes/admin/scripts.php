@@ -14,7 +14,7 @@ function ninja_forms_style_admin_js(){
 	if( isset( $_REQUEST['page'] ) AND ( $_REQUEST['page'] == 'ninja-forms-style' OR ( $_REQUEST['page'] == 'ninja-forms' AND ( isset( $_REQUEST['tab'] ) AND $_REQUEST['tab'] == 'form_layout' ) ) ) ){
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'ninja-forms-style-admin',
-			NINJA_FORMS_STYLE_URL .'/js/' . $src .'/ninja-forms-style-admin' . $suffix . '.js',
+			NINJA_FORMS_STYLE_URL .'/js/' . $src .'/ninja-forms-style-admin' . $suffix . '.js?nf_ver=' . NINJA_FORMS_STYLE_VERSION,
 			array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-sortable' ) );
 		wp_localize_script( 'ninja-forms-style-admin', 'nf_style', array( 'layout_error' => __( 'There is an error with your layout. Please ensure that all columns are fully spanned. See the error(s) below.', 'ninja-forms-style' ) ) );
 	}
