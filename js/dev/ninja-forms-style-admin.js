@@ -614,7 +614,7 @@ jQuery(document).ready(function($) {
 			var row_width = 0;
 			// Loop through each field in this row and add up their widths.
 			for (var x = 0; x < rows[i].length; x++) {
-				row_width += $( '#ninja_forms_field_' + rows[i][x] + '_li' ).width();
+				row_width += $( '#ninja_forms_field_' + rows[i][x] + '_li' ).css("width");
 			};
 
 			var diff = cols_width - row_width;
