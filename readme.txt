@@ -2,9 +2,9 @@
 Contributors: kstover, jameslaws
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
-Requires at least: 3.4
+Requires at least: 4.0
 Tested up to: 4.1.1
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 1.2.7 (12 May 2015) =
+
+*Bugs:*
+
+* Fixed a bug that could cause column layouts to fail even when they are correct.
 
 = 1.2.6 (17 March 2015) =
 
