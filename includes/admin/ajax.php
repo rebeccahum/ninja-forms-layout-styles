@@ -109,18 +109,13 @@ function ninja_forms_style_form_styling_save(){
 		$form_data['style']['groups']['error_msg'] = $data['error_msg'];
 	}
 
-	$form_data = serialize( $form_data );
+	if ( is_array( $form_data ) ) {
+		foreach ( $form_data as $key => $val ) {
+			Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
+		}
+	}
 
-	$args = array(
-		'update_array' => array(
-			'data' => $form_data,
-			),
-		'where' => array(
-			'id' => $form_id,
-			),
-	);
-
-	ninja_forms_update_form( $args );
+	Ninja_Forms()->form( $form_id )->dump_cache();
 
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 
