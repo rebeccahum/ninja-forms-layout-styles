@@ -57,9 +57,9 @@ function ninja_forms_style_display_css( $form_id ){
 											$css_property = $ninja_forms_css_options[$group]['css_property'];
 
 											if( $css_property != '' ){
-												echo $css_property.': '.$val.';';
+												echo $css_property.': '.stripslashes($val).';';
 											}else{
-												echo $val;
+												echo stripslashes($val);
 											}
 										}
 									}
@@ -107,9 +107,9 @@ function ninja_forms_style_display_css( $form_id ){
 									if( isset( $ninja_forms_css_options[$prop]['css_property'] ) ){
 										$css_property = $ninja_forms_css_options[$prop]['css_property'];
 										if( $css_property != '' ){
-											echo $css_property.': '.$value.';';
+											echo $css_property.': '.stripslashes($value).';';
 										}else{
-											echo $value;
+											echo stripslashes($value);
 										}
 									}
 								}
@@ -159,9 +159,9 @@ function ninja_forms_style_display_css( $form_id ){
 						if( isset( $ninja_forms_css_options[$prop]['css_property'] ) ){
 							$css_property = $ninja_forms_css_options[$prop]['css_property'];
 							if( $css_property != '' ){
-								echo $css_property.': '.$value.';';
+								echo $css_property.': '.stripslashes($value).';';
 							}else{
-								echo $value;
+								echo stripslashes($value);
 							}
 						}
 					}
@@ -203,9 +203,9 @@ function ninja_forms_style_display_css( $form_id ){
 								if( isset( $ninja_forms_css_options[$prop]['css_property'] ) ){
 									$css_property = $ninja_forms_css_options[$prop]['css_property'];
 									if( $css_property != '' ){
-										echo $css_property.': '.$value.';';
+										echo $css_property.': '.stripslashes($value).';';
 									}else{
-										echo $value;
+										echo stripslashes($value);
 									}
 								}
 							}
