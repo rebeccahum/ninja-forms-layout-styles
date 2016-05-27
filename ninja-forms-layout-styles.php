@@ -45,3 +45,13 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
         new NF_Extension_Updater( 'Layout and Styles', NINJA_FORMS_STYLE_VERSION, 'WP Ninjas', __FILE__, 'style' );
     }
 }
+
+add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_layouts_upgrade_form_settings' );
+function ninja_forms_layouts_upgrade_form_settings( $data ){
+    return $data;
+}
+
+add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_styles_upgrade_form_settings' );
+function ninja_forms_styles_upgrade_form_settings( $data ){
+    return $data;
+}
