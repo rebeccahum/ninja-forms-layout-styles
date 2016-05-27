@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../stdin"],"names":[],"mappings":"AAAA;EAEQ,YAAY;EACZ,YAAY;EACZ,eAAe,EAClB;;AAEL;EACI,YAAY;EACZ,eAAe,EAClB","file":"display-structure.css","sourcesContent":[".nf-row {\n    &::after {\n        clear: both;\n        content: \"\";\n        display: block;\n    }\n}\n.nf-cell {\n    float: left;\n    padding: 0 5px;\n}\n"],"sourceRoot":"/source/"}
