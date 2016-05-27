@@ -1,29 +1,4 @@
 <?php
-/*
-Plugin Name: Ninja Forms - Layout & Styles
-Plugin URI: http://ninjaforms.com/downloads/layout-styles/
-Description: Form layout and styling add-on for Ninja Forms.
-Version: 1.2.7
-Author: The WP Ninjas
-Author URI: http://ninjaforms.com
-Text Domain: ninja-forms-style
-Domain Path: /lang/
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-*/
-
-define("NINJA_FORMS_STYLE_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_STYLE_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_STYLE_VERSION", "1.2.7");
 
 function ninja_forms_style_setup_license() {
 	if ( class_exists( 'NF_Extension_Updater' ) ) {
