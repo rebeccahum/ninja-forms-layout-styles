@@ -40,6 +40,7 @@ final class NF_Layouts
     {
         add_action( 'nf_admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
         add_action( 'nf_display_enqueue_scripts', array( $this, 'display_scripts' ) );
+        add_filter( 'ninja_forms_upgrade_settings', array( $this, 'upgrade_form_settings' ) );
     }
 
     public function admin_scripts()
@@ -78,6 +79,11 @@ final class NF_Layouts
             $x++;
         }
         wp_localize_script( 'nf-layout-builder', 'nfLayouts', array( 'rows' => $rows ) );
+    }
+
+    public function upgrade_form_settings( $data )
+    {
+        return $data;
     }
 
     public function display_scripts()
