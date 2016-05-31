@@ -36,7 +36,15 @@ final class NF_Styles
     /**
      * NF_Layouts constructor.
      */
-    public function __construct(){}
+    public function __construct()
+    {
+        add_action( 'ninja_forms_loaded', array( $this, 'ninja_forms_loaded' ) );
+    }
+
+    public function ninja_forms_loaded()
+    {
+        new NF_Styles_Admin_Submenu();
+    }
 
     /**
      * Main Plugin Instance
