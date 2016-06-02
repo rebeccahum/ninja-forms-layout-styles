@@ -257,3 +257,13 @@ add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_styles_upgrade_form_set
 function ninja_forms_styles_upgrade_form_settings( $data ){
     return $data;
 }
+
+add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_styles_upgrade_plugin_settings' );
+function ninja_forms_styles_upgrade_plugin_settings( $data ){
+    return $data;
+}
+
+add_filter( 'ninja_forms_upgrade_field', 'ninja_forms_styles_upgrade_field_settings' );
+function ninja_forms_styles_upgrade_field_settings( $data ){
+    return $data;
+}
