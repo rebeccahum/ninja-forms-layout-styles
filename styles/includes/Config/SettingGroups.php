@@ -8,8 +8,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
     |--------------------------------------------------------------------------
     */
 
-    'form' => array(
-        'name' => 'form',
+    'form_settings' => array(
+        'name' => 'form_settings',
         'label' => __( 'Form Styles', 'ninja-forms-styles' ),
         'sections' => array(
             'container' => array(
@@ -20,20 +20,20 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
                 'name' => 'title',
                 'label' => __( 'Title Styles', 'ninja-forms-styles' )
             ),
-            'required' => array(
-                'name' => 'required_message',
+            'required-message' => array(
+                'name' => 'required-message',
                 'label' => __( 'Required Message Styles', 'ninja-forms-styles' )
             ),
             'row' => array(
                 'name' => 'row',
                 'label' => __( 'Row Styles', 'ninja-forms-styles' )
             ),
-            'odd_row' => array(
-                'name' => 'odd_row',
+            'row-odd' => array(
+                'name' => 'row-odd',
                 'label' => __( 'Odd Row Styles', 'ninja-forms-styles' )
             ),
-            'success' => array(
-                'name' => 'success',
+            'success-msg' => array(
+                'name' => 'success-msg',
                 'label' => __( 'Success Response Message Styles', 'ninja-forms-styles' )
             ),
         )
@@ -45,8 +45,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
     |--------------------------------------------------------------------------
     */
 
-    'field' => array(
-        'name' => 'field',
+    'field_settings' => array(
+        'name' => 'field_settings',
         'label' => __( 'Default Field Styles', 'ninja-forms-styles' ),
         'sections' => array(
             'wrap' => array(

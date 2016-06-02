@@ -1,4 +1,7 @@
 <?php
+
+$setting[ 'value' ] = $plugin_settings[ $tab ][ $section[ 'name' ] ][ $setting[ 'name' ] ];
+
 switch ( $setting[ 'type' ] ) {
     case 'html':
         echo $setting[ 'html'];
@@ -7,7 +10,7 @@ switch ( $setting[ 'type' ] ) {
         echo $setting[ 'value' ];
         break;
     case 'color' :
-        echo '<input type="text" value="" class="js-ninja-forms-styles-color-field" data-default-color="#F9F9F9" />';
+        echo '<input type="text" value="' . $setting['value'] . '" class="js-ninja-forms-styles-color-field" data-default-color="#F9F9F9" />';
         break;
     case 'textbox' :
         echo "<input type='text' class='code widefat' name='{$setting['name']}' id='{$setting['name']}' value='{$setting['value']}'>";

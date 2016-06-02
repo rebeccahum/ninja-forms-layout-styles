@@ -7,7 +7,7 @@
         </th>
         <td>
 
-            <?php NF_Styles::template( 'admin-submenu-settings-setting-type.html.php', compact( 'setting' ) ); ?>
+            <?php NF_Styles::template( 'admin-submenu-settings-setting-type.html.php', compact( 'setting', 'plugin_settings', 'tab', 'section' ) ); ?>
 
             <?php if( isset( $setting[ 'desc' ] ) ): ?>
                 <p class='description'><?php echo $setting[ 'desc' ]; ?></p>

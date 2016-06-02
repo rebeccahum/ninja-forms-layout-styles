@@ -18,8 +18,9 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         $groups = NF_Styles::config( 'SettingGroups' );
         $settings = NF_Styles::config( 'CommonSettings' );
         $tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : 'form';
-        
-        NF_Styles::template( 'admin-submenu-settings.html.php', compact( 'groups', 'settings', 'tab' ) );
+        $plugin_settings = Ninja_Forms()->get_setting( 'style' );
+
+        NF_Styles::template( 'admin-submenu-settings.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) );
     }
 
 }

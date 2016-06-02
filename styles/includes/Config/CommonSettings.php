@@ -8,8 +8,8 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
     |--------------------------------------------------------------------------
     */
 
-    'background_color' => array(
-        'name' => 'background_color',
+    'background-color' => array(
+        'name' => 'background-color',
         'type' => 'color',
         'label' => __( 'Background Color', 'ninja-forms-styles' ),
         'value' => '',
@@ -21,8 +21,8 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
     |--------------------------------------------------------------------------
     */
 
-    'border_width' => array(
-        'name' => 'border_width',
+    'border' => array(
+        'name' => 'border',
         'type' => 'textbox',
         'label' => __( 'Border Width', 'ninja-forms-styles' ),
         'value' => '',
@@ -34,8 +34,8 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
     |--------------------------------------------------------------------------
     */
 
-    'border_style' => array(
-        'name' => 'border_style',
+    'border-style' => array(
+        'name' => 'border-style',
         'type' => 'select',
         'label' => __( 'Border Style', 'ninja-forms-styles' ),
         'value' => '',
@@ -65,8 +65,8 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
     |--------------------------------------------------------------------------
     */
 
-    'border_color' => array(
-        'name' => 'border_color',
+    'border-color' => array(
+        'name' => 'border-color',
         'type' => 'color',
         'label' => __( 'Border Color', 'ninja-forms-styles' ),
         'value' => '',
@@ -78,8 +78,8 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
     |--------------------------------------------------------------------------
     */
 
-    'text_color' => array(
-        'name' => 'text_color',
+    'color' => array(
+        'name' => 'color',
         'type' => 'color',
         'label' => __( 'Text Color', 'ninja-forms-styles' ),
         'value' => '',
@@ -117,8 +117,8 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
     |--------------------------------------------------------------------------
     */
 
-    'font_size' => array(
-        'name' => 'font_size',
+    'font-size' => array(
+        'name' => 'font-size',
         'type' => 'textbox',
         'label' => __( 'Font Size', 'ninja-forms-styles' ),
         'value' => '',

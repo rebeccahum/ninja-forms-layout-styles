@@ -9,7 +9,7 @@
     <div id="poststuff">
         <form action="" method="POST">
 
-            <?php NF_Styles::template( 'admin-submenu-settings-sections.html.php', compact( 'groups', 'settings', 'tab' ) ); ?>
+            <?php NF_Styles::template( 'admin-submenu-settings-sections.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) ); ?>
 
             <p>
                 <label>

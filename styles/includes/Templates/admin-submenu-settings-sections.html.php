@@ -9,7 +9,7 @@
             <div class="inside" style="">
                 <table class="form-table">
 
-                    <?php NF_Styles::template( 'admin-submenu-settings-settings.html.php', compact( 'groups', 'settings', 'tab' ) ); ?>
+                    <?php NF_Styles::template( 'admin-submenu-settings-settings.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings', 'section' ) ); ?>
 
                 </table>
             </div>
