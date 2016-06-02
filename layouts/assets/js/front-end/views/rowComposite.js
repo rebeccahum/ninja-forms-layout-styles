@@ -6,8 +6,14 @@ define( ['views/cellComposite'], function( cellComposite ) {
 
 		initialize: function() {
 			this.collection = this.model.get( 'cells' );
-			// Get our fieldItem view.
-			// this.childView = nfRadio.channel( '')
+
+		},
+
+		onShow: function() {
+			if ( 1 < this.collection.length ) {
+				jQuery( this.el ).closest( '.nf-form-wrap' ).addClass( 'nf-multi-cell' );
+			}
+			
 		},
 
 		attachHtml: function( collectionView, childView ) {
