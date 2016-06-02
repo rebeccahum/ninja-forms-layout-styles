@@ -40,7 +40,7 @@ final class NF_Styles
     {
         add_action( 'ninja_forms_loaded', array( $this, 'ninja_forms_loaded' ) );
         add_filter( 'ninja_forms_field_settings_groups', array( $this, 'add_field_settings_group' ) );
-        add_filter( 'ninja_forms_field_settings', array( $this, 'add_field_settings' ) );
+        add_filter( 'ninja_forms_field_load_settings', array( $this, 'add_field_settings' ) );
     }
 
     public function ninja_forms_loaded()
@@ -126,51 +126,22 @@ final class NF_Styles
         new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
     }
 
-    public function add_field_settings_group( $groups ) {
-        $groups[ 'styles' ] = array(
-            'id' => 'styles',
-            'label' => __( 'Styles', 'ninja-forms' ),
-            'priority' => 950
-        );
-
-        return $groups;
+    public function add_field_settings_group( $groups )
+    {
+        return $groups = array_merge( $groups, self::config( 'FieldSettingGroups' ) );
     }
 
-    public function add_field_settings( $settings ) {
-        $settings[ 'wrap_styles' ] = array(
-            'name' => 'wrap_styles',
-            'type' => 'fieldset',
-            'label' => __( 'Wrap Styles', 'ninja-forms' ),
-            'width' => 'full',
-            'group' => 'styles',
-            'settings' => array(
-                array(
-                    'name' => 'test1',
-                    'type' => 'textbox',
-                    'placeholder' => '',
-                    'label' => __( 'TEST1', 'ninja-forms' ),
-                    'width' => 'one-third',
-                    'value' => ''
-                ),
-                array(
-                    'name' => 'test2',
-                    'type' => 'textbox',
-                    'label' => __( 'TEST2', 'ninja-forms' ),
-                    'placeholder' => '',
-                    'width' => 'one-third',
-                    'value' => ''
-                ),
-                array(
-                    'name' => 'test3',
-                    'type' => 'textbox',
-                    'label' => __( 'Test3', 'ninja-forms' ),
-                    'placeholder' => '',
-                    'width' => 'one-third',
-                    'value' => ''
-                ),
-            ),
+    public function add_field_settings( $settings )
+    {
+        $style_settings = self::config( 'FieldSettings' );
 
-        );
+        foreach( $style_settings as $name => $style_setting ){
+
+            $style_setting[ 'group' ] = 'styles';
+            $style_setting[ 'settings' ] = self::config( 'CommonSettings' );
+
+            $settings[ $name ] = $style_setting;
+        }
 
         return $settings;
     }
