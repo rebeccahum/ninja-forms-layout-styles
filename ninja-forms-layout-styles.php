@@ -48,6 +48,208 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
 
 add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_layouts_upgrade_form_settings' );
 function ninja_forms_layouts_upgrade_form_settings( $data ){
+    /*
+     * Get our number of columns.
+     */
+    $cols = $data[ 'settings' ][ 'style' ][ 'cols' ];
+    /*
+     * Try to catch any bad layout errors.
+     */
+    $rows = [];
+    $roworder = 0;
+    $coltrack = 0;
+    $cells = [];
+    $cellorder = 0;
+    $test = [];
+
+    for ( $i = 0; $i < count( $data[ 'fields' ] ); $i++ ) {
+        /*
+         * If we don't have a colspan set, it should be equal to our cols.
+         */
+        if ( ! isset( $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ] ) ) {
+            $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ] = 1;
+        }
+
+        /*
+         * If our colspan + coltrack is less than or equal to cols, we add this to our cells.
+         */
+        if ( $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ] + $coltrack <= $cols ) {
+            $cells[] = array(
+                'order'     => $cellorder,
+                'fields'    => array(
+                    $data[ 'fields' ][ $i ][ 'id' ]
+                ),
+                'width'     => $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ],
+            );
+         
+            $coltrack += $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ];
+            $cellorder++;
+        } else {
+
+            /*
+             * We're on a new row. We now need to add the previous row, represented by the $cells variable, to our rows array.
+             *
+             * 1) Add any blank cells necessary.
+             * 1) Add the cells to a new row.
+             * 2) Move our $i pointer back one field.
+             * 
+             * We need to add an extra blank cell to make up the difference.
+             */
+            $diff = 0;
+            foreach( $cells as $cell ) {
+                $diff += $cell[ 'width' ];
+            }
+            $diff = $cols - $diff;
+
+            if ( 0 != $diff ) {
+                $cells[] = array(
+                    'order'     => $cellorder,
+                    'fields'    => array(),
+                    'width'     => $diff,
+                );
+            }
+
+            foreach( $cells as $index => $cell ) {
+                /*
+                 * width will be set to the colspan of our initial cell.
+                 */
+                switch ( $cols ) {
+                    case 2:
+                        /*
+                         * If we have a colspan of 2, either it's 100%, which is handled above, or 50%.
+                         */
+                        $cells[ $index ][ 'width' ] = 50;
+                        break;
+                    
+                    case 3:
+                        /*
+                         * If we have a cols value of 3, either all cells are 33% or one is 75% and the other is 25%.
+                         */
+                        if ( 1 == $cells[ $index ][ 'width' ] && 2 == count( $cells ) ) {
+                            $cells[ $index ][ 'width' ] = 25;
+                        } else if ( 2 == $cells[ $index ][ 'width' ] ) {
+                            $cells[ $index ][ 'width' ] = 75;
+                        } else {
+                            $cells[ $index ][ 'width' ] = 33;
+                        }
+
+                        break;
+                    
+                    case 4:
+                        /*
+                         * If we have a cols value of 4, we can get our percentages with simple math.
+                         */
+                        $cells[ $index ][ 'width' ] = $cells[ $index ][ 'width' ] / 4 * 100;
+                        break;
+                }
+            }
+
+            $rows[] = array(
+                'order' => $roworder,
+                'cells' => $cells,
+            );
+            
+            $roworder++;
+            $coltrack = 0;
+            $cellorder = 0;
+            $cells = [];
+            $i -= 1;
+        }
+
+        if ( $i == count( $data[ 'fields' ] ) - 1 ) {
+            // /*
+            //  * If we don't have a colspan set, it should be equal to our cols.
+            //  */
+            // if ( ! isset( $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ] ) ) {
+            //     $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ] = 1;
+            // }
+
+            // echo "<pre>";
+            // echo print_r( $cells );
+            // echo "</pre>";
+
+            // $cells[] = array(
+            //     'order'     => $cellorder,
+            //     'fields'    => array(
+            //         $data[ 'fields' ][ $i ][ 'id' ]
+            //     ),
+            //     'width'     => $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ],
+            // );
+
+            /*
+             * We're on a new row. We now need to add the previous row, represented by the $cells variable, to our rows array.
+             *
+             * 1) Add any blank cells necessary.
+             * 1) Add the cells to a new row.
+             * 2) Move our $i pointer back one field.
+             * 
+             * We need to add an extra blank cell to make up the difference.
+             */
+            $diff = 0;
+            foreach( $cells as $cell ) {
+                $diff += $cell[ 'width' ];
+            }
+            $diff = $cols - $diff;
+
+            if ( 0 != $diff ) {
+                $cells[] = array(
+                    'order'     => $cellorder,
+                    'fields'    => array(),
+                    'width'     => $diff,
+                );
+            }
+
+            foreach( $cells as $index => $cell ) {
+                /*
+                 * width will be set to the colspan of our initial cell.
+                 */
+                switch ( $cols ) {
+                    case 2:
+                        /*
+                         * If we have a colspan of 2, either it's 100%, which is handled above, or 50%.
+                         */
+                        $cells[ $index ][ 'width' ] = 50;
+                        break;
+                    
+                    case 3:
+                        /*
+                         * If we have a cols value of 3, either all cells are 33% or one is 75% and the other is 25%.
+                         */
+                        if ( 1 == $cells[ $index ][ 'width' ] && 2 == count( $cells ) ) {
+                            $cells[ $index ][ 'width' ] = 25;
+                        } else if ( 2 == $cells[ $index ][ 'width' ] ) {
+                            $cells[ $index ][ 'width' ] = 75;
+                        } else {
+                            $cells[ $index ][ 'width' ] = 33;
+                        }
+
+                        break;
+                    
+                    case 4:
+                        /*
+                         * If we have a cols value of 4, we can get our percentages with simple math.
+                         */
+                        $cells[ $index ][ 'width' ] = $cells[ $index ][ 'width' ] / 4 * 100;
+                        break;
+                }
+            }
+
+            $rows[] = array(
+                'order' => $roworder,
+                'cells' => $cells,
+            );
+
+        }
+
+    } // for field loop
+
+    $data[ 'settings' ][ 'fieldContentsData' ] = $rows;
+
+    // echo "<pre>";
+    // print_r( $rows );
+    // echo "</pre>";
+    // die();
+
     return $data;
 }
 
