@@ -55,12 +55,11 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
     /*
      * Try to catch any bad layout errors.
      */
-    $rows = [];
+    $rows = array();
     $roworder = 0;
     $coltrack = 0;
-    $cells = [];
+    $cells = array();
     $cellorder = 0;
-    $test = [];
 
     for ( $i = 0; $i < count( $data[ 'fields' ] ); $i++ ) {
         /*
@@ -152,7 +151,7 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
             $roworder++;
             $coltrack = 0;
             $cellorder = 0;
-            $cells = [];
+            $cells = array();
             $i -= 1;
         }
 
