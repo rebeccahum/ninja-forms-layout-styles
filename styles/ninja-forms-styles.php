@@ -48,6 +48,26 @@ final class NF_Styles
         new NF_Styles_Admin_Submenu();
     }
 
+    public function add_field_settings_group( $groups )
+    {
+        return $groups = array_merge( $groups, self::config( 'FieldSettingGroups' ) );
+    }
+
+    public function add_field_settings( $settings )
+    {
+        $style_settings = self::config( 'FieldSettings' );
+
+        foreach( $style_settings as $name => $style_setting ){
+
+            $style_setting[ 'group' ] = 'styles';
+            $style_setting[ 'settings' ] = self::config( 'CommonSettings' );
+
+            $settings[ $name ] = $style_setting;
+        }
+
+        return $settings;
+    }
+
     /**
      * Main Plugin Instance
      *
@@ -124,26 +144,6 @@ final class NF_Styles
         if ( ! class_exists( 'NF_Extension_Updater' ) ) return;
 
         new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
-    }
-
-    public function add_field_settings_group( $groups )
-    {
-        return $groups = array_merge( $groups, self::config( 'FieldSettingGroups' ) );
-    }
-
-    public function add_field_settings( $settings )
-    {
-        $style_settings = self::config( 'FieldSettings' );
-
-        foreach( $style_settings as $name => $style_setting ){
-
-            $style_setting[ 'group' ] = 'styles';
-            $style_setting[ 'settings' ] = self::config( 'CommonSettings' );
-
-            $settings[ $name ] = $style_setting;
-        }
-
-        return $settings;
     }
 }
 
