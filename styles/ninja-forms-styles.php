@@ -39,7 +39,11 @@ final class NF_Styles
     public function __construct()
     {
         add_action( 'ninja_forms_loaded', array( $this, 'ninja_forms_loaded' ) );
-        add_filter( 'ninja_forms_field_settings_groups', array( $this, 'add_field_settings_group' ) );
+
+        add_filter( 'ninja_forms_from_settings_types', array( $this, 'add_form_settings_groups' ) );
+        add_filter( 'ninja_forms_localize_form_styles_settings', array( $this, 'add_form_settings' ) );
+
+        add_filter( 'ninja_forms_field_settings_groups', array( $this, 'add_field_settings_groups' ) );
         add_filter( 'ninja_forms_field_load_settings', array( $this, 'add_field_settings' ), 10, 3 );
     }
 
@@ -48,9 +52,44 @@ final class NF_Styles
         new NF_Styles_Admin_Submenu();
     }
 
-    public function add_field_settings_group( $groups )
+    public function add_form_settings_groups( $groups )
     {
-        return $groups = array_merge( $groups, self::config( 'FieldSettingGroups' ) );
+        $new_groups = self::config( 'FormSettingsGroups' );
+        $groups = array_merge( $groups, $new_groups );
+        return $groups;
+    }
+
+    public function add_form_settings( $settings )
+    {
+        $form_settings = self::config( 'FormSettings' );
+
+        foreach( $form_settings as $name => $form_setting ){
+            $form_setting[ 'group' ] = 'primary';
+
+            foreach( self::config( 'CommonSettings' ) as $common_setting ){
+
+                $common_setting[ 'name' ] = $name . '_' . $common_setting[ 'name' ];
+
+                if ( isset ( $common_setting[ 'deps' ] ) ) {
+                    foreach( $common_setting[ 'deps' ] as $dep_name => $val ) {
+                        $common_setting[ 'deps' ][ $name . '_' . $dep_name ] = $val;
+                        unset( $common_setting[ 'deps' ][ $dep_name ] );
+                    }
+                }
+
+                $form_setting[ 'settings' ][] = $common_setting;
+            }
+
+            $form_settings[ $name ] = $form_setting;
+        }
+
+        $settings = array_merge( $settings, $form_settings );
+        return $settings;
+    }
+
+    public function add_field_settings_groups( $groups )
+    {
+        return $groups = array_merge( $groups, self::config( 'FieldSettingsGroups' ) );
     }
 
     public function add_field_settings( $settings, $field_type, $field_parent_type )

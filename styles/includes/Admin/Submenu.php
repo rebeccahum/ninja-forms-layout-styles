@@ -22,18 +22,27 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
     public function display()
     {
         wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_style( 'ninja_forms_styles_admin_css', NF_Styles::$url . 'assets/css/admin.css', array(), false );
         wp_enqueue_script( 'ninja_forms_styles_admin_js', NF_Styles::$url . 'assets/js/admin.js', array( 'wp-color-picker' ), false, true );
 
         wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
         wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js' );
 
 
-        $groups = NF_Styles::config( 'SettingGroups' );
+        $groups = NF_Styles::config( 'PluginSettingGroups' );
         $settings = NF_Styles::config( 'CommonSettings' );
         $tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : 'form';
         $plugin_settings = Ninja_Forms()->get_setting( 'style' );
 
         unset( $settings[ 'show_advanced_css' ] );
+
+        $groups[ 'field_type' ][ 'sections' ] = array();
+        foreach( Ninja_Forms()->fields as $field ){
+            $groups[ 'field_type' ][ 'sections' ][ $field->get_name() ] = array(
+                'name' => $field->get_name(),
+                'label' => $field->get_nicename()
+            );
+        }
 
         NF_Styles::template( 'admin-submenu-settings.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) );
     }

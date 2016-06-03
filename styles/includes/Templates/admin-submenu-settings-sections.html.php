@@ -1,7 +1,7 @@
 <?php if( isset( $groups[ $tab ] ) && isset( $groups[ $tab ][ 'sections' ] ) ): ?>
-    <?php foreach( $groups[ $tab ][ 'sections' ] as  $section ): ?>
+    <?php foreach( $groups[ $tab ][ 'sections' ] as $section ): ?>
 
-        <div id="ninja_forms_metabox_general_settings" class="postbox">
+        <div id="ninja_forms_styles_settings_<?php echo $tab; ?>_<?php echo $section[ 'name' ]; ?>" class="postbox ninja_forms_styles_settings_<?php echo $tab; ?>">
             <span class="item-controls">
                 <!--<a class="item-edit metabox-item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>-->
             </span>

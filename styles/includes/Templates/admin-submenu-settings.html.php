@@ -9,6 +9,8 @@
     <div id="poststuff">
         <form action="" method="POST">
 
+            <?php if( 'field_type' == $tab ) NF_Styles::template( 'admin-submenu-settings-sections-field-type-selector.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) ); ?>
+
             <?php NF_Styles::template( 'admin-submenu-settings-sections.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) ); ?>
 
             <p>

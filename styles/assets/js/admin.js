@@ -6,6 +6,24 @@ jQuery( document ).ready( function( $ ){
     $( '.js-ninja-forms-styles-color-field' ).wpColorPicker();
 
     /*
+     * Initialize CodeMirror
+     */
+    jQuery( 'textarea.advanced' ).each( function( index, textarea ){
+        CodeMirror.fromTextArea( textarea, {
+            lineNumbers: true,
+        } );
+    });
+
+    /*
+     * Initialize Field Type Selector
+     */
+    var fieldTypeSettings = $( '.ninja_forms_styles_settings_field_type' );
+    $( '#ninja-forms-styles-field-type-selector' ).change( function() {
+        fieldTypeSettings.hide();
+        $( '#ninja_forms_styles_settings_field_type_' + $( this ).val() ).show();
+    });
+
+    /*
      * Toggle Advanced CSS
      */
     $( '#advanced_css' ).change( function() {
@@ -19,15 +37,6 @@ jQuery( document ).ready( function( $ ){
             advancedCSS.hide();
         }
 
-    });
-
-
-    /* ---- */
-
-    jQuery( 'textarea.advanced' ).each( function( index, textarea ){
-        CodeMirror.fromTextArea( textarea, {
-            lineNumbers: true,
-        } );
     });
 
 });
