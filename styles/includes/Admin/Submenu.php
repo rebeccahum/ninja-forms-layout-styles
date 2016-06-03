@@ -20,6 +20,8 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         $tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : 'form';
         $plugin_settings = Ninja_Forms()->get_setting( 'style' );
 
+        unset( $settings[ 'show_advanced_css' ] );
+
         NF_Styles::template( 'admin-submenu-settings.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) );
     }
 

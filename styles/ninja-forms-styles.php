@@ -64,6 +64,13 @@ final class NF_Styles
             foreach( self::config( 'CommonSettings' ) as $common_setting ){
 
                 $common_setting[ 'name' ] = $name . '_' . $common_setting[ 'name' ];
+
+                if( 'advanced' == $common_setting[ 'name' ] ){
+                    $common_setting[ 'deps' ] = array(
+                        $name . '_show_advanced_css' => 1
+                    );
+                }
+
                 $style_setting[ 'settings' ][] = $common_setting;
             }
 

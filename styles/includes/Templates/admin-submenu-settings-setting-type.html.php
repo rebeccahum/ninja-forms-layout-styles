@@ -1,6 +1,10 @@
 <?php
 
-$setting[ 'value' ] = $plugin_settings[ $tab ][ $section[ 'name' ] ][ $setting[ 'name' ] ];
+if( isset( $plugin_settings[ $tab ][ $section[ 'name' ] ][ $setting[ 'name' ] ]) ) {
+    $setting['value'] = $plugin_settings[$tab][$section['name']][$setting['name']];
+}
+
+$setting[ 'name' ] = 'styles[' . $tab . '][' . $section[ 'name' ] . '][' . $setting[ 'name' ] . ']';
 
 switch ( $setting[ 'type' ] ) {
     case 'html':
@@ -18,6 +22,7 @@ switch ( $setting[ 'type' ] ) {
     case 'textarea':
         echo "<textarea class='widefat' name='{$setting['name']}' id='{$setting['name']}' rows='8'>{$setting['value']}</textarea>";
         break;
+    case 'toggle' :
     case 'checkbox' :
         $checked = ( $setting[ 'value' ] ) ? 'checked' : '';
         echo "<input type='hidden' name='{$setting['name']}' value='0'>";
@@ -31,4 +36,10 @@ switch ( $setting[ 'type' ] ) {
         }
         echo "</select>";
         break;
+}
+
+if( isset( $_GET[ 'debug' ] ) ) {
+    echo "<pre>";
+    var_dump($setting);
+    echo "</pre>";
 }
