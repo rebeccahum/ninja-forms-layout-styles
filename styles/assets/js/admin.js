@@ -20,4 +20,14 @@ jQuery( document ).ready( function( $ ){
         }
 
     });
+
+
+    /* ---- */
+
+    jQuery( 'textarea.advanced' ).each( function( index, textarea ){
+        CodeMirror.fromTextArea( textarea, {
+            lineNumbers: true,
+        } );
+    });
+
 });

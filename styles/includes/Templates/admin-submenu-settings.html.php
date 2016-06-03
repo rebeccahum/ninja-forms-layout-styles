@@ -17,7 +17,7 @@
                 </label>
             </p>
 
-            <input type="hidden" name="update_ninja_forms_settings">
+            <input type="hidden" name="update_ninja_forms_style_settings">
             <input type="submit" class="button button-primary" value="Save Settings">
 
         </form>

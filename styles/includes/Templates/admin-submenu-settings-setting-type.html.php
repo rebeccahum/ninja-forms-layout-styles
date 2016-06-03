@@ -4,7 +4,9 @@ if( isset( $plugin_settings[ $tab ][ $section[ 'name' ] ][ $setting[ 'name' ] ])
     $setting['value'] = $plugin_settings[$tab][$section['name']][$setting['name']];
 }
 
-$setting[ 'name' ] = 'styles[' . $tab . '][' . $section[ 'name' ] . '][' . $setting[ 'name' ] . ']';
+$setting[ 'classes' ] = $setting[ 'name' ];
+$setting[ 'id' ] = 'style_' . $tab . '_' . $section[ 'name' ] . '_' . $setting[ 'name' ];
+$setting[ 'name' ] = 'style[' . $tab . '][' . $section[ 'name' ] . '][' . $setting[ 'name' ] . ']';
 
 switch ( $setting[ 'type' ] ) {
     case 'html':
@@ -14,13 +16,13 @@ switch ( $setting[ 'type' ] ) {
         echo $setting[ 'value' ];
         break;
     case 'color' :
-        echo '<input type="text" value="' . $setting['value'] . '" class="js-ninja-forms-styles-color-field" data-default-color="#F9F9F9" />';
+        echo '<input name="' . $setting['name'] . '" type="text" value="' . $setting['value'] . '" class="js-ninja-forms-styles-color-field" data-default-color="#F9F9F9" />';
         break;
     case 'textbox' :
         echo "<input type='text' class='code widefat' name='{$setting['name']}' id='{$setting['name']}' value='{$setting['value']}'>";
         break;
     case 'textarea':
-        echo "<textarea class='widefat' name='{$setting['name']}' id='{$setting['name']}' rows='8'>{$setting['value']}</textarea>";
+        echo "<textarea class='widefat {$setting['classes']}' name='{$setting['name']}' id='{$setting['id']}' rows='8'>{$setting['value']}</textarea>";
         break;
     case 'toggle' :
     case 'checkbox' :

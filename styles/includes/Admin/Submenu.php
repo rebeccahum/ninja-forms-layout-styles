@@ -10,10 +10,23 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
     public $priority = 11.5;
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        if( isset( $_POST[ 'update_ninja_forms_style_settings' ] ) ){
+            $this->update();
+        }
+    }
+
     public function display()
     {
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_script( 'ninja_forms_styles_admin_js', NF_Styles::$url . 'assets/js/admin.js', array( 'wp-color-picker' ), false, true );
+
+        wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
+        wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js' );
+
 
         $groups = NF_Styles::config( 'SettingGroups' );
         $settings = NF_Styles::config( 'CommonSettings' );
@@ -23,6 +36,21 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         unset( $settings[ 'show_advanced_css' ] );
 
         NF_Styles::template( 'admin-submenu-settings.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) );
+    }
+
+    public function update()
+    {
+        $data = $_POST[ 'style' ];
+        $data = self::sanitize_text_field( $data );
+        Ninja_Forms()->update_setting( 'style', $data );
+    }
+
+    public static function sanitize_text_field( $data )
+    {
+        if( is_array( $data ) ){
+            return array_map( array( 'self', 'sanitize_text_field' ), $data );
+        }
+        return sanitize_text_field( $data );
     }
 
 }
