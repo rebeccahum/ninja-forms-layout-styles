@@ -64,6 +64,12 @@ final class NF_Styles
             foreach( self::config( 'CommonSettings' ) as $common_setting ){
 
                 $common_setting[ 'name' ] = $name . '_' . $common_setting[ 'name' ];
+                if ( isset ( $common_setting[ 'deps' ] ) ) {
+                    foreach( $common_setting[ 'deps' ] as $dep_name => $val ) {
+                        $common_setting[ 'deps' ][ $name . '_' . $dep_name ] = $val;
+                        unset( $common_setting[ 'deps' ][ $dep_name ] );
+                    }
+                }
                 $style_setting[ 'settings' ][] = $common_setting;
             }
 
