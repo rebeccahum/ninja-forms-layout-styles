@@ -53,9 +53,13 @@ final class NF_Styles
         return $groups = array_merge( $groups, self::config( 'FieldSettingGroups' ) );
     }
 
-    public function add_field_settings( $settings )
+    public function add_field_settings( $settings, $field_type, $field_parent_type )
     {
         $style_settings = self::config( 'FieldSettings' );
+
+        if( 'list' == $field_parent_type ){
+            $style_settings = array_merge( $style_settings, self::config( 'ListFieldSettings' ) );
+        }
 
         foreach( $style_settings as $name => $style_setting ){
 
@@ -71,7 +75,7 @@ final class NF_Styles
                         unset( $common_setting[ 'deps' ][ $dep_name ] );
                     }
                 }
-                
+
                 $style_setting[ 'settings' ][] = $common_setting;
             }
 
