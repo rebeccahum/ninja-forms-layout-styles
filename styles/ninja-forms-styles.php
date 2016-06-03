@@ -40,7 +40,7 @@ final class NF_Styles
     {
         add_action( 'ninja_forms_loaded', array( $this, 'ninja_forms_loaded' ) );
         add_filter( 'ninja_forms_field_settings_groups', array( $this, 'add_field_settings_group' ) );
-        add_filter( 'ninja_forms_field_load_settings', array( $this, 'add_field_settings' ) );
+        add_filter( 'ninja_forms_field_load_settings', array( $this, 'add_field_settings' ), 10, 3 );
     }
 
     public function ninja_forms_loaded()
