@@ -3,15 +3,25 @@
     <h1><?php _e( 'Style Settings', 'ninja-forms-styles' ); ?></h1>
 
     <h2 class="nav-tab-wrapper">
-        <?php NF_Styles::template( 'admin-submenu-settings-tabs.html.php', compact( 'groups', 'tab' ) ); ?>
+        <?php foreach( $view->get_var( 'groups' ) as $group ): ?>
+            <?php $view->get_part( 'tab', $group ); ?>
+        <?php endforeach; ?>
     </h2>
 
     <div id="poststuff">
         <form action="" method="POST">
 
-            <?php if( 'field_type' == $tab ) NF_Styles::template( 'admin-submenu-settings-sections-field-type-selector.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) ); ?>
+            <?php
+            if( 'field_type' == $view->get_var( 'tab' ) ){
+                $view->get_part( 'field-type-selector' );
+            }
+            ?>
 
-            <?php NF_Styles::template( 'admin-submenu-settings-sections.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) ); ?>
+            <?php
+            foreach( $view->get_var( 'sections' ) as $section ) {
+                $view->get_part( 'postbox', $section );
+            }
+            ?>
 
             <p>
                 <label>
@@ -26,3 +36,4 @@
     </div>
 
 </div>
+

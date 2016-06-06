@@ -8,21 +8,15 @@ jQuery( document ).ready( function( $ ){
     /*
      * Initialize CodeMirror
      */
-    $( 'textarea.advanced' ).each( function( index, textarea ){
+    $( 'textarea.setting-advanced' ).each( function( index, textarea ){
         ninjaFormsStyles.initCodeMirror( textarea );
     });
 
     /*
-     * Initialize Field Type Selector
+     * Field Type Selector
      */
-    var fieldTypeSettings = $( '.ninja_forms_styles_settings_field_type' );
-    $( '#ninja-forms-styles-field-type-selector' ).change( function() {
-        fieldTypeSettings.hide();
-        var postbox = $( '#ninja_forms_styles_settings_field_type_' + $( this ).val() );
-        postbox.show();
-        postbox.find( 'textarea.advanced' ).each( function( index, textarea ) {
-            ninjaFormsStyles.initCodeMirror( textarea );
-        });
+    $( '#ninja-forms-styles-field-type-selector' ).change( function(){
+        window.location.href = window.location.href + '&field_type=' + $( this ).val();
     });
 
     /*

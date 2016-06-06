@@ -14,15 +14,18 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
         'sections' => array(
             'container' => array(
                 'name' => 'container',
-                'label' => __( 'Container Styles', 'ninja-forms-styles' )
+                'label' => __( 'Container Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-form-cont'
             ),
             'title' => array(
                 'name' => 'title',
-                'label' => __( 'Title Styles', 'ninja-forms-styles' )
+                'label' => __( 'Title Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-form-title h3'
             ),
             'required-message' => array(
                 'name' => 'required-message',
-                'label' => __( 'Required Message Styles', 'ninja-forms-styles' )
+                'label' => __( 'Required Message Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-response-msg'
             ),
             'row' => array(
                 'name' => 'row',
@@ -72,7 +75,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
 
     'field_type' => array(
         'name' => 'field_type',
-        'label' => __( 'Field Type Styles', 'ninja-forms-styles' )
+        'label' => __( 'Field Type Styles', 'ninja-forms-styles' ),
+        'sections' => array()
     ),
 
     /*

@@ -39,6 +39,7 @@ final class NF_Styles
     public function __construct()
     {
         add_action( 'ninja_forms_loaded', array( $this, 'ninja_forms_loaded' ) );
+        add_action( 'ninja_forms_before_container', array( $this, 'localize_plugin_styles' ) );
 
         add_filter( 'ninja_forms_from_settings_types', array( $this, 'add_form_settings_groups' ) );
         add_filter( 'ninja_forms_localize_form_styles_settings', array( $this, 'add_form_settings' ) );
@@ -123,6 +124,42 @@ final class NF_Styles
 
         return $settings;
     }
+
+    public function localize_plugin_styles()
+    {
+        $style_settings = Ninja_Forms()->get_setting( 'style' );
+        $settings_groups = self::config( 'PluginSettingGroups' );
+
+        $styles = array();
+        foreach( $settings_groups as $setting_group ){
+
+            if( ! isset( $setting_group[ 'sections' ] ) || ! $setting_group[ 'sections' ] ) continue;
+
+            $group_name = $setting_group[ 'name' ];
+
+            if( ! isset( $style_settings[ $group_name ] ) || ! $style_settings[ $group_name ] ) continue;
+
+            foreach( $setting_group[ 'sections' ] as $section ){
+
+                if( ! isset( $section[ 'selector' ] ) || ! $section[ 'selector' ] ) continue;
+
+                $section_name = $section[ 'name' ];
+
+                $selector = $section[ 'selector' ];
+
+                foreach( $style_settings[ $group_name ][ $section_name ] as $element => $style ){
+
+                    if( ! $style ) continue;
+
+                    $styles[ $selector ][ $element ] = $style;
+
+                }
+            }
+        }
+
+        self::template( 'display-form-styles.html.php', compact( 'styles' ) );
+    }
+
 
     /**
      * Main Plugin Instance

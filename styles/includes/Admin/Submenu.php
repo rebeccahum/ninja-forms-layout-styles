@@ -28,30 +28,73 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
         wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js' );
 
-
+        $tab = ( isset( $_GET[ 'tab' ] ) ) ? self::sanitize_text_field( $_GET[ 'tab' ] ) : 'form_settings';
         $groups = NF_Styles::config( 'PluginSettingGroups' );
-        $settings = NF_Styles::config( 'CommonSettings' );
-        $tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : 'form';
-        $plugin_settings = Ninja_Forms()->get_setting( 'style' );
 
-        unset( $settings[ 'show_advanced_css' ] );
+        if( 'field_type' == $tab ) {
 
-        $groups[ 'field_type' ][ 'sections' ] = array();
-        foreach( Ninja_Forms()->fields as $field ){
-            $groups[ 'field_type' ][ 'sections' ][ $field->get_name() ] = array(
-                'name' => $field->get_name(),
-                'label' => $field->get_nicename()
-            );
+            if( isset( $_GET[ 'field_type' ] ) ) {
+
+                $field_type = self::sanitize_text_field($_GET['field_type']);
+
+                if (isset(Ninja_Forms()->fields[ $field_type ])) {
+
+                    $field = Ninja_Forms()->fields[ $field_type ];
+
+                    $sections = array('wrap' => __('Wrap'), 'label' => __('Label'), 'element' => __('Element'));
+
+                    if ('html' == $field->get_name()) {
+                        unset($sections['label']);
+                    }
+
+                    if ('hr' == $field->get_name()) {
+                        unset($sections['wrap']);
+                        unset($sections['label']);
+                    }
+
+                    foreach ($sections as $section => $label) {
+
+                        $name = $field->get_name() . "_$section";
+
+                        $groups['field_type']['sections'][$name] = array(
+                            'name' => $name,
+                            'field' => $field->get_name(),
+                            'label' => $field->get_nicename() . ' ' . $label
+                        );
+                    }
+                }
+            }
         }
 
-        NF_Styles::template( 'admin-submenu-settings.html.php', compact( 'groups', 'settings', 'tab', 'plugin_settings' ) );
+        $sections = $groups[ $tab ][ 'sections' ];
+        $plugin_settings = Ninja_Forms()->get_setting( 'style' );
+
+        foreach( $sections as $section_id => $section ){
+            $settings = NF_Styles::config( 'CommonSettings' );
+            unset( $settings[ 'show_advanced_css' ] );
+
+            foreach( $settings as $name => $setting ){
+                $settings[ $name ][ 'section' ] = $section_id;
+            }
+
+            $sections[ $section_id ][ 'settings' ] = $settings;
+        }
+        
+        $view = new NF_Styles_Admin_Views_PluginSettings( compact( 'tab', 'groups', 'sections' ) );
+
+        NF_Styles::template( 'PluginSettings/index.html.php', compact( 'view' ) );
     }
 
     public function update()
     {
-        $data = $_POST[ 'style' ];
-        $data = self::sanitize_text_field( $data );
-        Ninja_Forms()->update_setting( 'style', $data );
+        $data = self::sanitize_text_field( $_POST[ 'style' ] );
+        $group = self::sanitize_text_field( $_GET[ 'tab' ] );
+
+        $settings = Ninja_Forms()->get_setting( 'style' );
+
+        $settings[ $group ] = $data[ $group ];
+
+        Ninja_Forms()->update_setting( 'style', $settings );
     }
 
     public static function sanitize_text_field( $data )
