@@ -1,6 +1,11 @@
 jQuery( document ).ready( function( $ ){
 
     /*
+     * Initialize Metaboxes
+     */
+    postboxes.add_postbox_toggles(pagenow);
+
+    /*
      * Initialize Color Picker Options
      */
     $( '.js-ninja-forms-styles-color-field' ).wpColorPicker();

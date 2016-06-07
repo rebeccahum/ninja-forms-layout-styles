@@ -22,11 +22,12 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
     public function display()
     {
         wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_style( 'nf-codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
         wp_enqueue_style( 'ninja_forms_styles_admin_css', NF_Styles::$url . 'assets/css/admin.css', array(), false );
-        wp_enqueue_script( 'ninja_forms_styles_admin_js', NF_Styles::$url . 'assets/js/admin.js', array( 'wp-color-picker' ), false, true );
 
-        wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
-        wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js' );
+        wp_enqueue_script( 'postbox' );
+        wp_enqueue_script( 'nf-codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js' );
+        wp_enqueue_script( 'ninja_forms_styles_admin_js', NF_Styles::$url . 'assets/js/admin.js', array( 'wp-color-picker', 'postbox', 'nf-codemirror' ), false, true );
 
         $tab = ( isset( $_GET[ 'tab' ] ) ) ? self::sanitize_text_field( $_GET[ 'tab' ] ) : 'form_settings';
         $groups = NF_Styles::config( 'PluginSettingGroups' );
