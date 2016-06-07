@@ -1,4 +1,4 @@
-<div class="postbox closed">
+<div class="postbox">
     <h3 class="hndle">
         <span><?php echo $data[ 'label' ]; ?></span>
         <span class="nf-postbox-controls"></span>

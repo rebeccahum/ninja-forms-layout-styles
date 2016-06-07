@@ -1,11 +1,6 @@
 jQuery( document ).ready( function( $ ){
 
     /*
-     * Initialize Metaboxes
-     */
-    postboxes.add_postbox_toggles(pagenow);
-
-    /*
      * Initialize Color Picker Options
      */
     $( '.js-ninja-forms-styles-color-field' ).wpColorPicker();
@@ -15,6 +10,16 @@ jQuery( document ).ready( function( $ ){
      */
     $( 'textarea.setting-advanced' ).each( function( index, textarea ){
         ninjaFormsStyles.initCodeMirror( textarea );
+    });
+
+    /*
+     * Initialize Metaboxes
+     *
+     * Note: Run AFTER initializing CodeMirror
+     */
+    postboxes.add_postbox_toggles(pagenow);
+    $( '.postbox' ).each( function() {
+        $( this ).addClass( 'closed' );
     });
 
     /*
