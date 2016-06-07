@@ -15,7 +15,7 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         parent::__construct();
 
         if( isset( $_POST[ 'update_ninja_forms_style_settings' ] ) ){
-            $this->update();
+            add_action( 'init', array( $this, 'update' ) );
         }
     }
 
@@ -88,6 +88,8 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
     public function update()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_styles_can_update_styles', 'manage_options' ) ) ) return;
+
         $data = self::sanitize_text_field( $_POST[ 'style' ] );
         $group = self::sanitize_text_field( $_GET[ 'tab' ] );
 
