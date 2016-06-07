@@ -29,14 +29,14 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         wp_enqueue_script( 'nf-codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js' );
         wp_enqueue_script( 'ninja_forms_styles_admin_js', NF_Styles::$url . 'assets/js/admin.js', array( 'wp-color-picker', 'postbox', 'nf-codemirror' ), false, true );
 
-        $tab = ( isset( $_GET[ 'tab' ] ) ) ? self::sanitize_text_field( $_GET[ 'tab' ] ) : 'form_settings';
+        $tab = ( isset( $_GET[ 'tab' ] ) ) ? WPN_Helper::sanitize_text_field( $_GET[ 'tab' ] ) : 'form_settings';
         $groups = NF_Styles::config( 'PluginSettingGroups' );
 
         if( 'field_type' == $tab ) {
 
             if( isset( $_GET[ 'field_type' ] ) ) {
 
-                $field_type = self::sanitize_text_field($_GET['field_type']);
+                $field_type = WPN_Helper::sanitize_text_field($_GET['field_type']);
 
                 if (isset(Ninja_Forms()->fields[ $field_type ])) {
 
