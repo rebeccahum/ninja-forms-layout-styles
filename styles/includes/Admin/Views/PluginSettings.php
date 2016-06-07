@@ -37,7 +37,15 @@ final class NF_Styles_Admin_Views_PluginSettings
 
     public function get_field_value( $data )
     {
-        return $data[ 'value' ];
+        extract( $data );
+
+        $tab = $this->data[ 'tab' ];
+
+        if( isset( $this->data[ 'plugin_settings' ][ $tab ][ $section ][ $name ] ) ){
+            return $this->data[ 'plugin_settings' ][ $tab ][ $section ][ $name ];
+        }
+
+        return $value;
     }
 
 }

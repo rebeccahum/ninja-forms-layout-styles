@@ -83,7 +83,7 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
         $url = remove_query_arg( 'field_type' );
 
-        $view = new NF_Styles_Admin_Views_PluginSettings( compact( 'tab', 'groups', 'sections', 'url' ) );
+        $view = new NF_Styles_Admin_Views_PluginSettings( compact( 'tab', 'groups', 'sections', 'url', 'plugin_settings' ) );
 
         NF_Styles::template( 'PluginSettings/index.html.php', compact( 'view' ) );
     }
@@ -93,11 +93,12 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         if( ! current_user_can( apply_filters( 'ninja_forms_styles_can_update_styles', 'manage_options' ) ) ) return;
 
         $data = WPN_Helper::sanitize_text_field( $_POST[ 'style' ] );
-        $group = WPN_Helper::sanitize_text_field( $_GET[ 'tab' ] );
+
+        $group = WPN_Helper::get_query_string( 'tab', 'form_settings' );
 
         $settings = Ninja_Forms()->get_setting( 'style' );
 
-        $settings[ $group ] = $data[ $group ];
+        $settings[ $group ] = apply_filters( 'ninja_forms_styles_updates_' . $group, $data[ $group ] );
 
         Ninja_Forms()->update_setting( 'style', $settings );
     }
