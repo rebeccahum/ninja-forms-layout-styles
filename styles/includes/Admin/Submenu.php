@@ -80,8 +80,10 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
             $sections[ $section_id ][ 'settings' ] = $settings;
         }
-        
-        $view = new NF_Styles_Admin_Views_PluginSettings( compact( 'tab', 'groups', 'sections' ) );
+
+        $url = remove_query_arg( 'field_type' );
+
+        $view = new NF_Styles_Admin_Views_PluginSettings( compact( 'tab', 'groups', 'sections', 'url' ) );
 
         NF_Styles::template( 'PluginSettings/index.html.php', compact( 'view' ) );
     }
