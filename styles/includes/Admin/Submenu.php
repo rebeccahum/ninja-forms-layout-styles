@@ -92,22 +92,14 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
     {
         if( ! current_user_can( apply_filters( 'ninja_forms_styles_can_update_styles', 'manage_options' ) ) ) return;
 
-        $data = self::sanitize_text_field( $_POST[ 'style' ] );
-        $group = self::sanitize_text_field( $_GET[ 'tab' ] );
+        $data = WPN_Helper::sanitize_text_field( $_POST[ 'style' ] );
+        $group = WPN_Helper::sanitize_text_field( $_GET[ 'tab' ] );
 
         $settings = Ninja_Forms()->get_setting( 'style' );
 
         $settings[ $group ] = $data[ $group ];
 
         Ninja_Forms()->update_setting( 'style', $settings );
-    }
-
-    public static function sanitize_text_field( $data )
-    {
-        if( is_array( $data ) ){
-            return array_map( array( 'self', 'sanitize_text_field' ), $data );
-        }
-        return sanitize_text_field( $data );
     }
 
 }
