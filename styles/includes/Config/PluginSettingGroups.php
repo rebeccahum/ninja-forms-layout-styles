@@ -29,7 +29,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'row' => array(
                 'name' => 'row',
                 'label' => __( 'Row Styles', 'ninja-forms-styles' ),
-                'selector' => '.nf-row {}'
+                'selector' => '.nf-row'
             ),
             'row-odd' => array(
                 'name' => 'row-odd',
