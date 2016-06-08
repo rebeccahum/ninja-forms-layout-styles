@@ -32,7 +32,7 @@ jQuery( document ).ready( function( $ ){
     /*
      * Toggle Advanced CSS
      */
-    var advancedCSS = $( '.row-ninja-forms--advanced' );
+    var advancedCSS = $( '.row-ninja-forms--display, .row-ninja-forms--float, .row-ninja-forms--advanced' );
     advancedCSS.hide();
     $( '#advanced_css' ).change( function(){
         var isChecked = $( this ).prop( 'checked' );
