@@ -27,7 +27,9 @@ final class NF_Styles_Admin_Views_PluginSettings
 
     public function get_field_name( $data )
     {
-        return 'style[' . $this->get_var( 'tab' ) . '][' . $data[ 'section' ] . '][' . $data[ 'name' ] . ']';
+        $name = 'style[' . $this->get_var( 'tab' ) . '][' . $data[ 'section' ] . '][' . $data[ 'name' ] . ']';
+        $name = apply_filters( 'ninja_forms_styles_get_plugin_setting_name', $name, $this->data[ 'tab' ], $data[ 'section' ], $data[ 'name' ] );
+        return $name;
     }
 
     public function get_field_id( $data )
@@ -42,8 +44,10 @@ final class NF_Styles_Admin_Views_PluginSettings
         $tab = $this->data[ 'tab' ];
 
         if( isset( $this->data[ 'plugin_settings' ][ $tab ][ $section ][ $name ] ) ){
-            return $this->data[ 'plugin_settings' ][ $tab ][ $section ][ $name ];
+            $value = $this->data[ 'plugin_settings' ][ $tab ][ $section ][ $name ];
         }
+
+        $value = apply_filters( 'ninja_forms_styles_get_plugin_style', $value, $tab, $section, $name );
 
         return $value;
     }

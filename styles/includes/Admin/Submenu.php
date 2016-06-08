@@ -17,6 +17,10 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         if( isset( $_POST[ 'update_ninja_forms_style_settings' ] ) ){
             add_action( 'init', array( $this, 'update' ) );
         }
+
+        add_filter( 'ninja_forms_style_field_type', array( $this, 'filter_field_type_name' ), 10, 1) ;
+        add_filter( 'ninja_forms_styles_get_plugin_style', array( $this, 'filter_get_plugin_style' ), 10, 4 );
+        add_filter( 'ninja_forms_styles_get_plugin_setting_name', array( $this, 'filter_get_plugin_setting_name' ), 10, 4 );
     }
 
     public function display()
@@ -101,6 +105,43 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         $settings[ $group ] = apply_filters( 'ninja_forms_styles_updates_' . $group, $data[ $group ] );
 
         Ninja_Forms()->update_setting( 'style', $settings );
+    }
+
+    public function filter_get_plugin_style( $value, $tab, $section, $name )
+    {
+        if( 'field_type' != $tab ) return $value;
+
+        $plugin_settings = Ninja_Forms()->get_setting( 'style' );
+        
+        list( $section, $subsection ) = explode( '_', $section );
+
+        $section = apply_filters( 'ninja_forms_style_field_type', $section );
+
+        if( isset( $plugin_settings[ $tab ][ $section ][ $subsection ][ $name ] ) ){
+            $value = $plugin_settings[ $tab ][ $section ][ $subsection ][ $name ];
+        }
+
+        return $value;
+    }
+    
+    public function filter_get_plugin_setting_name( $name, $tab, $section, $name_raw )
+    {
+        if( 'field_type' != $tab ) return $name;
+
+        list( $section, $subsection ) = explode( '_', $section );
+
+        $section = apply_filters( 'ninja_forms_style_field_type', $section );
+
+        return 'style[' . $tab . '][' . $section . '][' . $subsection . '][' . $name_raw . ']';
+    }
+
+    public function filter_field_type_name( $name, $flip = FALSE )
+    {
+        $lookup = NF_Styles::config( 'FieldTypeLookup' );
+
+        if( $flip ) $lookup = array_flip( $lookup );
+
+        return ( isset( $lookup[ $name ] ) ) ? $lookup[ $name ] : $name;
     }
 
 }
