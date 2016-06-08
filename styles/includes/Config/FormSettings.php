@@ -15,6 +15,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Title Styles', 'ninja-forms' ),
         'width' => 'full',
+        'selector' => '#nf-form-{ID}-cont .nf-form-title h3'
     ),
 
     'row_styles' => array(
@@ -22,6 +23,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Row Styles', 'ninja-forms' ),
         'width' => 'full',
+        'selector' => '#nf-form-{ID}-cont .nf-row'
     ),
 
     'odd_row_styles' => array(
@@ -29,6 +31,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Odd ow Styles', 'ninja-forms' ),
         'width' => 'full',
+        'selector' => '#nf-form-{ID}-cont .nf-row:nth-child(odd)'
     ),
 
     'success_styles' => array(
@@ -36,6 +39,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Success Response Message Styles', 'ninja-forms' ),
         'width' => 'full',
+        'selector' => '#nf-form-{ID}-cont .nf-response-msg'
     ),
 
     'error_styles' => array(
@@ -43,6 +47,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Error Response Message Styles', 'ninja-forms' ),
         'width' => 'full',
+        'selector' => '#nf-form-{ID}-cont .nf-error-field-errors'
     ),
 
 );

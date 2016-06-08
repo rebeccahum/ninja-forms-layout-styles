@@ -25,19 +25,21 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'required-message' => array(
                 'name' => 'required-message',
                 'label' => __( 'Required Message Styles', 'ninja-forms-styles' ),
-                'selector' => '.nf-response-msg'
             ),
             'row' => array(
                 'name' => 'row',
-                'label' => __( 'Row Styles', 'ninja-forms-styles' )
+                'label' => __( 'Row Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-row {}'
             ),
             'row-odd' => array(
                 'name' => 'row-odd',
-                'label' => __( 'Odd Row Styles', 'ninja-forms-styles' )
+                'label' => __( 'Odd Row Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-row:nth-child(odd)'
             ),
             'success-msg' => array(
                 'name' => 'success-msg',
-                'label' => __( 'Success Response Message Styles', 'ninja-forms-styles' )
+                'label' => __( 'Success Response Message Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-response-msg'
             ),
         )
     ),
@@ -54,15 +56,18 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
         'sections' => array(
             'wrap' => array(
                 'name' => 'wrap',
-                'label' => __( 'Wrap Styles', 'ninja-forms-styles' )
+                'label' => __( 'Wrap Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-fields .nf-field-container .field-wrap'
             ),
             'label' => array(
                 'name' => 'label',
-                'label' => __( 'Label Styles', 'ninja-forms-styles' )
+                'label' => __( 'Label Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-fields .nf-field-label label'
             ),
             'element' => array(
                 'name' => 'element',
-                'label' => __( 'Element Styles', 'ninja-forms-styles' )
+                'label' => __( 'Element Styles', 'ninja-forms-styles' ),
+                'selector' => '.nf-fields .nf-field-element .ninja-forms-field'
             ),
         )
     ),
