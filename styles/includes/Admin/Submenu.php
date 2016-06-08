@@ -21,6 +21,12 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         add_filter( 'ninja_forms_style_field_type', array( $this, 'filter_field_type_name' ), 10, 1) ;
         add_filter( 'ninja_forms_styles_get_plugin_style', array( $this, 'filter_get_plugin_style' ), 10, 4 );
         add_filter( 'ninja_forms_styles_get_plugin_setting_name', array( $this, 'filter_get_plugin_setting_name' ), 10, 4 );
+
+        if( defined( 'NF_DEV' ) && NF_DEV ){
+            if( isset( $_POST[ 'nuke_styles' ] ) && $_POST[ 'nuke_styles' ] ){
+                add_action( 'admin_init', array( $this, 'developer_nuke_styles' ) );
+            }
+        }
     }
 
     public function display()
@@ -142,6 +148,11 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         if( $flip ) $lookup = array_flip( $lookup );
 
         return ( isset( $lookup[ $name ] ) ) ? $lookup[ $name ] : $name;
+    }
+
+    public function developer_nuke_styles()
+    {
+        Ninja_Forms()->update_setting( 'style', array() );
     }
 
 }
