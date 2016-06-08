@@ -7,6 +7,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Container Styles', 'ninja-forms' ),
         'width' => 'full',
+        'selector' => '#nf-form-{ID}-cont'
     ),
 
     'title_styles' => array(

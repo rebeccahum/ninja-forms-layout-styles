@@ -39,7 +39,15 @@ final class NF_Styles
     public function __construct()
     {
         add_action( 'ninja_forms_loaded', array( $this, 'ninja_forms_loaded' ) );
-        add_action( 'ninja_forms_before_container', array( $this, 'localize_plugin_styles' ) );
+
+        add_action( 'ninja_forms_before_container', array( $this, 'localize_plugin_styles' ), 10, 3 );
+        add_action( 'ninja_forms_before_container_preview', array( $this, 'localize_plugin_styles' ), 10, 3 );
+
+        add_action( 'ninja_forms_before_container', array( $this, 'localize_form_styles' ), 10, 3 );
+        add_action( 'ninja_forms_before_container_preview', array( $this, 'localize_form_styles' ), 10, 3 );
+
+        add_action( 'ninja_forms_before_container', array( $this, 'localize_field_styles' ), 10, 3 );
+        add_action( 'ninja_forms_before_container_preview', array( $this, 'localize_field_styles' ), 10, 3 );
 
         add_filter( 'ninja_forms_from_settings_types', array( $this, 'add_form_settings_groups' ) );
         add_filter( 'ninja_forms_localize_form_styles_settings', array( $this, 'add_form_settings' ) );
@@ -125,7 +133,7 @@ final class NF_Styles
         return $settings;
     }
 
-    public function localize_plugin_styles()
+    public function localize_plugin_styles( $form_id, $settings, $fields )
     {
         $style_settings = Ninja_Forms()->get_setting( 'style' );
         $settings_groups = self::config( 'PluginSettingGroups' );
@@ -157,7 +165,46 @@ final class NF_Styles
             }
         }
 
-        self::template( 'display-form-styles.html.php', compact( 'styles' ) );
+        $this->localize_styles( $styles, 'Plugin Wide Styles' );
+    }
+
+    public function localize_form_styles( $form_id, $settings, $fields )
+    {
+        $form_settings_groups = self::config( 'FormSettings' );
+        $common_settings = self::config( 'CommonSettings' );
+
+        $styles = array();
+        foreach( $form_settings_groups as $form_settings_group ){
+
+            if( ! isset( $form_settings_group[ 'selector' ] ) ) continue;
+
+            $selector = str_replace( '{ID}', $form_id, $form_settings_group[ 'selector' ] );
+
+            foreach( $common_settings as $common_setting ){
+
+                $setting = $form_settings_group[ 'name' ] . '_' . $common_setting[ 'name' ];
+                if( ! isset( $settings[ $setting ] ) || ! $settings[ $setting ] ) continue;
+
+                $rule = $common_setting[ 'name' ];
+
+                $styles[ $selector ][ $rule ] = $settings[ $setting ];
+            }
+        }
+        
+        // $styles[ $selector ][ $element ] = $style;
+        $this->localize_styles( $styles, 'Form Styles' );
+    }
+
+    public function localize_field_styles( $form_id, $settings, $fields )
+    {
+        $styles = array();
+
+        $this->localize_styles( $styles, 'Field Styles' );
+    }
+
+    private function localize_styles( $styles, $title = '' )
+    {
+        self::template( 'display-form-styles.css.php', compact( 'styles', 'title' ) );
     }
 
 
