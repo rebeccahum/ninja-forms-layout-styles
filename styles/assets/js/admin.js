@@ -32,9 +32,10 @@ jQuery( document ).ready( function( $ ){
     /*
      * Toggle Advanced CSS
      */
+    var advancedCSS = $( '.row-ninja-forms--advanced' );
+    advancedCSS.hide();
     $( '#advanced_css' ).change( function(){
         var isChecked = $( this ).prop( 'checked' );
-        var advancedCSS = $( '.row-ninja-forms--advanced' );
         return ( isChecked ) ? advancedCSS.show() : advancedCSS.hide();
     });
 
