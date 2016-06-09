@@ -55,7 +55,18 @@ final class NF_Styles
         add_filter( 'ninja_forms_field_settings_groups', array( $this, 'add_field_settings_groups' ) );
         add_filter( 'ninja_forms_field_load_settings', array( $this, 'add_field_settings' ), 10, 3 );
 
+
         add_filter( 'ninja_forms_styles_output_rule_border', array( $this, 'filter_output_rule_border' ) );
+
+        /*
+         * Add a filter for importing/exporting plugin-wide styles
+         */
+        add_filter( 'ninja_forms_import_export_tabs', array( $this, 'add_export_tab' ) );
+        /*
+         * Listen for importing/exporting
+         */
+        add_action( 'admin_init', array( $this, 'import_export' ) );
+
     }
 
     public function ninja_forms_loaded()
@@ -343,6 +354,142 @@ final class NF_Styles
 
         new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
     }
+
+    /**
+     * Add a tab for styles to the import/export screen.
+     */
+    public function add_export_tab( $tabs ) {
+        $tabs[ 'styles' ] = __( 'Styles', 'ninja-forms-layout-styles' );
+        $this->add_export_metaboxes();
+        return $tabs;
+    }
+
+    /**
+     * Register our metaboxes
+     */
+    public function add_export_metaboxes() {
+        /*
+         * Import
+         */
+        add_meta_box(
+            'nf_import_export_styles_import',
+            __( 'Import Styles', 'ninja-forms-layout-styles' ),
+            array( $this, 'template_import_styles' ),
+            'nf_import_export_styles'
+        );
+
+        /*
+         * Export
+         */
+        add_meta_box(
+            'nf_import_export_styles_export',
+            __( 'Export Styles', 'ninja-forms-layout-styles' ),
+            array( $this, 'template_export_styles' ),
+            'nf_import_export_styles'
+        );
+    }
+    
+    /**
+     * Output our import metabox content
+     */
+    public function template_import_styles() {
+         NF_Styles::template( 'admin-settings-import-metabox.html.php' );
+    }
+
+    
+    /**
+     * Output our export metabox content
+     */
+    public function template_export_styles() {
+        NF_Styles::template( 'admin-settings-export-metabox.html.php' );
+    }
+
+    /**
+     * Handle import/export when the user clicks the appropriate button.
+     * 
+     * @since  3.0
+     * @return bool
+     */
+    public function import_export() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return false;
+        }
+
+        if ( isset ( $_POST[ 'nf_export_styles_submit' ] ) ) {
+            /*
+             * Get our current style settings.
+             */
+            $style_settings = Ninja_Forms()->get_setting( 'style', false );
+
+            /*
+             * Initiate a file download with our seralized settings.
+             */
+            header("Content-type: application/csv");
+            header("Content-Disposition: attachment; filename=ninja-forms-default-styles-" . time() . ".nfs");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            echo serialize( $style_settings );
+
+            die();
+        } else if ( isset( $_POST[ 'nf_import_style_submit' ] ) ) {
+            /*
+             * Check for upload errors.
+             */
+            $this->upload_error_check( $_FILES[ 'nf_import_style' ] );
+            /*
+             * Unserialise our uploaded .nfs file.
+             */
+            $import = maybe_unserialize( file_get_contents( $_FILES[ 'nf_import_style' ][ 'tmp_name' ] ) );
+            /*
+             * If we have an array, update our style settings with the imported array.
+             */
+            if ( is_array( $import ) ) {
+               Ninja_Forms()->update_setting( 'style', $import ); 
+            }
+        }
+    }
+
+    private function upload_error_check( $file )
+    {
+        if( ! $file[ 'error' ] ) return;
+
+        switch ( $file[ 'error' ] ) {
+            case UPLOAD_ERR_INI_SIZE:
+                $error_message = __( 'The uploaded file exceeds the upload_max_filesize directive in php.ini.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_FORM_SIZE:
+                $error_message = __( 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                $error_message = __( 'The uploaded file was only partially uploaded.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $error_message = __( 'No file was uploaded.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                $error_message = __( 'Missing a temporary folder.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                $error_message = __( 'Failed to write file to disk.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                $error_message = __( 'File upload stopped by extension.', 'ninja-forms' );
+                break;
+            default:
+                $error_message = __( 'Unknown upload error.', 'ninja-forms' );
+                break;
+        }
+
+        $args = array(
+            'title' => __( 'File Upload Error', 'ninja-forms' ),
+            'message' => $error_message,
+            'debug' => $file,
+        );
+        $message = Ninja_Forms()->template( 'admin-wp-die.html.php', $args );
+        wp_die( $message, $args[ 'title' ], array( 'back_link' => TRUE ) );
+    }
+
 }
 
 /**
