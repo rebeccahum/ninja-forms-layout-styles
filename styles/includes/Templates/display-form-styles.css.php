@@ -7,6 +7,9 @@
     <?php foreach( $styles as $selector => $rules ): ?>
     <?php echo $selector; ?> {
         <?php foreach( $rules as $rule => $value ): ?>
+
+        <?php if( 'border' == $rule ) $rule = 'border-width'; ?>
+
         <?php echo $rule; ?>:<?php echo $value; ?>;
         <?php endforeach; ?>
     }
