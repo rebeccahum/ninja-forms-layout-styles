@@ -176,6 +176,8 @@ final class NF_Styles
 
                     foreach( $style_setting_section as $rule => $value ){
 
+                        if( ! $value ) continue;
+
                         $styles[ str_replace( '{field-type}' , $field_type, $selector ) . ' ' . $selector_lookup[ $section ] ][ $rule ] = $value;
                     }
                 }
