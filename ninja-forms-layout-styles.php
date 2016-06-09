@@ -258,6 +258,19 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
 
 add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_styles_upgrade_form_settings' );
 function ninja_forms_styles_upgrade_form_settings( $data ){
+
+    if( ! isset( $data[ 'settings' ][ 'style' ][ 'groups' ] ) ) return $data;
+
+    foreach( $data[ 'settings' ][ 'style' ][ 'groups' ] as $group => $settings ){
+
+        if( 'field' == $group ) $group = 'element';
+
+        foreach( $settings as $setting => $value ){
+            $setting = $group . '_styles_' . $setting;
+            $data[ 'settings' ][ $setting ] = $value;
+        }
+    }
+
     return $data;
 }
 
