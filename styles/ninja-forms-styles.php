@@ -54,6 +54,8 @@ final class NF_Styles
 
         add_filter( 'ninja_forms_field_settings_groups', array( $this, 'add_field_settings_groups' ) );
         add_filter( 'ninja_forms_field_load_settings', array( $this, 'add_field_settings' ), 10, 3 );
+
+        add_filter( 'ninja_forms_styles_output_rule_border', array( $this, 'filter_output_rule_border' ) );
     }
 
     public function ninja_forms_loaded()
@@ -259,6 +261,10 @@ final class NF_Styles
         if( $styles ) self::template( 'display-form-styles.css.php', compact( 'styles', 'title' ) );
     }
 
+    public function filter_output_rule_border( $rule )
+    {
+        return 'border-width';
+    }
 
     /**
      * Main Plugin Instance

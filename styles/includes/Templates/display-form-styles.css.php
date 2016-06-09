@@ -7,10 +7,7 @@
     <?php foreach( $styles as $selector => $rules ): ?>
     <?php echo $selector; ?> {
         <?php foreach( $rules as $rule => $value ): ?>
-
-        <?php if( 'border' == $rule ) $rule = 'border-width'; ?>
-
-        <?php echo $rule; ?>:<?php echo $value; ?>;
+        <?php echo apply_filters( 'ninja_forms_styles_output_rule_' . $rule, $rule ); ?>:<?php echo $value; ?>;
         <?php endforeach; ?>
     }
     <?php endforeach; ?>
