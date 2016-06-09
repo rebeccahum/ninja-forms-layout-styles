@@ -169,11 +169,7 @@ final class NF_Styles
 
             $selector = $settings_groups[ 'field_type' ][ 'selector' ];
 
-            $selector_lookup = array(
-                'wrap' => '.field-wrap',
-                'label' => '.nf-field-label label',
-                'element' => '.nf-field-element .ninja-forms-field',
-            );
+            $selector_lookup = self::config( 'FieldTypeSelectorLookup' );
 
             foreach( $style_settings[ 'field_type' ] as $field_type => $style_setting_field ){
                 foreach( $style_setting_field as $section => $style_setting_section ){
