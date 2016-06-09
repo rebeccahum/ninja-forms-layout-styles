@@ -268,5 +268,20 @@ function ninja_forms_styles_upgrade_plugin_settings( $data ){
 
 add_filter( 'ninja_forms_upgrade_field', 'ninja_forms_styles_upgrade_field_settings' );
 function ninja_forms_styles_upgrade_field_settings( $data ){
+
+    if( ! isset( $data[ 'style' ][ 'groups' ] ) ) return $data;
+
+    foreach( $data[ 'style' ][ 'groups' ] as $group => $settings ){
+
+        if( 'field' == $group ) $group = 'element';
+
+        foreach( $settings as $setting => $value ){
+            $setting = $group . '_styles_' . $setting;
+            $data[ $setting ] = $value;
+        }
+    }
+
+    unset( $data[ 'style' ] );
+
     return $data;
 }
