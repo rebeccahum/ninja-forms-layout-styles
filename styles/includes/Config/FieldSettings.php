@@ -5,7 +5,7 @@ return array(
     'wrap_styles' => array(
         'name' => 'wrap_styles',
         'type' => 'fieldset',
-        'label' => __( 'Wrap Styles', 'ninja-forms' ),
+        'label' => __( 'Wrap Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap'
     ),
@@ -13,7 +13,7 @@ return array(
     'label_styles' => array(
         'name' => 'label_styles',
         'type' => 'fieldset',
-        'label' => __( 'Label Styles', 'ninja-forms' ),
+        'label' => __( 'Label Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap .nf-field-label label'
     ),
@@ -21,7 +21,7 @@ return array(
     'element_styles' => array(
         'name' => 'element_styles',
         'type' => 'fieldset',
-        'label' => __( 'Element Styles', 'ninja-forms' ),
+        'label' => __( 'Element Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap .nf-field-element .ninja-forms-field'
     ),
