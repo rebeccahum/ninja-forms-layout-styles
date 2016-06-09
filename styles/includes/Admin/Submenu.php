@@ -52,7 +52,7 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
                     $field = Ninja_Forms()->fields[ $field_type ];
 
-                    $sections = array('wrap' => __('Wrap'), 'label' => __('Label'), 'element' => __('Element'));
+                    $sections = array('wrap' => __('Wrap', 'ninja-forms-layout-styles' ), 'label' => __('Label', 'ninja-forms-layout-styles'), 'element' => __('Element', 'ninja-forms-layout-styles') );
 
                     if ('html' == $field->get_name()) {
                         unset($sections['label']);

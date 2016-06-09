@@ -5,7 +5,7 @@ return array(
     'container_styles' => array(
         'name' => 'container_styles',
         'type' => 'fieldset',
-        'label' => __( 'Container Styles', 'ninja-forms' ),
+        'label' => __( 'Container Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont'
     ),
@@ -13,7 +13,7 @@ return array(
     'title_styles' => array(
         'name' => 'title_styles',
         'type' => 'fieldset',
-        'label' => __( 'Title Styles', 'ninja-forms' ),
+        'label' => __( 'Title Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont .nf-form-title h3'
     ),
@@ -21,7 +21,7 @@ return array(
     'row_styles' => array(
         'name' => 'row_styles',
         'type' => 'fieldset',
-        'label' => __( 'Row Styles', 'ninja-forms' ),
+        'label' => __( 'Row Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont .nf-row'
     ),
@@ -29,7 +29,7 @@ return array(
     'odd_row_styles' => array(
         'name' => 'odd_row_styles',
         'type' => 'fieldset',
-        'label' => __( 'Odd ow Styles', 'ninja-forms' ),
+        'label' => __( 'Odd ow Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont .nf-row:nth-child(odd)'
     ),
@@ -37,7 +37,7 @@ return array(
     'success_styles' => array(
         'name' => 'success_styles',
         'type' => 'fieldset',
-        'label' => __( 'Success Response Message Styles', 'ninja-forms' ),
+        'label' => __( 'Success Response Message Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont .nf-response-msg'
     ),
@@ -45,7 +45,7 @@ return array(
     'error_styles' => array(
         'name' => 'error_styles',
         'type' => 'fieldset',
-        'label' => __( 'Error Response Message Styles', 'ninja-forms' ),
+        'label' => __( 'Error Response Message Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont .nf-error-field-errors'
     ),
