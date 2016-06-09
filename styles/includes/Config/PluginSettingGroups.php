@@ -81,7 +81,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
     'field_type' => array(
         'name' => 'field_type',
         'label' => __( 'Field Type Styles', 'ninja-forms-styles' ),
-        'sections' => array()
+        'sections' => array(),
+        'selector' => '.nf-fields .nf-field-container.{field-type}-container'
     ),
 
     /*

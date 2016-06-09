@@ -165,6 +165,27 @@ final class NF_Styles
             }
         }
 
+        if( isset( $style_settings[ 'field_type' ] ) && $style_settings[ 'field_type' ] ){
+
+            $selector = $settings_groups[ 'field_type' ][ 'selector' ];
+
+            $selector_lookup = array(
+                'wrap' => '.field-wrap',
+                'label' => '.nf-field-label label',
+                'element' => '.nf-field-element .ninja-forms-field',
+            );
+
+            foreach( $style_settings[ 'field_type' ] as $field_type => $style_setting_field ){
+                foreach( $style_setting_field as $section => $style_setting_section ){
+
+                    foreach( $style_setting_section as $rule => $value ){
+
+                        $styles[ str_replace( '{field-type}' , $field_type, $selector ) . ' ' . $selector_lookup[ $section ] ][ $rule ] = $value;
+                    }
+                }
+            }
+        }
+
         $this->localize_styles( $styles, 'Plugin Wide Styles' );
     }
 
@@ -197,9 +218,38 @@ final class NF_Styles
 
     public function localize_field_styles( $form_id, $settings, $fields )
     {
-        $styles = array();
+        $field_settings_groups = self::config( 'FieldSettings' );
+        $common_settings = self::config( 'CommonSettings' );
 
-        $this->localize_styles( $styles, 'Field Styles' );
+        $styles = array();
+        foreach( $fields as $field ){
+            foreach( $field_settings_groups as $field_settings_group ){
+
+                if( ! isset( $field_settings_group[ 'selector' ] ) ) continue;
+
+                $selector = str_replace( '{ID}', $form_id, $field_settings_group[ 'selector' ] );
+
+                foreach( $common_settings as $common_setting ){
+
+                    $setting = $field_settings_group[ 'name' ] . '_' . $common_setting[ 'name' ];
+
+                    $field_setting = '';
+                    if( is_object( $field ) ){
+                        $field_setting = $field->get_setting( $setting );
+                    } elseif( isset( $field[ $setting ] ) ){
+                        $field_setting = $field[ $setting ];
+                    }
+
+                    if( ! $field_setting ) continue;
+
+                    $rule = $common_setting[ 'name' ];
+
+                    $styles[ $selector ][ $rule ] = $field_setting;
+                }
+            }
+        }
+
+        $this->localize_styles( $styles, 'Fields Styles' );
     }
 
     private function localize_styles( $styles, $title = '' )
