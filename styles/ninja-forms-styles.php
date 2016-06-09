@@ -225,7 +225,11 @@ final class NF_Styles
 
                 if( ! isset( $field_settings_group[ 'selector' ] ) ) continue;
 
-                $selector = str_replace( '{ID}', $field->get_id(), $field_settings_group[ 'selector' ] );
+                if( is_object( $field ) ){
+                    $selector = str_replace( '{ID}', $field->get_id(), $field_settings_group[ 'selector' ] );
+                } elseif( isset( $field[ 'id' ] ) ){
+                    $selector = str_replace( '{ID}', $field[ 'id' ], $field_settings_group[ 'selector' ] );
+                }
 
                 foreach( $common_settings as $common_setting ){
 
