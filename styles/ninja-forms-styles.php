@@ -256,7 +256,7 @@ final class NF_Styles
 
     private function localize_styles( $styles, $title = '' )
     {
-        self::template( 'display-form-styles.css.php', compact( 'styles', 'title' ) );
+        if( $styles ) self::template( 'display-form-styles.css.php', compact( 'styles', 'title' ) );
     }
 
 
