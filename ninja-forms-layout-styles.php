@@ -48,6 +48,10 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
 
 add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_layouts_upgrade_form_settings' );
 function ninja_forms_layouts_upgrade_form_settings( $data ){
+
+    if( ! isset( $data[ 'settings' ][ 'style' ] ) ) return $data;
+    if( ! isset( $data[ 'settings' ][ 'style' ][ 'cols' ] ) ) return $data;
+
     /*
      * Get our number of columns.
      */
@@ -264,5 +268,20 @@ function ninja_forms_styles_upgrade_plugin_settings( $data ){
 
 add_filter( 'ninja_forms_upgrade_field', 'ninja_forms_styles_upgrade_field_settings' );
 function ninja_forms_styles_upgrade_field_settings( $data ){
+
+    if( ! isset( $data[ 'style' ][ 'groups' ] ) ) return $data;
+
+    foreach( $data[ 'style' ][ 'groups' ] as $group => $settings ){
+
+        if( 'field' == $group ) $group = 'element';
+
+        foreach( $settings as $setting => $value ){
+            $setting = $group . '_styles_' . $setting;
+            $data[ $setting ] = $value;
+        }
+    }
+
+    unset( $data[ 'style' ] );
+
     return $data;
 }
