@@ -184,14 +184,20 @@ final class NF_Styles
 
             $field_type_sections = NF_Styles::config( 'FieldTypeSections' );
 
+            $field_type_lookup = NF_Styles::config( 'FieldTypeLookup' );
+            $field_type_lookup = array_flip( $field_type_lookup );
+
             foreach( $style_settings[ 'field_type' ] as $field_type => $style_setting_field ){
                 foreach( $style_setting_field as $section => $style_setting_section ){
 
                     foreach( $style_setting_section as $rule => $value ){
 
                         if( ! $value ) continue;
+                        if( ! isset( $field_type_sections[ $section ][ 'selector' ] ) || ! $field_type_sections[ $section ][ 'selector' ] ) return;
 
-                        $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $field_type_sections[ $section ][ 'selector'];
+                        if( isset( $field_type_lookup[ $field_type ] ) ) $field_type = $field_type_lookup[ $field_type ];
+
+                        $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $field_type_sections[ $section ][ 'selector' ];
 
                         $styles[ $selector ][ $rule ] = $value;
                     }
