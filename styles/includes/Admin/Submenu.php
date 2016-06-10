@@ -52,25 +52,19 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
                     $field = Ninja_Forms()->fields[ $field_type ];
 
-                    $sections = array('wrap' => __('Wrap', 'ninja-forms-layout-styles' ), 'label' => __('Label', 'ninja-forms-layout-styles'), 'element' => __('Element', 'ninja-forms-layout-styles') );
+                    $sections = NF_Styles::config( 'FieldTypeSections' );
 
-                    if ('html' == $field->get_name()) {
-                        unset($sections['label']);
-                    }
+                    foreach ($sections as $section) {
 
-                    if ('hr' == $field->get_name()) {
-                        unset($sections['wrap']);
-                        unset($sections['label']);
-                    }
+                        if( isset( $section[ 'except' ] ) && in_array( $field->get_name(), $section[ 'except' ] ) ) continue;
+                        if( isset( $section[ 'only' ] ) && ! in_array( $field->get_name(), $section[ 'only' ] ) ) continue;
 
-                    foreach ($sections as $section => $label) {
+                        $name = $field->get_name() . "_" . $section[ 'name' ];
 
-                        $name = $field->get_name() . "_$section";
-
-                        $groups['field_type']['sections'][$name] = array(
+                        $groups[ 'field_type' ][ 'sections' ][ $name ] = array(
                             'name' => $name,
                             'field' => $field->get_name(),
-                            'label' => $field->get_nicename() . ' ' . $label
+                            'label' => $field->get_nicename() . ' ' . $section[ 'label' ]
                         );
                     }
                 }

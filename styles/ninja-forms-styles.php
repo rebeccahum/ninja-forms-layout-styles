@@ -180,9 +180,9 @@ final class NF_Styles
 
         if( isset( $style_settings[ 'field_type' ] ) && $style_settings[ 'field_type' ] ){
 
-            $selector = $settings_groups[ 'field_type' ][ 'selector' ];
+            $base_selector = $settings_groups[ 'field_type' ][ 'selector' ];
 
-            $selector_lookup = self::config( 'FieldTypeSelectorLookup' );
+            $field_type_sections = NF_Styles::config( 'FieldTypeSections' );
 
             foreach( $style_settings[ 'field_type' ] as $field_type => $style_setting_field ){
                 foreach( $style_setting_field as $section => $style_setting_section ){
@@ -191,7 +191,9 @@ final class NF_Styles
 
                         if( ! $value ) continue;
 
-                        $styles[ str_replace( '{field-type}' , $field_type, $selector ) . ' ' . $selector_lookup[ $section ] ][ $rule ] = $value;
+                        $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $field_type_sections[ $section ][ 'selector'];
+
+                        $styles[ $selector ][ $rule ] = $value;
                     }
                 }
             }
