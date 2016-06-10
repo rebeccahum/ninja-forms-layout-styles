@@ -184,6 +184,8 @@ final class NF_Styles
 
             $field_type_sections = NF_Styles::config( 'FieldTypeSections' );
 
+            $field_type_opinionated_selectors = NF_Styles::config( 'FieldTypeOpinionatedSelectors' );
+
             $field_type_lookup = NF_Styles::config( 'FieldTypeLookup' );
             $field_type_lookup = array_flip( $field_type_lookup );
 
@@ -198,6 +200,12 @@ final class NF_Styles
                         if( isset( $field_type_lookup[ $field_type ] ) ) $field_type = $field_type_lookup[ $field_type ];
 
                         $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $field_type_sections[ $section ][ 'selector' ];
+
+                        if( isset( $field_type_opinionated_selectors[ $field_type ][ $section ] ) && $field_type_opinionated_selectors[ $field_type ][ $section ] ){
+                            $selector = $field_type_opinionated_selectors[ $field_type ][ $section ];
+                        }
+
+                        $selector = apply_filters( 'ninja_forms_styles_' . $field_type . '_selector', $selector );
 
                         $styles[ $selector ][ $rule ] = $value;
                     }
