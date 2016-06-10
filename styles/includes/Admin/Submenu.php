@@ -102,7 +102,11 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
         $settings = Ninja_Forms()->get_setting( 'style' );
 
-        $settings[ $group ] = apply_filters( 'ninja_forms_styles_updates_' . $group, $data[ $group ] );
+        if( 'field_type' == $group ){
+            $settings[ 'field_type' ] = array_merge( $settings[ 'field_type' ], $data[ $group ] );
+        } else {
+            $settings[$group] = apply_filters('ninja_forms_styles_updates_' . $group, $data[$group]);
+        }
 
         Ninja_Forms()->update_setting( 'style', $settings );
     }
