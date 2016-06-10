@@ -29,7 +29,7 @@ return array(
     'odd_row_styles' => array(
         'name' => 'odd_row_styles',
         'type' => 'fieldset',
-        'label' => __( 'Odd ow Styles', 'ninja-forms-layout-styles' ),
+        'label' => __( 'Odd Row Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
         'selector' => '#nf-form-{ID}-cont .nf-row:nth-child(odd)'
     ),
