@@ -109,6 +109,7 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         }
 
         Ninja_Forms()->update_setting( 'style', $settings );
+        do_action( 'ninja_forms_styles_update_styles', $settings );
     }
 
     public function filter_get_plugin_style( $value, $tab, $section, $name )

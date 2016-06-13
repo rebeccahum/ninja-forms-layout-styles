@@ -58,6 +58,12 @@ final class NF_Styles
 
         add_filter( 'ninja_forms_styles_output_rule_border', array( $this, 'filter_output_rule_border' ) );
 
+        add_action( 'ninja_forms_save_form', array( $this, 'bust_form_styles_cache' ), 10, 1 );
+        add_action( 'ninja_forms_save_form', array( $this, 'bust_field_styles_cache' ), 10, 1 );
+        add_action( 'ninja_forms_save_form_preview', array( $this, 'bust_form_styles_cache' ), 10, 1 );
+        add_action( 'ninja_forms_save_form_preview', array( $this, 'bust_field_styles_cache' ), 10, 1 );
+        add_action( 'ninja_forms_styles_update_styles', array( $this, 'bust_plugin_styles_cache' ), 10, 1 );
+
         /*
          * Add a filter for importing/exporting plugin-wide styles
          */
@@ -148,6 +154,12 @@ final class NF_Styles
 
     public function localize_plugin_styles( $form_id, $settings, $fields )
     {
+        $cache = get_transient( 'ninja_forms_styles_plugin_styles' );
+        if( $cache ){
+            echo $cache;
+            return;
+        }
+
         $style_settings = Ninja_Forms()->get_setting( 'style' );
         $settings_groups = self::config( 'PluginSettingGroups' );
 
@@ -213,11 +225,23 @@ final class NF_Styles
             }
         }
 
+        ob_start();
         $this->localize_styles( $styles, 'Plugin Wide Styles' );
+        $output = ob_get_clean();
+
+        set_transient( 'ninja_forms_styles_plugin_styles', $output );
+        echo $output;
+
     }
 
     public function localize_form_styles( $form_id, $settings, $fields )
     {
+        $cache = get_transient( 'ninja_forms_styles_form_' . $form_id . '_styles' );
+        if( $cache ){
+            echo $cache;
+            return;
+        }
+
         $form_settings_groups = self::config( 'FormSettings' );
         $common_settings = self::config( 'CommonSettings' );
 
@@ -238,13 +262,23 @@ final class NF_Styles
                 $styles[ $selector ][ $rule ] = $settings[ $setting ];
             }
         }
-        
-        // $styles[ $selector ][ $element ] = $style;
+
+        ob_start();
         $this->localize_styles( $styles, 'Form Styles' );
+        $output = ob_get_clean();
+
+        set_transient( 'ninja_forms_styles_form_' . $form_id . '_styles', $output );
+        echo $output;
     }
 
     public function localize_field_styles( $form_id, $settings, $fields )
     {
+        $cache = get_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles' );
+        if( $cache ){
+            echo $cache;
+            return;
+        }
+
         $field_settings_groups = self::config( 'FieldSettings' );
         $common_settings = self::config( 'CommonSettings' );
 
@@ -280,12 +314,33 @@ final class NF_Styles
             }
         }
 
+        ob_start();
         $this->localize_styles( $styles, 'Fields Styles' );
+        $output = ob_get_clean();
+
+        set_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles', $output );
+        echo $output;
     }
 
     private function localize_styles( $styles, $title = '' )
     {
+        // $styles[ $selector ][ $element ] = $style;
         if( $styles ) self::template( 'display-form-styles.css.php', compact( 'styles', 'title' ) );
+    }
+
+    public function bust_form_styles_cache( $form_id )
+    {
+        delete_transient( 'ninja_forms_styles_form_' . $form_id . '_styles' );
+    }
+
+    public function bust_field_styles_cache( $form_id )
+    {
+        delete_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles' );
+    }
+
+    public function bust_plugin_styles_cache( $style_settings )
+    {
+        delete_transient( 'ninja_forms_styles_plugin_styles' );
     }
 
     public function filter_output_rule_border( $rule )
