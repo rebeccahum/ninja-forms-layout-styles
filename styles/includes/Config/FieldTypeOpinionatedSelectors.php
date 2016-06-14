@@ -8,7 +8,7 @@ return array(
     |--------------------------------------------------------------------------
     */
 
-    'listdropdown' => array(
+    'listselect' => array(
         'wrap' => '',
         'label' => '',
         'element' => ''

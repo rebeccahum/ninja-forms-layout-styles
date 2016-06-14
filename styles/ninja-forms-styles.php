@@ -213,8 +213,10 @@ final class NF_Styles
 
                         $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $field_type_sections[ $section ][ 'selector' ];
 
-                        if( isset( $field_type_opinionated_selectors[ $field_type ][ $section ] ) && $field_type_opinionated_selectors[ $field_type ][ $section ] ){
-                            $selector = $field_type_opinionated_selectors[ $field_type ][ $section ];
+                        if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
+                            if (isset($field_type_opinionated_selectors[$field_type][$section]) && $field_type_opinionated_selectors[$field_type][$section]) {
+                                $selector = $field_type_opinionated_selectors[$field_type][$section];
+                            }
                         }
 
                         $selector = apply_filters( 'ninja_forms_styles_' . $field_type . '_selector', $selector );
