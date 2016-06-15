@@ -186,6 +186,15 @@ final class NF_Styles
 
                     $styles[ $selector ][ $element ] = $style;
 
+                    if( 'field_settings' == $group_name ){
+                        if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                            switch( $element ){
+                                case 'background-color':
+                                    $styles[ '.nf-field-element > div' ][ $element ] = $style;
+                                    break;
+                            }
+                        }
+                    }
                 }
             }
         }
