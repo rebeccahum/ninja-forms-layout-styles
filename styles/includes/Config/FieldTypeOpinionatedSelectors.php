@@ -9,9 +9,11 @@ return array(
     */
 
     'listselect' => array(
-        'wrap' => '',
-        'label' => '',
-        'element' => ''
+        'field_type' => array(
+            'wrap' => '',
+            'label' => '',
+            'element' => '.ninja-forms-field + div'
+        )
     ),
 
     /*

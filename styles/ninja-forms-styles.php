@@ -154,11 +154,11 @@ final class NF_Styles
 
     public function localize_plugin_styles( $form_id, $settings, $fields )
     {
-        $cache = get_transient( 'ninja_forms_styles_plugin_styles' );
-        if( $cache ){
-            echo $cache;
-            return;
-        }
+//        $cache = get_transient( 'ninja_forms_styles_plugin_styles' );
+//        if( $cache ){
+//            echo $cache;
+//            return;
+//        }
 
         $style_settings = Ninja_Forms()->get_setting( 'style' );
         $settings_groups = self::config( 'PluginSettingGroups' );
@@ -196,32 +196,61 @@ final class NF_Styles
 
             $field_type_sections = NF_Styles::config( 'FieldTypeSections' );
 
-            $field_type_opinionated_selectors = NF_Styles::config( 'FieldTypeOpinionatedSelectors' );
-
             $field_type_lookup = NF_Styles::config( 'FieldTypeLookup' );
             $field_type_lookup = array_flip( $field_type_lookup );
 
             foreach( $style_settings[ 'field_type' ] as $field_type => $style_setting_field ){
                 foreach( $style_setting_field as $section => $style_setting_section ){
 
+                    if( ! is_array( $style_setting_section ) )
+                        continue;
+
                     foreach( $style_setting_section as $rule => $value ){
 
                         if( ! $value ) continue;
-                        if( ! isset( $field_type_sections[ $section ][ 'selector' ] ) || ! $field_type_sections[ $section ][ 'selector' ] ) return;
+                        if( ! isset( $field_type_sections[ $section ][ 'selector' ] ) || ! $field_type_sections[ $section ][ 'selector' ] ) continue;
 
                         if( isset( $field_type_lookup[ $field_type ] ) ) $field_type = $field_type_lookup[ $field_type ];
 
-                        $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $field_type_sections[ $section ][ 'selector' ];
+                        $selector = $field_type_sections[ $section ][ 'selector' ];
 
                         if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
-                            if (isset($field_type_opinionated_selectors[$field_type][$section]) && $field_type_opinionated_selectors[$field_type][$section]) {
-                                $selector = $field_type_opinionated_selectors[$field_type][$section];
+
+                            if( 'listselect' == $field_type ) {
+                                if ('element' == $section) {
+                                    switch ($rule) {
+                                        case 'background-color':
+                                        case 'border':
+                                        case 'border-style':
+                                        case 'border-color':
+                                            $selector = '.nf-field-element > div';
+                                            break;
+                                        case 'color':
+                                        case 'font-size':
+                                            $selector = '.ninja-forms-field';
+                                            break;
+                                        case 'display':
+                                        case 'float':
+                                            continue;
+                                        default:
+                                            $selector = '.ninja-forms-field';
+                                            $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' .nf-field-element > div' ][ $rule ] = $value;
+                                    }
+
+                                    if( 'border-color' == $rule ){
+                                        $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' div::after' ][ 'color' ] = $value;
+                                    }
+                                }
                             }
+
                         }
+
+                        $selector = str_replace( '{field-type}' , $field_type, $base_selector ) . ' ' . $selector;
 
                         $selector = apply_filters( 'ninja_forms_styles_' . $field_type . '_selector', $selector );
 
-                        $styles[ $selector ][ $rule ] = $value;
+                        $styles[$selector][$rule] = $value;
+
                     }
                 }
             }

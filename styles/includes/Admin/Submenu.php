@@ -78,6 +78,11 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
             $settings = NF_Styles::config( 'CommonSettings' );
             unset( $settings[ 'show_advanced_css' ] );
 
+            if( 'listselect_element' == $section_id && Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                unset( $settings[ 'float' ] );
+                unset( $settings[ 'display' ] );
+            }
+
             foreach( $settings as $name => $setting ){
                 $settings[ $name ][ 'section' ] = $section_id;
             }
