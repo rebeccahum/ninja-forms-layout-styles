@@ -67,7 +67,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'element' => array(
                 'name' => 'element',
                 'label' => __( 'Element Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-fields .nf-field-element .ninja-forms-field'
+                'selector' => '.nf-fields .nf-field-element .ninja-forms-field:not(select)'
             ),
         )
     ),
