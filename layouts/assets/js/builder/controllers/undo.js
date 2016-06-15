@@ -10,6 +10,7 @@ define( [], function() {
 			nfRadio.channel( 'changes' ).reply( 'undo:cellSorting', this.undoCellSorting, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removedCell', this.undoRemovedCell, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:cellNewField', this.undoCellNewField, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:rowNewField', this.undoRowNewField, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:gutterResize', this.undoGutterResize, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:movedToNewRow', this.undoMovedToNewRow, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:rowSorting', this.undoRowSorting, this );
@@ -62,21 +63,11 @@ define( [], function() {
 
 			newCollection.sort();
 
-
 			this.maybeRemoveChange( change, undoAll );
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
-
+			this.enableNextChange();
 		},
 
 		/**
@@ -104,15 +95,7 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 		},
 
 		/**
@@ -150,15 +133,7 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 		},
 
 		undoCellSorting: function( change, undoAll ) {
@@ -185,15 +160,7 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 		},
 
 		undoRemovedCell: function( change, undoAll ) {
@@ -224,17 +191,8 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 		},
-
 
 		undoCellNewField: function( change, undoAll ) {
 			// Remove our new field
@@ -247,15 +205,21 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
+		},
+
+		undoRowNewField: function( change, undoAll ) {
+			// Remove our new field
+			var fieldModel = change.get( 'model' );
+			var fieldCollection = change.get( 'data' ).collection;
+			fieldCollection.remove( fieldModel );
+
+			this.maybeRemoveChange( change, undoAll );
+
+			/*
+			 * Enable the next Layouts change
+			 */
+			this.enableNextChange();
 		},
 
 		undoGutterResize: function( change, undoAll ) {
@@ -282,15 +246,7 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 
 		},
 
@@ -313,15 +269,7 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 		},
 
 		undoRowSorting: function( change, undoAll ) {
@@ -347,18 +295,13 @@ define( [], function() {
 			/*
 			 * Enable the next Layouts change
 			 */
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
-			var found = false;
-			_.each( changeCollection.models, function( changeModel ) {
-				var data = changeModel.get( 'data' );
-				if ( ! found && 'undefined' != typeof data.layouts && data.layouts ) {
-					changeModel.set( 'disabled', false );
-					found = true;
-				}
-			}, this );
+			this.enableNextChange();
 		},
 
 		enableNextChange: function() {
+			/*
+			 * Enable the next Layouts change
+			 */
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 			var found = false;
 			_.each( changeCollection.models, function( changeModel ) {
