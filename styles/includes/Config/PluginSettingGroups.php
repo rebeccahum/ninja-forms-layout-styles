@@ -97,7 +97,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
         'sections' => array(
             'error_message_wrap' => array(
                 'name' => 'error_message_wrap',
-                'label' => __( 'Error Message Main Wrap Styles', 'ninja-forms-layout-styles' )
+                'label' => __( 'Error Message Main Wrap Styles', 'ninja-forms-layout-styles' ),
+                'selector' => '.nf-after-fields .nf-form-errors .nf-error-msg'
             ),
             'error_field_wrap' => array(
                 'name' => 'error_field_wrap',
@@ -130,27 +131,48 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
         'sections' => array(
             'datepicker_container' => array(
                 'name' => 'datepicker_container',
-                'label' => __( 'DatePicker Container', 'ninja-forms-layout-styles' )
+                'label' => __( 'DatePicker Container', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-single'
             ),
             'datepicker_header' => array(
                 'name' => 'datepicker_header',
-                'label' => __( 'DatePicker Header', 'ninja-forms-layout-styles' )
+                'label' => __( 'DatePicker Header', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-title'
             ),
             'datepicker_week_days' => array(
                 'name' => 'datepicker_week_days',
-                'label' => __( 'DatePicker Week Days', 'ninja-forms-layout-styles' )
+                'label' => __( 'DatePicker Week Days', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-single th'
             ),
             'datepicker_days' => array(
                 'name' => 'datepicker_days',
-                'label' => __( 'DatePicker Days', 'ninja-forms-layout-styles' )
+                'label' => __( 'DatePicker Days', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-button'
+            ),
+            'datepicker_days_hover' => array(
+                'name' => 'datepicker_days_hover',
+                'label' => __( 'DatePicker Day Hover', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-single .pika-button:hover'
+            ),
+            'datepicker_today' => array(
+                'name' => 'datepicker_today',
+                'label' => __( 'DatePicker Today', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .is-today .pika-button'
+            ),
+            'datepicker_selected' => array(
+                'name' => 'datepicker_selected',
+                'label' => __( 'DatePicker Selected', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .is-selected .pika-button'
             ),
             'datepicker_prev_link' => array(
                 'name' => 'datepicker_prev_link',
-                'label' => __( 'DatePicker Previous Link', 'ninja-forms-layout-styles' )
+                'label' => __( 'DatePicker Previous Link', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-prev'
             ),
             'datepicker_next_link' => array(
                 'name' => 'datepicker_next_link',
-                'label' => __( 'DatePicker Next Link', 'ninja-forms-layout-styles' )
+                'label' => __( 'DatePicker Next Link', 'ninja-forms-layout-styles' ),
+                'selector' => 'html body .pika-next'
             ),
         )
     ),

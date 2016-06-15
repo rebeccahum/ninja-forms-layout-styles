@@ -220,7 +220,7 @@ define( [], function() {
 				}
 			}, this );
 
-			var changeModel = nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', fieldModel, null, label, data );
+			var changeModel = nfRadio.channel( 'changes' ).request( 'register:change', 'rowNewField', fieldModel, null, label, data );
 		},
 
 		receiveFieldStaging: function( e, ui, rowsView, sortable ) {
