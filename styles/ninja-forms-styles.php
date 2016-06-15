@@ -216,6 +216,77 @@ final class NF_Styles
 
                         if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
 
+                            if( 'checkbox' == $field_type ){
+                                if( 'element' == $section ){
+                                    switch( $rule ){
+                                        case 'background-color':
+                                        case 'border':
+                                        case 'border-style':
+                                        case 'border-color':
+                                            $selector = '.nf-field-label label::after';
+                                            break;
+                                        case 'color':
+                                        case 'font-size':
+                                            $selector = '.nf-field-label label::before';
+                                        case 'display':
+                                        case 'float':
+                                        case 'height':
+                                        case 'width':
+                                            continue;
+                                    }
+                                }
+                            }
+
+                            if( 'listcheckbox' == $field_type ){
+                                if( 'element' == $section ){
+                                    switch( $rule ){
+                                        case 'background-color':
+                                        case 'border':
+                                        case 'border-style':
+                                        case 'border-color':
+                                            $selector = '.nf-field-element label::after';
+                                            break;
+                                        case 'color':
+                                        case 'font-size':
+                                            $selector = '.nf-field-element label::before';
+                                        case 'display':
+                                        case 'float':
+                                        case 'height':
+                                        case 'width':
+                                            continue;
+                                    }
+                                }
+                            }
+
+                            if( 'listradio' == $field_type ){
+                                if( 'element' == $section ){
+                                    switch( $rule ){
+                                        case 'background-color':
+                                        case 'border':
+                                        case 'border-style':
+                                        case 'border-color':
+                                            $selector = '.nf-field-element label::after';
+                                            break;
+                                        case 'font-size':
+                                            $selector = '.nf-field-element label::before';
+                                            break;
+                                        case 'display':
+                                        case 'float':
+                                        case 'height':
+                                        case 'width':
+                                            continue;
+                                    }
+                                }
+
+                                if( 'color' == $rule ){
+                                    $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' label.nf-checked-label::before' ][ 'background-color' ] = $value;
+                                }
+
+                                if( 'border-color' == $rule ){
+                                    $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' .nf-field-element label::after' ][ 'color' ] = $value;
+                                }
+                            }
+
                             if( 'listselect' == $field_type ) {
                                 if ('element' == $section) {
                                     switch ($rule) {

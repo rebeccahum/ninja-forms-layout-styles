@@ -83,6 +83,16 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
                 unset( $settings[ 'display' ] );
             }
 
+            if( in_array( $section_id, array( 'checkbox_element', 'listcheckbox_element', 'listcheckbox_list-item-element' ) )
+                && Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                unset( $settings[ 'float' ] );
+                unset( $settings[ 'display' ] );
+                unset( $settings[ 'height' ] );
+                unset( $settings[ 'width' ] );
+                unset( $settings[ 'padding' ] );
+                unset( $settings[ 'margin' ] );
+            }
+
             foreach( $settings as $name => $setting ){
                 $settings[ $name ][ 'section' ] = $section_id;
             }
