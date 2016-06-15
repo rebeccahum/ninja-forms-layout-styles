@@ -59,7 +59,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'list-item-row' => array(
         'name' => 'list-item-row',
         'label' => __( 'List Item Row', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => 'li',
         'only' => array(
             'listcheckbox',
             'listradio'
@@ -69,7 +69,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'list-item-label' => array(
         'name' => 'list-item-label',
         'label' => __( 'List Item Label', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => 'li label',
         'only' => array(
             'listcheckbox',
             'listradio'
@@ -79,7 +79,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'list-item-element' => array(
         'name' => 'list-item-element',
         'label' => __( 'List Item Element', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => 'li label',
         'only' => array(
             'listcheckbox',
             'listradio'

@@ -276,14 +276,14 @@ final class NF_Styles
                                         case 'width':
                                             continue;
                                     }
-                                }
 
-                                if( 'color' == $rule ){
-                                    $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' label.nf-checked-label::before' ][ 'background-color' ] = $value;
-                                }
+                                    if( 'color' == $rule ){
+                                        $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' label.nf-checked-label::before' ][ 'background-color' ] = $value;
+                                    }
 
-                                if( 'border-color' == $rule ){
-                                    $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' .nf-field-element label::after' ][ 'color' ] = $value;
+                                    if( 'border-color' == $rule ){
+                                        $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' .nf-field-element label::after' ][ 'color' ] = $value;
+                                    }
                                 }
                             }
 
@@ -312,6 +312,10 @@ final class NF_Styles
                                         $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' div::after' ][ 'color' ] = $value;
                                     }
                                 }
+                            }
+
+                            if( 'list-item-row' == $section ){
+                                $selector = '.nf-field-element li';
                             }
 
                         }
