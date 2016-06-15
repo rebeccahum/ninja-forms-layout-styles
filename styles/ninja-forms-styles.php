@@ -154,11 +154,11 @@ final class NF_Styles
 
     public function localize_plugin_styles( $form_id, $settings, $fields )
     {
-//        $cache = get_transient( 'ninja_forms_styles_plugin_styles' );
-//        if( $cache ){
-//            echo $cache;
-//            return;
-//        }
+        $cache = get_transient( 'ninja_forms_styles_plugin_styles' );
+        if( $cache ){
+            echo $cache;
+            return;
+        }
 
         $style_settings = Ninja_Forms()->get_setting( 'style' );
         $settings_groups = self::config( 'PluginSettingGroups' );
@@ -186,12 +186,38 @@ final class NF_Styles
 
                     $styles[ $selector ][ $element ] = $style;
 
-                    if( 'field_settings' == $group_name ){
+                    if( 'field_settings' == $group_name && 'element' == $section_name ){
                         if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
-                            switch( $element ){
+                            switch ($element) {
                                 case 'background-color':
-                                    $styles[ '.nf-field-element > div' ][ $element ] = $style;
+                                case 'border':
+                                case 'border-style':
+                                case 'border-color':
+                                    $styles[ '.nf-fields .nf-field .list-select-wrap .nf-field-element > div' ][ $element ] = $style; // Select
+                                    $styles[ '.nf-fields .nf-field .checkbox-wrap .nf-field-label label::after' ][ $element ] = $style; // Checkbox
+                                    $styles[ '.nf-fields .nf-field .nf-field-element label::after' ][ $element ] = $style; // Checkbox List, Radio List
                                     break;
+                                case 'color':
+                                case 'font-size':
+                                    $styles[ '.nf-fields .nf-field .list-select-wrap .ninja-forms-field' ][ $element ] = $style; // Select
+                                    $styles[ '.nf-field-container .checkbox-wrap .nf-field-label label.nf-checked-label::before' ][ $element ] = $style; // Checkbox
+                                    $styles[ '.nf-fields .listcheckbox-wrap .nf-field-element label.nf-checked-label::before' ][ $element ] = $style; // Checkbox List
+                                    break;
+                                case 'display':
+                                case 'float':
+                                    continue;
+                                default:
+                                    $selector = '.ninja-forms-field';
+                                    $styles[ '.nf-field-element > div' ][ $element ] = $style;
+                            }
+
+                            if( 'border-color' == $element ){
+                                $styles[ 'div::after' ][ 'color' ] = $style;
+                            }
+
+                            if( 'color' == $element ) {
+                                $styles['.nf-fields .listradio-wrap .nf-field-element label.nf-checked-label::before']['background-color'] = $style; // Radio List
+                                $styles['.nf-fields .listradio-wrap .nf-field-element label.nf-checked-label::after']['border-color'] = $style; // Radio List
                             }
                         }
                     }
