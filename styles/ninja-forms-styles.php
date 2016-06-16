@@ -458,19 +458,46 @@ final class NF_Styles
                             $field_type = $field[ 'type' ];
                         }
 
+                        if( 'listradio' == $field_type ){
+                                switch( $rule ){
+                                    case 'background-color':
+                                    case 'border':
+                                    case 'border-style':
+                                    case 'border-color':
+//                                        $selector = '.nf-field-element label::after';
+                                        $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' label::after' ][$rule] = $field_setting;
+                                        break;
+                                    case 'font-size':
+//                                        $selector = '.nf-field-element label::before';
+                                        $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' .nf-field-element label::before' ][$rule] = $field_setting;
+                                        break;
+                                    case 'display':
+                                    case 'float':
+                                    case 'height':
+                                    case 'width':
+                                        continue;
+                                }
+
+                                if( 'color' == $rule ){
+                                    $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' label.nf-checked-label::before' ][ 'background-color' ] = $field_setting;
+                                }
+
+                                if( 'border-color' == $rule ){
+                                    $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' .nf-field-element label::after' ][ 'color' ] = $field_setting;
+                                }
+                        }
+                        
                         if( 'listselect' == $field_type ){
                             switch ($rule) {
                                 case 'background-color':
                                 case 'border':
                                 case 'border-style':
                                 case 'border-color':
-                                    $selector = str_replace( '.ninja-forms-field', '', $selector );
-                                    $selector .= ' > div';
+                                    $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' > div' ][$rule] = $field_setting;
                                     break;
                                 case 'color':
                                 case 'font-size':
-                                    $selector = str_replace( '> div', '', $selector );
-                                    $selector .= ' .ninja-forms-field';
+                                    $styles[ $selector . ''][$rule] = $field_setting;
                                     break;
                                 case 'display':
                                 case 'float':
@@ -481,12 +508,49 @@ final class NF_Styles
                             }
 
                             if( 'border-color' == $rule ){
-                                $styles[ $selector. '::after' ][ 'color' ] = $field_setting;
+                                $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' > div' . '::after' ][ 'color' ] = $field_setting;
                             }
                         }
-                    }
 
-                    $styles[ $selector ][ $rule ] = $field_setting;
+                        if( 'checkbox' == $field_type ){
+                            switch ($rule) {
+                                case 'background-color':
+                                case 'border':
+                                case 'border-style':
+                                case 'border-color':
+                                $styles[ str_replace( '.nf-field-element .ninja-forms-field', '', $selector ) . ' label:after'][$rule] = $field_setting;
+                                    break;
+                                case 'color':
+                                case 'font-size':
+                                    $styles[ str_replace( '.nf-field-element .ninja-forms-field', '', $selector ) . ' label:before'][$rule] = $field_setting;
+                                    break;
+                                case 'display':
+                                case 'float':
+                                    continue;
+                            }
+                        }
+
+                        if( 'listcheckbox' == $field_type ){
+                            switch( $rule ){
+                                case 'background-color':
+                                case 'border':
+                                case 'border-style':
+                                case 'border-color':
+                                    $styles[ str_replace( '.nf-field-element .ninja-forms-field', '', $selector ) . ' label:after'][$rule] = $field_setting;
+                                    break;
+                                case 'color':
+                                case 'font-size':
+                                    $styles[ str_replace( '.nf-field-element .ninja-forms-field', '', $selector ) . ' label:before'][$rule] = $field_setting;
+                                case 'display':
+                                case 'float':
+                                case 'height':
+                                case 'width':
+                                    continue;
+                            }
+                        }
+                    } else {
+                        $styles[$selector][$rule] = $field_setting;
+                    }
                 }
             }
         }
