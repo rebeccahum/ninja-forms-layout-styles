@@ -414,11 +414,11 @@ final class NF_Styles
 
     public function localize_field_styles( $form_id, $settings, $fields )
     {
-        $cache = get_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles' );
-        if( $cache ){
-            echo $cache;
-            return;
-        }
+//        $cache = get_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles' );
+//        if( $cache ){
+//            echo $cache;
+//            return;
+//        }
 
         $field_settings_groups = self::config( 'FieldSettings' );
         $common_settings = self::config( 'CommonSettings' );
@@ -449,6 +449,42 @@ final class NF_Styles
                     if( ! $field_setting ) continue;
 
                     $rule = $common_setting[ 'name' ];
+
+                    if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+
+                        if( is_object( $field ) ){
+                            $field_type = $field->get_setting( 'type' );
+                        } elseif( isset( $field[ 'type' ] ) ){
+                            $field_type = $field[ 'type' ];
+                        }
+
+                        if( 'listselect' == $field_type ){
+                            switch ($rule) {
+                                case 'background-color':
+                                case 'border':
+                                case 'border-style':
+                                case 'border-color':
+                                    $selector = str_replace( '.ninja-forms-field', '', $selector );
+                                    $selector .= ' > div';
+                                    break;
+                                case 'color':
+                                case 'font-size':
+                                    $selector = str_replace( '> div', '', $selector );
+                                    $selector .= ' .ninja-forms-field';
+                                    break;
+                                case 'display':
+                                case 'float':
+                                    continue;
+                                default:
+                                    $selector = '.ninja-forms-field';
+                                    $styles[ ' .nf-field-element > div' ][ $rule ] = $field_setting;
+                            }
+
+                            if( 'border-color' == $rule ){
+                                $styles[ $selector. '::after' ][ 'color' ] = $field_setting;
+                            }
+                        }
+                    }
 
                     $styles[ $selector ][ $rule ] = $field_setting;
                 }
