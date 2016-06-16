@@ -166,6 +166,8 @@ final class NF_Styles
         $styles = array();
         foreach( $settings_groups as $setting_group ){
 
+            if( 'error_settings' == $setting_group[ 'name' ] ) $setting_group[ 'name' ] = 'form_settings';
+
             if( ! isset( $setting_group[ 'sections' ] ) || ! $setting_group[ 'sections' ] ) continue;
 
             $group_name = $setting_group[ 'name' ];
@@ -414,11 +416,11 @@ final class NF_Styles
 
     public function localize_field_styles( $form_id, $settings, $fields )
     {
-//        $cache = get_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles' );
-//        if( $cache ){
-//            echo $cache;
-//            return;
-//        }
+        $cache = get_transient( 'ninja_forms_styles_form_' . $form_id . '_field_styles' );
+        if( $cache ){
+            echo $cache;
+            return;
+        }
 
         $field_settings_groups = self::config( 'FieldSettings' );
         $common_settings = self::config( 'CommonSettings' );
