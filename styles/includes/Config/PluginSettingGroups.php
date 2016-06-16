@@ -125,8 +125,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
     |--------------------------------------------------------------------------
     */
 
-    'datepicker' => array(
-        'name' => 'datepicker',
+    'datepicker_settings' => array(
+        'name' => 'datepicker_settings',
         'label' => __( 'DatePicker Styles', 'ninja-forms-layout-styles' ),
         'sections' => array(
             'datepicker_container' => array(

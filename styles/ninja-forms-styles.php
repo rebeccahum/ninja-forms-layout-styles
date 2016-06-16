@@ -167,6 +167,7 @@ final class NF_Styles
         foreach( $settings_groups as $setting_group ){
 
             if( 'error_settings' == $setting_group[ 'name' ] ) $setting_group[ 'name' ] = 'form_settings';
+            if( 'datepicker_settings' == $setting_group[ 'name' ] ) $setting_group[ 'name' ] = 'form_settings';
 
             if( ! isset( $setting_group[ 'sections' ] ) || ! $setting_group[ 'sections' ] ) continue;
 
