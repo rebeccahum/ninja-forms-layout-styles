@@ -132,6 +132,10 @@ final class NF_Styles
             $style_settings = array_merge( $style_settings, self::config( 'ListFieldSettings' ) );
         }
 
+        if( 'submit' == $field_type ){
+            $style_settings = array_merge( $style_settings, self::config( 'ButtonFieldSettings' ) );
+        }
+
         foreach( $style_settings as $name => $style_setting ){
 
             $style_setting[ 'group' ] = 'styles';
@@ -437,6 +441,10 @@ final class NF_Styles
         }
 
         $field_settings_groups = self::config( 'FieldSettings' );
+
+        $field_settings_groups = array_merge( $field_settings_groups, self::config( 'ButtonFieldSettings' ) );
+
+
         $common_settings = self::config( 'CommonSettings' );
 
         $styles = array();
@@ -454,6 +462,8 @@ final class NF_Styles
                 foreach( $common_settings as $common_setting ){
 
                     $setting = $field_settings_group[ 'name' ] . '_' . $common_setting[ 'name' ];
+
+                    $all_field_settings = $field->get_settings();
 
                     $field_setting = '';
                     if( is_object( $field ) ){
@@ -564,9 +574,9 @@ final class NF_Styles
                                     continue;
                             }
                         }
-                    } else {
-                        $styles[$selector][$rule] = $field_setting;
                     }
+
+                    $styles[$selector][$rule] = $field_setting;
                 }
             }
         }
