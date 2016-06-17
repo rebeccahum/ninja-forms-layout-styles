@@ -96,6 +96,10 @@ final class NF_Styles
 
             foreach( self::config( 'CommonSettings' ) as $common_setting ){
 
+                if( 'float' == $common_setting[ 'name' ] && in_array( $form_setting[ 'name' ], array( 'row_styles', 'row-odd_styles', 'success-msg_styles', 'error_msg_styles' ) ) ){
+                    continue;
+                }
+
                 $common_setting[ 'name' ] = $name . '_' . $common_setting[ 'name' ];
 
                 if ( isset ( $common_setting[ 'deps' ] ) ) {
@@ -126,6 +130,10 @@ final class NF_Styles
 
         if( 'list' == $field_parent_type ){
             $style_settings = array_merge( $style_settings, self::config( 'ListFieldSettings' ) );
+        }
+
+        if( 'submit' == $field_type ){
+            $style_settings = array_merge( $style_settings, self::config( 'ButtonFieldSettings' ) );
         }
 
         foreach( $style_settings as $name => $style_setting ){
@@ -166,6 +174,8 @@ final class NF_Styles
         $styles = array();
         foreach( $settings_groups as $setting_group ){
 
+            $use_important = ( 'error_settings' == $setting_group[ 'name' ] ) ? TRUE : FALSE;
+
             if( 'error_settings' == $setting_group[ 'name' ] ) $setting_group[ 'name' ] = 'form_settings';
             if( 'datepicker_settings' == $setting_group[ 'name' ] ) $setting_group[ 'name' ] = 'form_settings';
 
@@ -183,9 +193,15 @@ final class NF_Styles
 
                 $selector = $section[ 'selector' ];
 
+                if( ! isset( $style_settings[ $group_name ][ $section_name ] ) ) continue;
+
                 foreach( $style_settings[ $group_name ][ $section_name ] as $element => $style ){
 
                     if( ! $style ) continue;
+
+                    if( $use_important ){
+                        $style .= ' !important';
+                    }
 
                     $styles[ $selector ][ $element ] = $style;
 
@@ -246,6 +262,7 @@ final class NF_Styles
                     foreach( $style_setting_section as $rule => $value ){
 
                         if( ! $value ) continue;
+
                         if( ! isset( $field_type_sections[ $section ][ 'selector' ] ) || ! $field_type_sections[ $section ][ 'selector' ] ) continue;
 
                         if( isset( $field_type_lookup[ $field_type ] ) ) $field_type = $field_type_lookup[ $field_type ];
@@ -424,6 +441,10 @@ final class NF_Styles
         }
 
         $field_settings_groups = self::config( 'FieldSettings' );
+
+        $field_settings_groups = array_merge( $field_settings_groups, self::config( 'ButtonFieldSettings' ) );
+
+
         $common_settings = self::config( 'CommonSettings' );
 
         $styles = array();
@@ -551,9 +572,9 @@ final class NF_Styles
                                     continue;
                             }
                         }
-                    } else {
-                        $styles[$selector][$rule] = $field_setting;
                     }
+
+                    $styles[$selector][$rule] = $field_setting;
                 }
             }
         }
