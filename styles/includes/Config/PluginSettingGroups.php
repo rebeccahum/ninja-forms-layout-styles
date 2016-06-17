@@ -98,23 +98,27 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'error_msg' => array(
                 'name' => 'error_msg',
                 'label' => __( 'Error Message Main Wrap Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-after-fields .nf-form-errors .nf-error-msg'
+                'selector' => '.nf-form-errors .nf-error-msg'
             ),
             'field_error_wrap' => array(
                 'name' => 'field_error_wrap',
-                'label' => __( 'Error Field Wrap Styles', 'ninja-forms-layout-styles' )
+                'label' => __( 'Error Field Wrap Styles', 'ninja-forms-layout-styles' ),
+                'selector' => '.nf-fields .nf-error-wrap'
             ),
             'field_error_label' => array(
                 'name' => 'field_error_label',
-                'label' => __( 'Error Label Styles', 'ninja-forms-layout-styles' )
+                'label' => __( 'Error Label Styles', 'ninja-forms-layout-styles' ),
+                'selector' => '.nf-error .nf-field-label label'
             ),
             'field_error_element' => array(
                 'name' => 'field_error_element',
-                'label' => __( 'Error Element Styles', 'ninja-forms-layout-styles' )
+                'label' => __( 'Error Element Styles', 'ninja-forms-layout-styles' ),
+                'selector' => '.nf-error .nf-field-element .ninja_forms_field'
             ),
             'field_error_message' => array(
                 'name' => 'field_error_message',
-                'label' => __( 'Error Message Styles', 'ninja-forms-layout-styles' )
+                'label' => __( 'Error Message Styles', 'ninja-forms-layout-styles' ),
+                'selector' => '.nf-fields .nf-error-wrap .nf-error-msg'
             ),
         )
     ),
