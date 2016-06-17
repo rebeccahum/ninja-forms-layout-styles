@@ -463,8 +463,6 @@ final class NF_Styles
 
                     $setting = $field_settings_group[ 'name' ] . '_' . $common_setting[ 'name' ];
 
-                    $all_field_settings = $field->get_settings();
-
                     $field_setting = '';
                     if( is_object( $field ) ){
                         $field_setting = $field->get_setting( $setting );
