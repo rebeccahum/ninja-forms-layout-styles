@@ -93,6 +93,15 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
                 unset( $settings[ 'margin' ] );
             }
 
+            if( 'datepicker_container' == $section_id ){
+                unset( $settings[ 'padding' ] );
+            }
+
+            if( in_array( $section_id, array( 'datepicker_container', 'datepicker_header', 'datepicker_week', 'datepicker_days', 'datepicker_prev', 'datepicker_next' ) ) ){
+                unset( $settings[ 'margin' ] );
+                unset( $settings[ 'float' ] );
+            }
+
             foreach( $settings as $name => $setting ){
                 $settings[ $name ][ 'section' ] = $section_id;
             }

@@ -143,8 +143,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
                 'label' => __( 'DatePicker Header', 'ninja-forms-layout-styles' ),
                 'selector' => 'html body .pika-title'
             ),
-            'datepicker_week_days' => array(
-                'name' => 'datepicker_week_days',
+            'datepicker_week' => array(
+                'name' => 'datepicker_week',
                 'label' => __( 'DatePicker Week Days', 'ninja-forms-layout-styles' ),
                 'selector' => 'html body .pika-single th'
             ),
@@ -168,13 +168,13 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
                 'label' => __( 'DatePicker Selected', 'ninja-forms-layout-styles' ),
                 'selector' => 'html body .is-selected .pika-button'
             ),
-            'datepicker_prev_link' => array(
-                'name' => 'datepicker_prev_link',
+            'datepicker_prev' => array(
+                'name' => 'datepicker_prev',
                 'label' => __( 'DatePicker Previous Link', 'ninja-forms-layout-styles' ),
                 'selector' => 'html body .pika-prev'
             ),
-            'datepicker_next_link' => array(
-                'name' => 'datepicker_next_link',
+            'datepicker_next' => array(
+                'name' => 'datepicker_next',
                 'label' => __( 'DatePicker Next Link', 'ninja-forms-layout-styles' ),
                 'selector' => 'html body .pika-next'
             ),
