@@ -44,8 +44,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     |--------------------------------------------------------------------------
     */
 
-    'element-hover' => array(
-        'name' => 'element-hover',
+    'submit-hover' => array(
+        'name' => 'submit-hover',
         'label' => __( 'Element Hover', 'ninja-forms-layout-styles' ),
         'selector' => '.nf-field-element .ninja-forms-field:hover',
         'only' => array(
