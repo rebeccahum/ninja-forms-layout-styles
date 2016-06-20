@@ -61,7 +61,6 @@ final class NF_Layouts
         }
         $rows = array();
         $form = Ninja_Forms()->form( $form_id );
-        $x = 0;
         foreach( $form->get_fields() as $field ) {
             $rows[] = array(
                 'order' => absint( $field->get_setting( 'order' ) ),
@@ -75,7 +74,6 @@ final class NF_Layouts
                     )
                 )
             );
-            $x++;
         }
         wp_localize_script( 'nf-layout-builder', 'nfLayouts', array( 'rows' => $rows ) );
     }
