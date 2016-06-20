@@ -1,6 +1,15 @@
-.nf-cell {
-    width: auto; !important;
-}
+
+// .nf-row {
+//     &::after {
+//         clear: both;
+//         content: "";
+//         display: block;
+//     }
+// }
+// .nf-cell {
+//     float: left;
+//     padding: 0 5px;
+// }
 .nf-multi-cell {
     .nf-row {
         &::after {
