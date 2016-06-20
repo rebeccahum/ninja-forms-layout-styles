@@ -111,6 +111,8 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
     {
         if( ! current_user_can( apply_filters( 'ninja_forms_styles_can_update_styles', 'manage_options' ) ) ) return;
 
+        if( ! isset( $_POST[ 'style' ] ) ) return;
+
         $data = WPN_Helper::sanitize_text_field( $_POST[ 'style' ] );
 
         $group = WPN_Helper::get_query_string( 'tab', 'form_settings' );
