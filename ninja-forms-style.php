@@ -46,7 +46,7 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
     }
 }
 
-add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_layouts_upgrade_form_settings' );
+add_filter( 'ninja_forms_after_upgrade_settings', 'ninja_forms_layouts_upgrade_form_settings' );
 function ninja_forms_layouts_upgrade_form_settings( $data ){
 
     /*

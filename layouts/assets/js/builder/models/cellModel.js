@@ -12,8 +12,6 @@ define( ['models/cellFieldCollection'], function( CellFieldCollection) {
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			var fieldModels = [];
 
-			console.log(  this.get( 'fields' ) );
-
 			_.each( this.get( 'fields' ), function( search ) {
 				if ( 'undefined' == typeof fieldCollection.get( search ) ) {
 					fieldModels.push( fieldCollection.findWhere( { key: search } ) );
