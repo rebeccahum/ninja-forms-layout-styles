@@ -1,15 +1,15 @@
 === Ninja Forms - Layout & Styles Extension ===
-Contributors: kstover, jameslaws
+Contributors: kstover, jameslaws, kbjohnson90
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
-Requires at least: 4.0
-Tested up to: 4.1.1
-Stable tag: 1.2.7
+Requires at least: 4.3
+Tested up to: 4.5.2
+Stable tag: 3.0.0
 
 License: GPLv2 or later
 
 == Description ==
-The Ninja Forms Layout & Styles Extension allows users to create very complex layouts and styles with liitle to no experience with CSS right in their WordPress admin.
+The Ninja Forms Layout & Styles Extension allows users to create very complex layouts and styles with little to no experience with CSS right in their WordPress admin.
 
 == Installation ==
 
@@ -23,6 +23,11 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.0 =
+
+* Updated with Ninja Forms v3.x compatibility
+* Deprecated Ninja Forms v2.9.x compatible code
 
 = 1.2.7 (12 May 2015) =
 
@@ -95,7 +100,7 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 * Admin scripts should now load the min or dev versions based on the NINJA_FORMS_JS_DEBUG constant.
 * Added display selector.
 * Adjusted what's advanced and what's basic.
-* Limitted some secectors from Default Field Styles. 
+* Limited some selectors from Default Field Styles.
 * Moved styles to be output before form and not after.
 
 = 1.1 =
@@ -131,7 +136,7 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 
 *Changes:*
 
-* improved i18n compatability.
+* improved i18n compatibility.
 
 = 1.0.5 =
 
@@ -174,7 +179,7 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 *Changes:*
 
 * The selector used for the "next" and "previous" buttons in Multi-Part Forms has been changed.
-* Added "Page" styles for use with AJAX submissions and Mult-Part Forms.
+* Added "Page" styles for use with AJAX submissions and Multi-Part Forms.
 
 = 0.8 =
 
