@@ -115,8 +115,8 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
                 'label' => __( 'Error Element Styles', 'ninja-forms-layout-styles' ),
                 'selector' => '.nf-error .nf-field-element .ninja_forms_field'
             ),
-            'field_error_message' => array(
-                'name' => 'field_error_message',
+            'field_error_msg' => array(
+                'name' => 'field_error_msg',
                 'label' => __( 'Error Message Styles', 'ninja-forms-layout-styles' ),
                 'selector' => '.nf-fields .nf-error-wrap .nf-error-msg'
             ),
