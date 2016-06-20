@@ -9,7 +9,7 @@ return array(
     'listmultiselect' => '_list-multi',
     'submit' => '_submit',
     'spam' => '_spam',
-    'textarea' => 'textarea',
+    'textarea' => '_textarea',
     'password' => '_profile_pass',
     'starrating' => '_rating',
     'listcountry' => '_country',

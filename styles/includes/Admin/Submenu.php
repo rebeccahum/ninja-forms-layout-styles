@@ -144,6 +144,11 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
         $section = apply_filters( 'ninja_forms_style_field_type', $section );
 
+        if( 'html' == $section ) {
+            $section = '_desc';
+            $subsection = 'desc_field';
+        }
+
         if( isset( $plugin_settings[ $tab ][ $section ][ $subsection ][ $name ] ) ){
             $value = $plugin_settings[ $tab ][ $section ][ $subsection ][ $name ];
         }
@@ -158,6 +163,8 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         list( $section, $subsection ) = explode( '_', $section );
 
         $section = apply_filters( 'ninja_forms_style_field_type', $section );
+
+        if( 'desc' == $subsection ) $subsection = 'desc_field';
 
         return 'style[' . $tab . '][' . $section . '][' . $subsection . '][' . $name_raw . ']';
     }

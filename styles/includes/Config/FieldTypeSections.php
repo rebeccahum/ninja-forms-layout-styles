@@ -8,6 +8,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'selector' => '.field-wrap',
         'except' => array(
             'hr',
+            'html',
             'passwordconfirm'
         )
     ),
@@ -24,12 +25,13 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         )
     ),
     
-    'element' => array(
-        'name' => 'element',
+    'field' => array(
+        'name' => 'field',
         'label' => __( 'Element', 'ninja-forms-layout-styles' ),
         'selector' => '.nf-field-element .ninja-forms-field',
         'except' => array(
             'hr',
+            'html',
             'starrating',
             'password',
             'passwordconfirm'
@@ -264,6 +266,21 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'selector' => '.nf-field-element .ninja-forms-field:hover',
         'only' => array(
             'hr'
+        )
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTML/Desc/Text Specific Sections
+    |--------------------------------------------------------------------------
+    */
+
+    'desc_field' => array(
+        'name' => 'desc_field',
+        'label' => __( 'Element', 'ninja-forms-layout-styles' ),
+        'selector' => '.nf-field-element .ninja-forms-field:hover',
+        'only' => array(
+            'html'
         )
     ),
 
