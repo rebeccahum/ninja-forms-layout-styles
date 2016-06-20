@@ -122,6 +122,7 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         if( 'field_type' == $group ){
             $settings[ 'field_type' ] = array_merge( $settings[ 'field_type' ], $data[ $group ] );
         } elseif( 'error_settings' == $group || 'datepicker_settings' == $group ) {
+            if( ! isset( $settings[ 'form_settings' ] ) ) $settings[ 'form_settings' ] = array();
             $settings[ 'form_settings' ] = array_merge( $settings[ 'form_settings' ], $data[ $group ] );
         } else {
             $settings[$group] = apply_filters('ninja_forms_styles_updates_' . $group, $data[$group]);
