@@ -55,6 +55,15 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
     if( ! isset( $data[ 'settings' ][ 'style' ] ) && ! isset( $data[ 'settings' ][ 'style' ][ 'cols' ] ) ) {
         $rows = array();
         foreach( $data[ 'fields' ] as $field ) {
+
+            if( ! isset( $field[ 'key' ] ) ){
+                $field[ 'key' ] = ltrim( $field[ 'type' ], '_' ) . '_' . $field[ 'id' ];
+            }
+
+            if( '_text' == $field[ 'type' ] && isset( $field['data'][ 'datepicker' ] ) && $field['data'][ 'datepicker' ] ){
+                $field[ 'key' ] = 'date_' . $field[ 'id' ];
+            }
+
             $rows[] = array(
                 'order' => absint( $field[ 'order' ] ),
                 'cells' => array(
