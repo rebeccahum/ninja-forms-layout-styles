@@ -16,4 +16,3 @@ node_modules
 # Project Stuff
 .wakatime-project
 deploy.sh
-gulpfile.js
