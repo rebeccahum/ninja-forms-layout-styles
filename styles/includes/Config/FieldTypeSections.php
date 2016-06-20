@@ -95,8 +95,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     |--------------------------------------------------------------------------
     */
 
-    'item' => array(
-        'name' => 'item',
+    'rating-item' => array(
+        'name' => 'rating-item',
         'label' => __( 'Item', 'ninja-forms-layout-styles' ),
         'selector' => '',
         'only' => array(
@@ -104,8 +104,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         )
     ),
 
-    'item-hover' => array(
-        'name' => 'item-hover',
+    'rating-item-hover' => array(
+        'name' => 'rating-item-hover',
         'label' => __( 'Item Hover', 'ninja-forms-layout-styles' ),
         'selector' => '',
         'only' => array(
@@ -113,8 +113,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         )
     ),
 
-    'item-selected' => array(
-        'name' => 'item-selected',
+    'rating-item-selected' => array(
+        'name' => 'rating-item-selected',
         'label' => __( 'Item Selected', 'ninja-forms-layout-styles' ),
         'selector' => '',
         'only' => array(
@@ -122,8 +122,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         )
     ),
 
-    'cancel' => array(
-        'name' => 'cancel',
+    'rating-cancel' => array(
+        'name' => 'rating-cancel',
         'label' => __( 'Cancel', 'ninja-forms-layout-styles' ),
         'selector' => '',
         'only' => array(
@@ -131,8 +131,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         )
     ),
 
-    'cancel-hover' => array(
-        'name' => 'cancel-hover',
+    'rating-cancel-hover' => array(
+        'name' => 'rating-cancel-hover',
         'label' => __( 'Cancel Hover', 'ninja-forms-layout-styles' ),
         'selector' => '',
         'only' => array(
