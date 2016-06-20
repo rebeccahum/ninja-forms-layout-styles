@@ -29,6 +29,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'label' => __( 'Element', 'ninja-forms-layout-styles' ),
         'selector' => '.nf-field-element .ninja-forms-field',
         'except' => array(
+            'hr',
             'starrating',
             'password',
             'passwordconfirm'
@@ -248,6 +249,21 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'selector' => '',
         'only' => array(
             'password',
+        )
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | HR/Divider Specific Sections
+    |--------------------------------------------------------------------------
+    */
+
+    'hr-element' => array(
+        'name' => 'hr-element',
+        'label' => __( 'Element', 'ninja-forms-layout-styles' ),
+        'selector' => '.nf-field-element .ninja-forms-field:hover',
+        'only' => array(
+            'hr'
         )
     ),
 

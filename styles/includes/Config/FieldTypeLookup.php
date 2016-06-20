@@ -13,5 +13,6 @@ return array(
     'password' => '_profile_pass',
     'starrating' => '_rating',
     'listcountry' => '_country',
-    'number' => '_number'
+    'number' => '_number',
+    'hr' => '_hr'
 );
