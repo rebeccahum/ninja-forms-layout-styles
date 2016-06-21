@@ -826,6 +826,14 @@ final class NF_Styles
         wp_die( $message, $args[ 'title' ], array( 'back_link' => TRUE ) );
     }
 
+    public static function sanitize_text_field( $data )
+    {
+        if( is_array( $data ) ){
+            return array_map( array( 'self', 'sanitize_text_field' ), $data );
+        }
+        return sanitize_text_field( $data );
+    }
+    
 }
 
 /**
