@@ -48,11 +48,11 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
 
 add_filter( 'ninja_forms_after_upgrade_settings', 'ninja_forms_layouts_upgrade_form_settings' );
 function ninja_forms_layouts_upgrade_form_settings( $data ){
-
     /*
      * If we're importing an old form that doesn't have any styling information, create a new row for each field.
      */
     if( ! isset( $data[ 'settings' ][ 'style' ] ) && ! isset( $data[ 'settings' ][ 'style' ][ 'cols' ] ) ) {
+        wp_die( 'WE ARE HERE!' );
         $rows = array();
         foreach( $data[ 'fields' ] as $field ) {
 
@@ -103,10 +103,20 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
              * If our colspan + coltrack is less than or equal to cols, we add this to our cells.
              */
             if ( $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ] + $coltrack <= $cols ) {
+                
+                if( ! isset( $field[ 'key' ] ) ){
+                    $data[ 'fields' ][ $i ][ 'key' ] = ltrim( $data[ 'fields' ][ $i ][ 'type' ], '_' ) . '_' . $data[ 'fields' ][ $i ][ 'id' ];
+                }
+
+                if( '_text' == $data[ 'fields' ][ $i ][ 'type' ] && isset( $data[ 'fields' ][ $i ]['data'][ 'datepicker' ] ) && $data[ 'fields' ][ $i ]['data'][ 'datepicker' ] ){
+                    $data[ 'fields' ][ $i ][ 'key' ] = 'date_' . $data[ 'fields' ][ $i ][ 'id' ];
+                }
+
+
                 $cells[] = array(
                     'order'     => $cellorder,
                     'fields'    => array(
-                        $data[ 'fields' ][ $i ][ 'id' ]
+                        $data[ 'fields' ][ $i ][ 'key' ]
                     ),
                     'width'     => $data[ 'fields' ][ $i ][ 'data' ][ 'style' ][ 'colspan' ],
                 );
