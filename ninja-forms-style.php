@@ -52,7 +52,6 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
      * If we're importing an old form that doesn't have any styling information, create a new row for each field.
      */
     if( ! isset( $data[ 'settings' ][ 'style' ] ) && ! isset( $data[ 'settings' ][ 'style' ][ 'cols' ] ) ) {
-        wp_die( 'WE ARE HERE!' );
         $rows = array();
         foreach( $data[ 'fields' ] as $field ) {
 
