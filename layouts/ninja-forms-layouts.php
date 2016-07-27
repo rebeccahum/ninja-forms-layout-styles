@@ -5,7 +5,7 @@
  */
 final class NF_Layouts
 {
-    const VERSION = '3.0.0';
+    const VERSION = '3.0.1';
     const SLUG    = 'layouts';
     const NAME    = 'Layouts';
     const AUTHOR  = 'WP Ninjas';

@@ -5,7 +5,7 @@
  */
 final class NF_Styles
 {
-    const VERSION = '3.0.0';
+    const VERSION = '3.0.1';
     const SLUG    = 'styles';
     const NAME    = 'Styles';
     const AUTHOR  = 'WP Ninjas';
