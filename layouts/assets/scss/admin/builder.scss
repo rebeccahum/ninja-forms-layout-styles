@@ -129,7 +129,7 @@
 .layouts-dragging .layouts-row {
     padding: 6px;
     margin: 8px 0;
-    transition: all 0.5s ease;
+    //transition: all 0.5s ease;
 }
 
 .layouts-dragging .layouts-cell .nf-field-wrap {
@@ -140,22 +140,22 @@
     transition: width 0.5s ease;
 }
 
-.layouts-dragging .layouts-row.multi-cell .nf-field-wrap {
+.layouts-row.multi-cell .nf-field-wrap {
     margin: 20px 0;
 }
-.layouts-dragging .layouts-row.multi-cell .nf-fields-sortable-placeholder {
+.layouts-row.multi-cell .nf-fields-sortable-placeholder {
     margin: 6px 0;
 }
-.layouts-dragging .layouts-row.multi-cell .gutter.nf-fields-sortable-placeholder {
+.layouts-row.multi-cell .gutter.nf-fields-sortable-placeholder {
     margin: 0
 }
-.layouts-dragging .layouts-row.multi-cell .nf-fields-sortable-placeholder + .nf-field-wrap {
+.layouts-row.multi-cell .nf-fields-sortable-placeholder + .nf-field-wrap {
     margin-top: 0;
 }
-.layouts-dragging .layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder {
+.layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder {
     margin-top: -14px;
 }
-.layouts-dragging .layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder + .nf-field-wrap {
+.layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder + .nf-field-wrap {
     margin-top: 6px;
 }
 
