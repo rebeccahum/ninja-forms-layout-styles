@@ -25,7 +25,7 @@
 
             <p>
                 <label>
-                    <input type="checkbox" name="advanced" id="advanced_css" value="1"> Show Advanced CSS Properties
+                    <input type="checkbox" name="advanced" id="advanced_css" value="1"><?php _e( 'Show Advanced CSS Properties', 'ninja-forms-layout-styles' ) ?>
                 </label>
             </p>
 

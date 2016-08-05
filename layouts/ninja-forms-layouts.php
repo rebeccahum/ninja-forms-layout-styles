@@ -50,7 +50,9 @@ final class NF_Layouts
         ?>
         <script id="nf-tmpl-empty-cell" type="text/template">
             <div class="no-fields">
-                Add fields, <a href="#" class="delete">delete column</a>, or leave it empty.
+                <?php _e( 'Add fields, ', 'ninja-forms-layout-styles' ) ?>
+                <a href="#" class="delete"><?php _e( 'delete column', 'ninja-forms-layout-styles' ) ?></a>
+                <?php _e( ', or leave it empty.', 'ninja-forms-layout-styles' ) ?>
             </div>
         </script>
 
