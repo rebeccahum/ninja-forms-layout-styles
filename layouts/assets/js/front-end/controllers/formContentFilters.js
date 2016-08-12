@@ -19,14 +19,14 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 		},
 
 		/**
-		 * When we load our builder view, we filter the fieldContentsData.
+		 * When we load our builder view, we filter the formContentData.
 		 * This turns the saved object into a Backbone Collection.
 		 *
 		 * If we aren't passed any data, then this form hasn't been modified with layouts yet,
 		 * so we default to the nfLayouts.rows global variable that is localised for us.
 		 * 
 		 * @since  3.0
-		 * @param  array rowArray current value of our fieldContentsData.
+		 * @param  array rowArray current value of our formContentData.
 		 * @return Backbone.Collection
 		 */
 		formContentLoad: function( rowArray, formModel ) {
