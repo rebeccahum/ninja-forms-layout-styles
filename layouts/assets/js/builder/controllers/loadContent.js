@@ -1,4 +1,4 @@
-define( ['views/rowCollection', 'controllers/LoadControllers', 'models/rowCollection'], function( RowCollectionView, LoadControllers, RowCollection ) {
+define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollection'], function( RowCollectionView, LoadControllers, RowCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'app' ), 'after:loadControllers', this.loadControllers );
@@ -7,24 +7,34 @@ define( ['views/rowCollection', 'controllers/LoadControllers', 'models/rowCollec
 		loadControllers: function() {
 			new LoadControllers();
 
-			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.getFieldContentsView, 4 );
-			nfRadio.channel( 'fieldContents' ).request( 'add:saveFilter', this.fieldContentsSave, 4 );
-			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.fieldContentsLoad, 4 );
+			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.getFormContentView, 4 );
+			nfRadio.channel( 'formContent' ).request( 'add:saveFilter', this.formContentSave, 4 );
+			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.formContentLoad, 4 );
+		
+			/*
+			 * In the RC for Ninja Forms, the 'formContent' channel was called 'fieldContents'.
+			 * This was changed in version 3.0. These radio messages are here to make sure nothing breaks.
+			 *
+			 * TODO: Remove this backwards compatibility radio calls.
+			 */
+			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.getFormContentView, 4 );
+			nfRadio.channel( 'fieldContents' ).request( 'add:saveFilter', this.formContentSave, 4 );
+			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.formContentLoad, 4 );
 		},
 
-		getFieldContentsView: function( collection ) {
+		getFormContentView: function( collection ) {
 			return RowCollectionView;
 		},
 
 		/**
-		 * When we update our database, set the form setting value of 'fieldContentsData' to our row collection.
+		 * When we update our database, set the form setting value of 'formContentData' to our row collection.
 		 * To do this, we have to break our row collection down into an object, then remove all the extra field settings
 		 * so that we're left with just the field IDs.
 		 * 
 		 * @since  3.0
 		 * @return array 
 		 */
-		fieldContentsSave: function( rowCollection ) {
+		formContentSave: function( rowCollection ) {
 			var rows = JSON.parse( JSON.stringify( rowCollection ) );	
 			_.each( rows, function( row, rowIndex ) {
 				_.each( row.cells, function( cell, cellIndex ) {
@@ -39,17 +49,17 @@ define( ['views/rowCollection', 'controllers/LoadControllers', 'models/rowCollec
 		},
 
 		/**
-		 * When we load our builder view, we filter the fieldContentsData.
+		 * When we load our builder view, we filter the formContentData.
 		 * This turns the saved object into a Backbone Collection.
 		 *
 		 * If we aren't passed any data, then this form hasn't been modified with layouts yet,
 		 * so we default to the nfLayouts.rows global variable that is localised for us.
 		 * 
 		 * @since  3.0
-		 * @param  array rowArray current value of our fieldContentsData.
+		 * @param  array rowArray current value of our formContentData.
 		 * @return Backbone.Collection
 		 */
-		fieldContentsLoad: function( rowArray ) {
+		formContentLoad: function( rowArray ) {
 			if ( false === rowArray instanceof Backbone.Collection ) {
 				if ( 'undefined' == typeof rowArray || 0 == rowArray.length || 'undefined' == typeof rowArray[0]['cells'] ) {
 					if ( 'undefined' != typeof nfLayouts ) {

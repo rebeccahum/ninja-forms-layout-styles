@@ -12,10 +12,12 @@
 
 .layouts-row {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-line-pack: stretch;
-      align-content: stretch;
+  -webkit-align-content: stretch;
+      -ms-flex-line-pack: stretch;
+          align-content: stretch;
   /*border: 2px dashed darkblue;*/ }
 
 .layouts-row .gutter {
@@ -88,8 +90,9 @@
 
 .layouts-handle {
   background: green;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch;
   float: left;
   width: 10px; }
 

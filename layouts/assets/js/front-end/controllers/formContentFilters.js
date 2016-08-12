@@ -1,11 +1,20 @@
 define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectionView, RowCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.getFieldContentsView, 4 );
-			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.fieldContentsLoad, 4 );
+			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.getFormContentView, 4 );
+			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.formContentLoad, 4 );
+			
+			/*
+			 * In the RC for Ninja Forms, the 'formContent' channel was called 'fieldContents'.
+			 * This was changed in version 3.0. These radio messages are here to make sure nothing breaks.
+			 *
+			 * TODO: Remove this backwards compatibility radio calls.
+			 */
+			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.getFormContentView, 4 );
+			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.formContentLoad, 4 );
 		},
 
-		getFieldContentsView: function( collection ) {
+		getFormContentView: function( collection ) {
 			return RowCollectionView;
 		},
 
@@ -20,7 +29,7 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 		 * @param  array rowArray current value of our fieldContentsData.
 		 * @return Backbone.Collection
 		 */
-		fieldContentsLoad: function( rowArray, formModel ) {
+		formContentLoad: function( rowArray, formModel ) {
 			if ( false === rowArray instanceof Backbone.Collection ) {
 				return new RowCollection( rowArray, { formModel: formModel } );				
 			} else {

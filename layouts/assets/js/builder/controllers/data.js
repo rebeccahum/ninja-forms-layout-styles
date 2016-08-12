@@ -12,7 +12,16 @@ define( [], function() {
 
 		addRow: function( rowCollection, data ) {
 
-			var rowCollection = rowCollection || nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
+			if ( ! rowCollection ) {
+				/*
+				 * In the RC for Ninja Forms, 'formContentData' was 'fieldContentsData'.
+				 * In 3.0, we changed it to 'formContentData', so this line checks for that old setting name if the new one doesn't exist.
+				 * This is for backwards compatibility and can be removed in the future.
+				 *
+				 * TODO: Remove the || portion of this ternary.
+				 */
+				rowCollection = nfRadio.channel( 'settings' ).request( 'get:setting', 'formContentData' ) || nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
+			}
 
 			if ( 'undefined' == typeof data.order ) {
 				data.order = 999;

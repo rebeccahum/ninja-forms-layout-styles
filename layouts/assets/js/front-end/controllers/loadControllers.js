@@ -1,15 +1,15 @@
 define( 
 	[
-		'controllers/fieldContentsFilters',
+		'controllers/formContentFilters',
 	], 
 	function
 	(
-		FieldContentsFilters
+		FormContentFilters
 	)
 	{
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			new FieldContentsFilters();
+			new FormContentFilters();
 		}
 
 	});
