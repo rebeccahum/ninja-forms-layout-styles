@@ -263,7 +263,7 @@ function ninja_forms_layouts_upgrade_form_settings( $data ){
         } // for field loop
     }
 
-    $data[ 'settings' ][ 'fieldContentsData' ] = $rows;
+    $data[ 'settings' ][ 'formContentData' ] = $rows;
 
     return $data;
 }
