@@ -20,6 +20,11 @@ define( ['models/cellFieldCollection'], function( CellFieldCollection) {
 				
 			} );
 			this.set( 'fields', new CellFieldCollection( fieldModels, { cellModel: this } ) );
+			this.listenTo( this.get( 'fields' ), 'change:errors', this.triggerErrors );
+		},
+
+		triggerErrors: function( fieldModel ) {
+			this.collection.trigger( 'change:errors', fieldModel );
 		}
 		
 	} );

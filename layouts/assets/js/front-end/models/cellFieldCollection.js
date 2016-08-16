@@ -13,11 +13,19 @@ define( [], function( ) {
 		initialize: function( models, options ) {
 			// We've been passed the cellModel to which this collection belongs.
 			this.cellModel = options.cellModel;
-			var that = this;
 			_.each( models, function( model ) {
-				model.set( 'cellcid', that.cellModel.cid, { silent: true } );
-			} );
+				model.set( 'cellcid', this.cellModel.cid, { silent: true } );
+			}, this );
+
+			this.listenTo( this.cellModel.collection.rowModel.collection, 'validate:modelData', this.validateModelData );
+		},
+
+		validateFields: function() {
+			_.each( this.models, function( fieldModel ) {
+				nfRadio.channel( 'submit' ).trigger( 'validate:field', fieldModel );
+			}, this );
 		}
+
 	} );
 	return collection;
 } );

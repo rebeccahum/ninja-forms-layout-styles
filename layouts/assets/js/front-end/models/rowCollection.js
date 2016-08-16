@@ -13,6 +13,13 @@ define( ['models/rowModel'], function( rowModel ) {
 
 		initialize: function( models, options ) {
 			this.formModel = options.formModel;
+		},
+
+		validateFields: function() {
+			/*
+			 * Validate the fields in this row collection.
+			 */
+			this.trigger( 'validate:modelData', this );
 		}
 	} );
 	return collection;
