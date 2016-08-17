@@ -17,7 +17,7 @@ define( [], function( ) {
 				model.set( 'cellcid', this.cellModel.cid, { silent: true } );
 			}, this );
 
-			this.listenTo( this.cellModel.collection.rowModel.collection, 'validate:modelData', this.validateModelData );
+			this.listenTo( this.cellModel.collection.rowModel.collection, 'validate:fields', this.validateFields );
 		},
 
 		validateFields: function() {

@@ -19,7 +19,7 @@ define( ['models/rowModel'], function( rowModel ) {
 			/*
 			 * Validate the fields in this row collection.
 			 */
-			this.trigger( 'validate:modelData', this );
+			this.trigger( 'validate:fields', this );
 		}
 	} );
 	return collection;
