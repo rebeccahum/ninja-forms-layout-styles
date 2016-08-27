@@ -12,10 +12,12 @@
 
 .layouts-row {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-line-pack: stretch;
-      align-content: stretch;
+  -webkit-align-content: stretch;
+      -ms-flex-line-pack: stretch;
+          align-content: stretch;
   /*border: 2px dashed darkblue;*/ }
 
 .layouts-row .gutter {
@@ -88,8 +90,9 @@
 
 .layouts-handle {
   background: green;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch;
   float: left;
   width: 10px; }
 
@@ -115,9 +118,7 @@
 
 .layouts-dragging .layouts-row {
   padding: 6px;
-  margin: 8px 0;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease; }
+  margin: 8px 0; }
 
 .layouts-dragging .layouts-cell .nf-field-wrap {
   /*margin: 30px 0;*/ }
@@ -127,22 +128,22 @@
   -webkit-transition: width 0.5s ease;
   transition: width 0.5s ease; }
 
-.layouts-dragging .layouts-row.multi-cell .nf-field-wrap {
+.layouts-row.multi-cell .nf-field-wrap {
   margin: 20px 0; }
 
-.layouts-dragging .layouts-row.multi-cell .nf-fields-sortable-placeholder {
+.layouts-row.multi-cell .nf-fields-sortable-placeholder {
   margin: 6px 0; }
 
-.layouts-dragging .layouts-row.multi-cell .gutter.nf-fields-sortable-placeholder {
+.layouts-row.multi-cell .gutter.nf-fields-sortable-placeholder {
   margin: 0; }
 
-.layouts-dragging .layouts-row.multi-cell .nf-fields-sortable-placeholder + .nf-field-wrap {
+.layouts-row.multi-cell .nf-fields-sortable-placeholder + .nf-field-wrap {
   margin-top: 0; }
 
-.layouts-dragging .layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder {
+.layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder {
   margin-top: -14px; }
 
-.layouts-dragging .layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder + .nf-field-wrap {
+.layouts-row.multi-cell .nf-field-wrap + .nf-fields-sortable-placeholder + .nf-field-wrap {
   margin-top: 6px; }
 
 .gutter {
