@@ -192,7 +192,8 @@ define( [], function() {
 			var type = jQuery( ui.item ).data( 'id' );
 			// Add a new field for our type, returning its tmp id.
 			var fieldModel = this.addField( type, order, true );
-			this.addRow( order, rowsView.collection, [ fieldModel.get( 'id' ) ], true );
+
+			this.addRow( order, rowsView.collection, [ fieldModel.get( 'key' ) ], true );
 			// Remove our helper
 			jQuery( ui.helper ).remove();
 
@@ -367,7 +368,7 @@ define( [], function() {
 			collection.sort();
 		
 			return newRow;
-;
+
 		},
 
 		/**
@@ -384,10 +385,8 @@ define( [], function() {
 			silent = silent || false;
 			// Get our field type model
 			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type ); 
-			// Get our tmp ID
-			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpID' );
 			// Add our field
-			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { id: tmpID, label: fieldType.get( 'nicename' ), type: type }, silent );
+			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { label: fieldType.get( 'nicename' ), type: type }, silent );
 			return newModel;
 		},
 

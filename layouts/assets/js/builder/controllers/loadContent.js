@@ -45,6 +45,7 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 					} );
 				} );
 			} );
+
 			return rows;
 		},
 
