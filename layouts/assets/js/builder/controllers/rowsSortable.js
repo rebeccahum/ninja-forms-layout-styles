@@ -386,7 +386,7 @@ define( [], function() {
 			// Get our field type model
 			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type ); 
 			// Add our field
-			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { label: fieldType.get( 'nicename' ), type: type }, silent );
+			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { label: fieldType.get( 'nicename' ), type: type }, silent, false );
 			return newModel;
 		},
 

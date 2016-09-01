@@ -1,4 +1,4 @@
-define( [], function() {
+define( [ 'models/rowCollection' ], function( RowCollection ) {
 	var controller = Marionette.Object.extend( {
 		overSortable: false,
 		outFired: false,
@@ -21,6 +21,7 @@ define( [], function() {
 				 * TODO: Remove the || portion of this ternary.
 				 */
 				rowCollection = nfRadio.channel( 'settings' ).request( 'get:setting', 'formContentData' ) || nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
+				if ( false === rowCollection instanceof RowCollection ) return false;
 			}
 
 			if ( 'undefined' == typeof data.order ) {

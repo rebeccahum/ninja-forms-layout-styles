@@ -30,7 +30,8 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 		 * @return Backbone.Collection
 		 */
 		formContentLoad: function( rowArray, formModel ) {
-			if ( false === rowArray instanceof Backbone.Collection ) {
+			console.log( 'filter' );
+			if ( false === rowArray instanceof RowCollection ) {
 				return new RowCollection( rowArray, { formModel: formModel } );				
 			} else {
 				return rowArray;

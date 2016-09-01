@@ -17,6 +17,8 @@ define( ['models/rowModel'], function( rowModel ) {
 			this.on( 'destroy:cell', this.updateMaxCols, this );
 			this.on( 'remove:cell', this.updateMaxCols, this );
 			this.on( 'destroy', this.updateMaxCols, this );
+			
+			this.on( 'add:field', this.addNewField );
 		},
 
 		updateMaxCols: function( models ) {
@@ -38,6 +40,21 @@ define( ['models/rowModel'], function( rowModel ) {
 			} );
 
 			nfRadio.channel( 'layouts' ).request( 'update:colClass', maxCols );
+		},
+
+		addNewField: function( fieldModel ) {
+			var order = 9999;
+			
+			this.add( {
+				order: order,
+				cells: [
+					{
+						order: 0,
+						fields: [ fieldModel.get( 'key' ) ],
+						width: '100'
+					}
+				]
+			} );
 		}
 	} );
 	return collection;

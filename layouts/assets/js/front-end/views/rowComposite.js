@@ -9,11 +9,10 @@ define( ['views/cellComposite'], function( cellComposite ) {
 
 		},
 
-		onShow: function() {
+		onAttach: function() {
 			if ( 1 < this.collection.length ) {
 				jQuery( this.el ).closest( '.nf-form-wrap' ).addClass( 'nf-multi-cell' );
 			}
-			
 		},
 
 		attachHtml: function( collectionView, childView ) {

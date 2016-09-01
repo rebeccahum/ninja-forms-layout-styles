@@ -4,12 +4,7 @@ require( ['controllers/loadControllers'], function( LoadControllers ) {
 	var NFLayouts = Marionette.Application.extend( {
 
 		initialize: function( options ) {
-			this.listenTo( nfRadio.channel( 'app' ), 'after:loadControllers', this.loadControllers );
-		},
-
-		onStart: function() {
-			// new LoadContent();
-			console.log( 'start layout app' );
+			this.listenTo( nfRadio.channel( 'form' ), 'before:filterData', this.loadControllers );
 		},
 
 		loadControllers: function( app ) {
