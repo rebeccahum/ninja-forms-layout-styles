@@ -57,19 +57,20 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 		 * so we default to the nfLayouts.rows global variable that is localised for us.
 		 * 
 		 * @since  3.0
-		 * @param  array rowArray current value of our formContentData.
+		 * @param  array 		rowArray 	current value of our formContentData.
+		 * @param  bool  		empty		is this a purposefully empty collection?
 		 * @return Backbone.Collection
 		 */
-		formContentLoad: function( rowArray ) {
-			if ( false === rowArray instanceof Backbone.Collection ) {
+		formContentLoad: function( rowArray, empty ) {
+			empty = empty || false;
+			if ( false === rowArray instanceof RowCollection ) {
 				if ( 'undefined' == typeof rowArray || 0 == rowArray.length || 'undefined' == typeof rowArray[0]['cells'] ) {
-					if ( 'undefined' != typeof nfLayouts ) {
+					if ( 'undefined' != typeof nfLayouts && ! empty ) {
 						rowArray = nfLayouts.rows;
 					} else {
 						rowArray = [];
 					}
 				}
-
 				return new RowCollection( rowArray );				
 			} else {
 				return rowArray;

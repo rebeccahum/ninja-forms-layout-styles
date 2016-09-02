@@ -18,12 +18,22 @@ define( [], function( ) {
 			}, this );
 
 			this.listenTo( this.cellModel.collection.rowModel.collection, 'validate:fields', this.validateFields );
+			this.listenTo( this.cellModel.collection.rowModel.collection, 'show:fields', this.showFields );
+			this.listenTo( this.cellModel.collection.rowModel.collection, 'hide:fields', this.hideFields );
 		},
 
 		validateFields: function() {
 			_.each( this.models, function( fieldModel ) {
 				nfRadio.channel( 'submit' ).trigger( 'validate:field', fieldModel );
 			}, this );
+		},
+
+		showFields: function() {
+			this.invoke( 'set', { visible: true } );
+		},
+
+		hideFields: function() {
+			this.invoke( 'set', { visible: false } );
 		}
 
 	} );
