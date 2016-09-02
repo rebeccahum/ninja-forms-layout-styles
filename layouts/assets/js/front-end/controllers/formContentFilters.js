@@ -29,13 +29,33 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 		 * @param  array rowArray current value of our formContentData.
 		 * @return Backbone.Collection
 		 */
-		formContentLoad: function( rowArray, formModel ) {
-			if ( false === rowArray instanceof RowCollection ) {
-				return new RowCollection( rowArray, { formModel: formModel } );				
-			} else {
-				return rowArray;
-			}
+		formContentLoad: function( rowArray, formModel, empty, fields ) {
+			if ( true === rowArray instanceof RowCollection ) return rowArray;
+			
+			empty = empty || false;
+			fields = fields || false;
 
+			if ( fields ) {
+				rowArray = [];
+
+				_.each( fields, function( key, index ) {
+					rowArray.push( {
+						order: index,
+						cells: [ {
+							order: 0,
+							fields: [ key ],
+							width: '100'
+						} ]
+					} );
+
+				} );
+			} else if ( 'undefined' != typeof nfLayouts && ! empty ) {
+				rowArray = nfLayouts.rows;
+			} else {
+				rowArray = [];
+			}
+			
+			return new RowCollection( rowArray, { formModel: formModel } );
 		}
 	});
 

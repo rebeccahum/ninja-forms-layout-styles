@@ -7,9 +7,9 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 		loadControllers: function() {
 			new LoadControllers();
 
-			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.getFormContentView, 4 );
-			nfRadio.channel( 'formContent' ).request( 'add:saveFilter', this.formContentSave, 4 );
-			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.formContentLoad, 4 );
+			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.getFormContentView, 4, this );
+			nfRadio.channel( 'formContent' ).request( 'add:saveFilter', this.formContentSave, 4, this );
+			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.formContentLoad, 4, this );
 		
 			/*
 			 * In the RC for Ninja Forms, the 'formContent' channel was called 'fieldContents'.
@@ -17,9 +17,9 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 			 *
 			 * TODO: Remove this backwards compatibility radio calls.
 			 */
-			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.getFormContentView, 4 );
-			nfRadio.channel( 'fieldContents' ).request( 'add:saveFilter', this.formContentSave, 4 );
-			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.formContentLoad, 4 );
+			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.getFormContentView, 4, this );
+			nfRadio.channel( 'fieldContents' ).request( 'add:saveFilter', this.formContentSave, 4, this );
+			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.formContentLoad, 4, this );
 		},
 
 		getFormContentView: function( collection ) {
@@ -59,23 +59,38 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 		 * @since  3.0
 		 * @param  array 		rowArray 	current value of our formContentData.
 		 * @param  bool  		empty		is this a purposefully empty collection?
+		 * @param  array		fields		fields array to be turned into rows. This is only passed if MP is also active.
 		 * @return Backbone.Collection
 		 */
-		formContentLoad: function( rowArray, empty ) {
-			empty = empty || false;
-			if ( false === rowArray instanceof RowCollection ) {
-				if ( 'undefined' == typeof rowArray || 0 == rowArray.length || 'undefined' == typeof rowArray[0]['cells'] ) {
-					if ( 'undefined' != typeof nfLayouts && ! empty ) {
-						rowArray = nfLayouts.rows;
-					} else {
-						rowArray = [];
-					}
-				}
-				return new RowCollection( rowArray );				
-			} else {
-				return rowArray;
-			}
+		formContentLoad: function( rowArray, empty, fields ) {
+			if ( true === rowArray instanceof RowCollection ) return rowArray;
 
+			empty = empty || false;
+			fields = fields || false;
+
+			if ( 'undefined' != typeof nfLayouts && ! empty ) {
+				if ( fields ) {
+					rowArray = [];
+
+					_.each( fields, function( key, index ) {
+						rowArray.push( {
+							order: index,
+							cells: [ {
+								order: 0,
+								fields: [ key ],
+								width: '100'
+							} ]
+						} );
+
+					} );
+				} else {
+					rowArray = nfLayouts.rows;
+				}
+			} else {
+				rowArray = [];
+			}
+			
+			return new RowCollection( rowArray );
 		}
 	});
 
