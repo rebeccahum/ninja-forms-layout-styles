@@ -65,6 +65,14 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 		formContentLoad: function( formContentData, empty, fields ) {
 			if ( true === formContentData instanceof RowCollection ) return formContentData;
 			
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+
+			/*
+			 * TODO: Bandaid fix for making sure that we interpret fields correclty when Multi-Part is active.
+			 * Basically, if MP is active, we don't want to ever use the nfLayouts.rows.
+			 */
+			var mp = ( 'undefined' != typeof formContentLoadFilters[1] ) ? true : false;
+
 			empty = empty || false;
 			fields = fields || false;
 			var rowArray = [];
@@ -81,7 +89,8 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 					} );
 
 				} );
-			} else if ( 'undefined' != typeof nfLayouts && ! empty ) {
+
+			} else if ( 'undefined' != typeof nfLayouts && ! empty && ! mp ) {
 				rowArray = nfLayouts.rows;
 			} else {
 				rowArray = formContentData;
