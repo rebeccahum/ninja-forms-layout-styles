@@ -26,16 +26,45 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 		 * so we default to the nfLayouts.rows global variable that is localised for us.
 		 * 
 		 * @since  3.0
-		 * @param  array rowArray current value of our formContentData.
+		 * @param  array formContentData current value of our formContentData.
 		 * @return Backbone.Collection
 		 */
-		formContentLoad: function( rowArray, formModel ) {
-			if ( false === rowArray instanceof Backbone.Collection ) {
-				return new RowCollection( rowArray, { formModel: formModel } );				
-			} else {
-				return rowArray;
+		formContentLoad: function( formContentData, formModel, empty, fields ) {
+			if ( true === formContentData instanceof RowCollection ) return formContentData;
+			
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+
+			/*
+			 * TODO: This is a bandaid fix to prevent forms with layouts and parts from freaking out of layouts & styles are deactivated.
+			 * If Layouts is deactivated, it will send the field keys.
+			 */
+			if ( 'undefined' == typeof formContentLoadFilters[1] && _.isArray( formContentData ) && 'part' == formContentData[0].type ) {
+				formContentData = formModel.get( 'fields' ).pluck( 'key' );
 			}
 
+			empty = empty || false;
+			fields = fields || false;
+			var rowArray = [];
+
+			if ( _.isArray( formContentData ) && 'undefined' == typeof formContentData[0].cells ) {
+				_.each( formContentData, function( key, index ) {
+					rowArray.push( {
+						order: index,
+						cells: [ {
+							order: 0,
+							fields: [ key ],
+							width: '100'
+						} ]
+					} );
+
+				} );
+			} else if ( 'undefined' != typeof nfLayouts && ! empty ) {
+				rowArray = nfLayouts.rows;
+			} else {
+				rowArray = formContentData;
+			}
+			
+			return new RowCollection( rowArray, { formModel: formModel } );
 		}
 	});
 

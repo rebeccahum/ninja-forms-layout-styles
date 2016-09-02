@@ -17,6 +17,10 @@ define( ['models/rowModel'], function( rowModel ) {
 			this.on( 'destroy:cell', this.updateMaxCols, this );
 			this.on( 'remove:cell', this.updateMaxCols, this );
 			this.on( 'destroy', this.updateMaxCols, this );
+			
+			this.on( 'add:field', this.addField, this );
+			this.on( 'append:field', this.appendField, this );
+			this.on( 'remove:field', this.removeField, this );
 		},
 
 		updateMaxCols: function( models ) {
@@ -38,6 +42,53 @@ define( ['models/rowModel'], function( rowModel ) {
 			} );
 
 			nfRadio.channel( 'layouts' ).request( 'update:colClass', maxCols );
+		},
+
+		addField: function( fieldModel ) {
+			if ( ! fieldModel.get( 'oldCellcid' ) ) {
+				this.appendField( fieldModel );
+				return false;
+			}
+
+			var cellModel = false;
+			this.every( function( rowModel ) {
+				if ( rowModel.get( 'cells' ).get( { cid: fieldModel.get( 'oldCellcid' ) } ) ) {
+					cellModel = rowModel.get( 'cells' ).get( { cid: fieldModel.get( 'oldCellcid' ) } );
+					return false;
+				}
+				return true;
+			} );
+
+			if ( cellModel ) {
+				cellModel.get( 'fields' ).add( fieldModel );
+				cellModel.collection.sort();
+			} else {
+				this.appendField( fieldModel );
+			}
+
+			fieldModel.set( 'oldCellcid', false );
+		},
+
+		removeField: function( fieldModel ) {
+			if ( ! fieldModel.get( 'oldCellcid' ) ) {
+				fieldModel.set( 'oldCellcid', fieldModel.get( 'cellcid' ) );
+			}
+			nfRadio.channel( 'layouts-cell' ).trigger( 'remove:field', fieldModel.get( 'id' ) );
+		},
+
+		appendField: function( fieldModel ) {
+			var order = 9999;
+			
+			this.add( {
+				order: order,
+				cells: [
+					{
+						order: 0,
+						fields: [ fieldModel.get( 'key' ) ],
+						width: '100'
+					}
+				]
+			} );
 		}
 	} );
 	return collection;

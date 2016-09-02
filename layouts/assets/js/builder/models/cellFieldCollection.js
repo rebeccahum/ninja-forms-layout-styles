@@ -12,11 +12,13 @@ define( [], function( ) {
 
 		initialize: function( models, options ) {
 			this.options = options;
+			
 			// Listen to requests to remove a field from a collection.
 			this.listenTo( nfRadio.channel( 'layouts-cell' ), 'remove:field', this.removeField );
 			// We've been passed the cellModel to which this collection belongs.
 			// this.options.cellModel = options.cellModel;
 			_.each( models, function( model ) {
+				if ( 'undefined' == typeof model ) return;
 				model.set( 'cellcid', this.options.cellModel.cid, { silent: true } );
 			}, this );
 
@@ -30,6 +32,7 @@ define( [], function( ) {
 
 			// When we add a model to our main field collection, add it to this collection if its cid matches
 			fieldCollection.on( 'add', this.addModel, this );
+
 		},
 
 		/**

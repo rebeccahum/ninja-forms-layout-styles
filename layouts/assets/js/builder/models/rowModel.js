@@ -26,7 +26,7 @@ define( ['models/cellCollection'], function( CellCollection ) {
 				}
 			} );
 
-			if ( remove ) {
+			if ( remove && 'undefined' != typeof this.collection ) {
 				this.collection.remove( this );
 			}
 		}		

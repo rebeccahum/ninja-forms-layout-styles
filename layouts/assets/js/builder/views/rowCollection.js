@@ -106,6 +106,7 @@ define( ['views/rowItem'], function( RowItemView ) {
 				 * @return void
 				 */
 				receive: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'layouts' ).trigger( 'receive:rowsSortable', e, ui, that, this );
 				},
 

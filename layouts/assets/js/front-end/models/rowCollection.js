@@ -20,6 +20,14 @@ define( ['models/rowModel'], function( rowModel ) {
 			 * Validate the fields in this row collection.
 			 */
 			this.trigger( 'validate:fields', this );
+		},
+
+		showFields: function() {
+			this.trigger( 'show:fields', this );
+		},
+
+		hideFields: function() {
+			this.trigger( 'hide:fields', this );
 		}
 	} );
 	return collection;

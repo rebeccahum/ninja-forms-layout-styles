@@ -135,7 +135,7 @@ define( ['views/emptyCell'], function( EmptyCell ) {
 				 * @return void
 				 */
 		        sort: function( e, ui) {
-		        	nfRadio.channel( 'layouts' ).trigger( 'sort:cellSortable', e, ui, that, this );
+		        	     	nfRadio.channel( 'layouts' ).trigger( 'sort:cellSortable', e, ui, that, this );
 		        },
 				
 				/**
@@ -147,6 +147,7 @@ define( ['views/emptyCell'], function( EmptyCell ) {
 				 * @return void
 				 */
 				receive: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'layouts' ).trigger( 'receive:cellSortable', e, ui, that, this );
 				},
 
@@ -159,6 +160,7 @@ define( ['views/emptyCell'], function( EmptyCell ) {
 				 * @return void
 				 */
 				start: function( e, ui ) {
+
 					nfRadio.channel( 'layouts' ).trigger( 'start:cellSortable', e, ui, that, this );
 				},
 
