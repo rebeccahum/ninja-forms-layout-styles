@@ -38,7 +38,7 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 			 * TODO: This is a bandaid fix to prevent forms with layouts and parts from freaking out of layouts & styles are deactivated.
 			 * If Layouts is deactivated, it will send the field keys.
 			 */
-			if ( 'undefined' == typeof formContentLoadFilters[1] && _.isArray( formContentData ) && 'part' == formContentData[0].type ) {
+			if ( 'undefined' == typeof formContentLoadFilters[1] && _.isArray( formContentData ) && 0 != formContentData.length && 'part' == formContentData[0].type ) {
 				formContentData = formModel.get( 'fields' ).pluck( 'key' );
 			}
 

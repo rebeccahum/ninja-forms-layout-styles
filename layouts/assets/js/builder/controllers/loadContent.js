@@ -57,37 +57,34 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 		 * so we default to the nfLayouts.rows global variable that is localised for us.
 		 * 
 		 * @since  3.0
-		 * @param  array 		rowArray 	current value of our formContentData.
-		 * @param  bool  		empty		is this a purposefully empty collection?
-		 * @param  array		fields		fields array to be turned into rows. This is only passed if MP is also active.
+		 * @param  array 		formContentData 	current value of our formContentData.
+		 * @param  bool  		empty				is this a purposefully empty collection?
+		 * @param  array		fields				fields array to be turned into rows. This is only passed if MP is also active.
 		 * @return Backbone.Collection
 		 */
-		formContentLoad: function( rowArray, empty, fields ) {
-			if ( true === rowArray instanceof RowCollection ) return rowArray;
-
+		formContentLoad: function( formContentData, empty, fields ) {
+			if ( true === formContentData instanceof RowCollection ) return formContentData;
+			
 			empty = empty || false;
 			fields = fields || false;
+			var rowArray = [];
 
-			if ( 'undefined' != typeof nfLayouts && ! empty ) {
-				if ( fields ) {
-					rowArray = [];
-
-					_.each( fields, function( key, index ) {
-						rowArray.push( {
-							order: index,
-							cells: [ {
-								order: 0,
-								fields: [ key ],
-								width: '100'
-							} ]
-						} );
-
+			if ( _.isArray( formContentData ) && 0 != formContentData.length && 'undefined' == typeof formContentData[0].cells ) {
+				_.each( formContentData, function( key, index ) {
+					rowArray.push( {
+						order: index,
+						cells: [ {
+							order: 0,
+							fields: [ key ],
+							width: '100'
+						} ]
 					} );
-				} else {
-					rowArray = nfLayouts.rows;
-				}
+
+				} );
+			} else if ( 'undefined' != typeof nfLayouts && ! empty ) {
+				rowArray = nfLayouts.rows;
 			} else {
-				rowArray = [];
+				rowArray = formContentData;
 			}
 			
 			return new RowCollection( rowArray );
