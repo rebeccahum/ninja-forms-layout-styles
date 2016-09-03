@@ -38,8 +38,16 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 			 * TODO: This is a bandaid fix to prevent forms with layouts and parts from freaking out of layouts & styles are deactivated.
 			 * If Layouts is deactivated, it will send the field keys.
 			 */
-			if ( 'undefined' == typeof formContentLoadFilters[1] && _.isArray( formContentData ) && 0 != formContentData.length && 'part' == formContentData[0].type ) {
-				formContentData = formModel.get( 'fields' ).pluck( 'key' );
+			var mpEnabled = ( 'undefined' != typeof formContentLoadFilters[1] ) ? true : false;
+
+			/*
+			 * TODO: Bandaid fix for making sure that Layouts can interpret Multi-Part data if Multi-Part is disabled.
+			 */
+			if ( ! mpEnabled && _.isArray( formContentData ) && 0 != _.isArray( formContentData ).length  && 'undefined' != typeof _.first( formContentData ) && 'part' == _.first( formContentData ).type ) {
+				/* 
+				 * Get our layout data from inside MP
+				 */
+				formContentData = _.flatten( _.pluck( formContentData, 'formContentData' ) );
 			}
 
 			empty = empty || false;
@@ -58,7 +66,7 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 					} );
 
 				} );
-			} else if ( 'undefined' != typeof nfLayouts && ! empty ) {
+			} else if ( _.isEmpty( rowArray ) && 'undefined' != typeof nfLayouts && ! empty && ! mpEnabled ) {
 				rowArray = nfLayouts.rows;
 			} else {
 				rowArray = formContentData;
