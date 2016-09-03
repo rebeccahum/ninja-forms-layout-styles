@@ -54,7 +54,7 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 			fields = fields || false;
 			var rowArray = [];
 
-			if ( _.isArray( formContentData ) && 'undefined' == typeof formContentData[0].cells ) {
+			if ( _.isArray( formContentData ) && 0 != formContentData.length && 'undefined' == typeof formContentData[0].cells ) {
 				_.each( formContentData, function( key, index ) {
 					rowArray.push( {
 						order: index,
