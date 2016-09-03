@@ -65,17 +65,27 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 		formContentLoad: function( formContentData, empty, fields ) {
 			if ( true === formContentData instanceof RowCollection ) return formContentData;
 			
+			empty = empty || false;
+			fields = fields || false;
+			var rowArray = [];
+
 			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
 
 			/*
 			 * TODO: Bandaid fix for making sure that we interpret fields correclty when Multi-Part is active.
 			 * Basically, if MP is active, we don't want to ever use the nfLayouts.rows.
 			 */
-			var mp = ( 'undefined' != typeof formContentLoadFilters[1] ) ? true : false;
+			var mpEnabled = ( 'undefined' != typeof formContentLoadFilters[1] ) ? true : false;
 
-			empty = empty || false;
-			fields = fields || false;
-			var rowArray = [];
+			/*
+			 * TODO: Bandaid fix for making sure that Layouts can interpret Multi-Part data if Multi-Part is disabled.
+			 */
+			if ( ! mpEnabled && _.isArray( formContentData ) && 0 != _.isArray( formContentData ).length  && 'undefined' != typeof _.first( formContentData ) && 'part' == _.first( formContentData ).type ) {
+				/* 
+				 * Get our layout data from inside MP
+				 */
+				formContentData = _.flatten( _.pluck( formContentData, 'formContentData' ) );
+			}
 
 			if ( _.isArray( formContentData ) && 0 != formContentData.length && 'undefined' == typeof formContentData[0].cells ) {
 				_.each( formContentData, function( key, index ) {
@@ -89,13 +99,12 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 					} );
 
 				} );
-
-			} else if ( 'undefined' != typeof nfLayouts && ! empty && ! mp ) {
+			} else if ( _.isEmpty( rowArray ) && 'undefined' != typeof nfLayouts && ! empty && ! mpEnabled ) {
 				rowArray = nfLayouts.rows;
 			} else {
 				rowArray = formContentData;
 			}
-			
+
 			return new RowCollection( rowArray );
 		}
 	});
