@@ -66,7 +66,7 @@ define( [ 'views/rowCollection', 'models/rowCollection'], function( RowCollectio
 					} );
 
 				} );
-			} else if ( _.isEmpty( rowArray ) && 'undefined' != typeof nfLayouts && ! empty && ! mpEnabled ) {
+			} else if ( _.isEmpty( rowArray ) && 'undefined' != typeof nfLayouts && ! mpEnabled ) {
 				rowArray = nfLayouts.rows;
 			} else {
 				rowArray = formContentData;

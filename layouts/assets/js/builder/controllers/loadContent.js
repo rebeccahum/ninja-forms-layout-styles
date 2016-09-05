@@ -99,7 +99,7 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 					} );
 
 				} );
-			} else if ( _.isEmpty( rowArray ) && 'undefined' != typeof nfLayouts && ! empty && ! mpEnabled ) {
+			} else if ( _.isEmpty( rowArray ) && 'undefined' != typeof nfLayouts && ! mpEnabled ) {
 				rowArray = nfLayouts.rows;
 			} else {
 				rowArray = formContentData;
