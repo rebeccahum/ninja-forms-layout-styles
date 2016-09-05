@@ -24,12 +24,19 @@
  */
 require_once 'lib/conversion.php';
 
-define("NINJA_FORMS_STYLE_VERSION", "3.0.1");
+if( ! defined( 'NINJA_FORMS_STYLE_VERSION' ) ) {
+    define("NINJA_FORMS_STYLE_VERSION", "3.0.1");
+}
 
 if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
-    define("NINJA_FORMS_STYLE_DIR", plugin_dir_path( __FILE__ ) . '/deprecated' );
-    define("NINJA_FORMS_STYLE_URL", plugin_dir_url( __FILE__ ) . '/deprecated' );
+    if( ! defined( 'NINJA_FORMS_STYLE_DIR' ) ) {
+        define("NINJA_FORMS_STYLE_DIR", plugin_dir_path(__FILE__) . '/deprecated');
+    }
+
+    if( ! defined( 'NINJA_FORMS_STYLE_URL' ) ) {
+        define("NINJA_FORMS_STYLE_URL", plugin_dir_url(__FILE__) . '/deprecated');
+    }
 
     include 'deprecated/ninja-forms-style.php';
 
@@ -48,44 +55,50 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
 }
 
 add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_styles_upgrade_form_settings' );
-function ninja_forms_styles_upgrade_form_settings( $data ){
+if( ! function_exists( 'ninja_forms_styles_upgrade_form_settings' ) ) {
+    function ninja_forms_styles_upgrade_form_settings( $data ){
 
-    if( ! isset( $data[ 'settings' ][ 'style' ][ 'groups' ] ) ) return $data;
+        if( ! isset( $data[ 'settings' ][ 'style' ][ 'groups' ] ) ) return $data;
 
-    foreach( $data[ 'settings' ][ 'style' ][ 'groups' ] as $group => $settings ){
+        foreach( $data[ 'settings' ][ 'style' ][ 'groups' ] as $group => $settings ){
 
-        if( 'field' == $group ) $group = 'element';
+            if( 'field' == $group ) $group = 'element';
 
-        foreach( $settings as $setting => $value ){
-            $setting = $group . '_styles_' . $setting;
-            $data[ 'settings' ][ $setting ] = $value;
+            foreach( $settings as $setting => $value ){
+                $setting = $group . '_styles_' . $setting;
+                $data[ 'settings' ][ $setting ] = $value;
+            }
         }
-    }
 
-    return $data;
+        return $data;
+    }
 }
 
 add_filter( 'ninja_forms_upgrade_settings', 'ninja_forms_styles_upgrade_plugin_settings' );
-function ninja_forms_styles_upgrade_plugin_settings( $data ){
-    return $data;
+if( ! function_exists( 'ninja_forms_styles_upgrade_plugin_settings' ) ) {
+    function ninja_forms_styles_upgrade_plugin_settings( $data ){
+        return $data;
+    }
 }
 
 add_filter( 'ninja_forms_upgrade_field', 'ninja_forms_styles_upgrade_field_settings' );
-function ninja_forms_styles_upgrade_field_settings( $data ){
+if( ! function_exists( 'ninja_forms_styles_upgrade_field_settings' ) ) {
+    function ninja_forms_styles_upgrade_field_settings( $data ){
 
-    if( ! isset( $data[ 'style' ][ 'groups' ] ) ) return $data;
+        if( ! isset( $data[ 'style' ][ 'groups' ] ) ) return $data;
 
-    foreach( $data[ 'style' ][ 'groups' ] as $group => $settings ){
+        foreach( $data[ 'style' ][ 'groups' ] as $group => $settings ){
 
-        if( 'field' == $group ) $group = 'element';
+            if( 'field' == $group ) $group = 'element';
 
-        foreach( $settings as $setting => $value ){
-            $setting = $group . '_styles_' . $setting;
-            $data[ $setting ] = $value;
+            foreach( $settings as $setting => $value ){
+                $setting = $group . '_styles_' . $setting;
+                $data[ $setting ] = $value;
+            }
         }
+
+        unset( $data[ 'style' ] );
+
+        return $data;
     }
-
-    unset( $data[ 'style' ] );
-
-    return $data;
 }
