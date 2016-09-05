@@ -4,7 +4,7 @@
 
 final class NF_Layouts_Conversion
 {
-	   var $part_array = array();
+	var $part_array = array();
     var $part_count = - 1;
     var $conditions = array();
 
@@ -119,8 +119,8 @@ final class NF_Layouts_Conversion
              */
             if ( $fields[ $i ][ 'style' ][ 'colspan' ] + $coltrack <= $cols ) {
                 
-                if( ! isset( $field[ 'key' ] ) ){
-                    $fields[ $i ][ 'key' ] = ltrim( $fields[ $i ][ 'type' ], '_' ) . '_' . $fields[ $i ][ 'id' ];
+                if( ! isset( $fields[ $i ][ 'key' ] ) ){
+                    $fields[ $i ][ 'key' ] = ltrim( $fields[ $i ][ 'type' ], '_' ) . '_asdf' . $fields[ $i ][ 'id' ];
                 }
 
                 if( '_text' == $fields[ $i ][ 'type' ] && isset( $fields[ $i ][ 'datepicker' ] ) && $fields[ $i ][ 'datepicker' ] ){
@@ -200,7 +200,11 @@ final class NF_Layouts_Conversion
                 /*
                  * If we have a colspan of 2, either it's 100%, which is handled above, or 50%.
                  */
-                $width = 50;
+                if ( 2 == $width ) {
+                    $width = 100;
+                } else {
+                   $width = 50; 
+                }
                 break;
             
             case 3:
