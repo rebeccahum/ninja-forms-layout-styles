@@ -4,7 +4,7 @@
 
 final class NF_Layouts_Conversion
 {
-	var $part_array = array();
+	   var $part_array = array();
     var $part_count = - 1;
     var $conditions = array();
 
@@ -267,6 +267,7 @@ final class NF_Layouts_Conversion
     private function conditions_add_else( &$condition, $index )
     {
         foreach( $condition[ 'then' ] as $tindex => $then ) {
+            if ( 'part' != $then[ 'type' ] ) continue;
             if ( 'show_part' == $then[ 'trigger' ] ) {
                 $opposite = 'hide_part';
             } else {
