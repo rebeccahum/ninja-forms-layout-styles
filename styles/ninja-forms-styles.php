@@ -73,6 +73,11 @@ final class NF_Styles
          */
         add_action( 'admin_init', array( $this, 'import_export' ) );
 
+
+        /*
+         * Multi-Part Integration
+         */
+        add_filter( 'ninja_forms_multi_part_advanced_settings', array( $this, 'add_multi_part_settings' ) );
     }
 
     public function ninja_forms_loaded()
@@ -386,6 +391,7 @@ final class NF_Styles
             }
         }
 
+        
         ob_start();
         $this->localize_styles( $styles, 'Plugin Wide Styles' );
         $output = ob_get_clean();
@@ -423,6 +429,23 @@ final class NF_Styles
                 $styles[ $selector ][ $rule ] = $settings[ $setting ];
             }
         }
+
+        /*
+         * Multi-Part Styles
+         */
+        $part_styles = self::config( 'MultiPartSettings' );
+        foreach( $part_styles as &$part ){
+            foreach( self::config( 'CommonSettings' ) as $common_setting ) {
+                $name =  $part[ 'name' ] . '_' . $common_setting[ 'name' ];
+
+                if( ! isset( $settings[ $name ] ) || ! $settings[ $name ] ) continue;
+
+                $selector = $part[ 'selector' ];
+                $rule = $common_setting[ 'name' ];
+                $styles[$selector][$rule] = $settings[ $name ];
+            }
+        }
+        /* End Multi-Part Styles */
 
         ob_start();
         $this->localize_styles( $styles, 'Form Styles' );
@@ -824,6 +847,24 @@ final class NF_Styles
         );
         $message = Ninja_Forms()->template( 'admin-wp-die.html.php', $args );
         wp_die( $message, $args[ 'title' ], array( 'back_link' => TRUE ) );
+    }
+
+    public function add_multi_part_settings( $settings )
+    {
+        $part_styles = self::config( 'MultiPartSettings' );
+
+        foreach( $part_styles as &$part ){
+            $part[ 'group' ] = 'styles';
+
+            foreach( self::config( 'CommonSettings' ) as $common_setting ) {
+                $name =  $part[ 'name' ] . '_' . $common_setting[ 'name' ];
+                $part[ 'settings' ][ $name ] = $common_setting;
+                $part[ 'settings' ][ $name ][ 'name' ] = $name;
+            }
+        }
+
+        $settings[ 'multi_part' ] = array_merge( $settings[ 'multi_part' ], $part_styles );
+        return $settings;
     }
 
 }
