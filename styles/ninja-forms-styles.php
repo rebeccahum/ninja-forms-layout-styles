@@ -73,6 +73,11 @@ final class NF_Styles
          */
         add_action( 'admin_init', array( $this, 'import_export' ) );
 
+
+        /*
+         * Multi-Part Integration
+         */
+        add_filter( 'ninja_forms_multi_part_advanced_settings', array( $this, 'add_multi_part_settings' ) );
     }
 
     public function ninja_forms_loaded()
@@ -824,6 +829,19 @@ final class NF_Styles
         );
         $message = Ninja_Forms()->template( 'admin-wp-die.html.php', $args );
         wp_die( $message, $args[ 'title' ], array( 'back_link' => TRUE ) );
+    }
+
+    public function add_multi_part_settings( $settings )
+    {
+        $part_styles = self::config( 'MultiPartSettings' );
+
+        foreach( $part_styles as &$part ){
+            $part[ 'group' ] = 'styles';
+            $part[ 'settings' ] = self::config( 'CommonSettings' );
+        }
+
+        $settings[ 'multi_part' ] = array_merge( $settings[ 'multi_part' ], $part_styles );
+        return $settings;
     }
 
 }
