@@ -28,7 +28,7 @@ if( ! defined( 'NINJA_FORMS_STYLE_VERSION' ) ) {
     define("NINJA_FORMS_STYLE_VERSION", "3.0.2");
 }
 
-if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
+if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
     if( ! defined( 'NINJA_FORMS_STYLE_DIR' ) ) {
         define("NINJA_FORMS_STYLE_DIR", plugin_dir_path(__FILE__) . '/deprecated');
