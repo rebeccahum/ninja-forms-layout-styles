@@ -887,5 +887,3 @@ if( ! function_exists( 'NF_Styles' ) ) {
         return NF_Styles::instance();
     }
 }
-
-NF_Styles();

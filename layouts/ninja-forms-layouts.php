@@ -191,5 +191,3 @@ if( ! function_exists( 'NF_Layouts' ) ) {
         return NF_Layouts::instance();
     }
 }
-
-NF_Layouts();

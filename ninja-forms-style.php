@@ -43,7 +43,10 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
 } else {
 
     include 'layouts/ninja-forms-layouts.php';
+    NF_Layouts();
+
     include 'styles/ninja-forms-styles.php';
+    NF_Styles();
 
     add_action( 'admin_init', 'ninja_forms_layout_styles_setup_license' );
     if( ! function_exists( 'ninja_forms_layout_styles_setup_license' ) ) {
