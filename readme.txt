@@ -3,8 +3,8 @@ Contributors: kstover, jameslaws, kbjohnson90
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.3
-Tested up to: 4.5.2
-Stable tag: 3.0.1
+Tested up to: 4.6
+Stable tag: 3.0.2
 
 License: GPLv2 or later
 
@@ -23,6 +23,13 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.2 (06 September 2016) =
+
+*Bugs:*
+
+* Improved conversion efficiency.
+* Compatibility with Multi-Part Forms v3.0.
 
 = 3.0.1 (27 July 2016) =
 
