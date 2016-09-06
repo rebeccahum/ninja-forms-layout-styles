@@ -1,6 +1,6 @@
 <?php
 
-// if( class_exists( 'NF_Layouts_Conversion' ) ) return;
+ if( class_exists( 'NF_Layouts_Conversion', false ) ) return;
 
 final class NF_Layouts_Conversion
 {

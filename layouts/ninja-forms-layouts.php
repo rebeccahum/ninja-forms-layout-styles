@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+if( class_exists( 'NF_Layouts', false ) ) return;
+
 /**
  * Class NF_Layouts
  */
