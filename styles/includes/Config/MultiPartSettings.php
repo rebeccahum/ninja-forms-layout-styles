@@ -7,7 +7,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Part Container Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '',
+        'selector' => '#test-selector-for-mp-part-container-styles-setting',
     ),
 
     'breadcrumb_container_styles' => array(

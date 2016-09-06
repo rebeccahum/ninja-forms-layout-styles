@@ -391,6 +391,7 @@ final class NF_Styles
             }
         }
 
+        
         ob_start();
         $this->localize_styles( $styles, 'Plugin Wide Styles' );
         $output = ob_get_clean();
@@ -428,6 +429,20 @@ final class NF_Styles
                 $styles[ $selector ][ $rule ] = $settings[ $setting ];
             }
         }
+
+        /*
+         * Multi-Part Styles
+         */
+        $part_styles = self::config( 'MultiPartSettings' );
+        foreach( $part_styles as &$part ){
+            foreach( self::config( 'CommonSettings' ) as $common_setting ) {
+                $name =  $part[ 'name' ] . '_' . $common_setting[ 'name' ];
+                $selector = $part[ 'selector' ];
+                $rule = $common_setting[ 'name' ];
+                $styles[$selector][$rule] = $settings[ $name ];
+            }
+        }
+        /* End Multi-Part Styles */
 
         ob_start();
         $this->localize_styles( $styles, 'Form Styles' );
@@ -837,7 +852,12 @@ final class NF_Styles
 
         foreach( $part_styles as &$part ){
             $part[ 'group' ] = 'styles';
-            $part[ 'settings' ] = self::config( 'CommonSettings' );
+
+            foreach( self::config( 'CommonSettings' ) as $common_setting ) {
+                $name =  $part[ 'name' ] . '_' . $common_setting[ 'name' ];
+                $part[ 'settings' ][ $name ] = $common_setting;
+                $part[ 'settings' ][ $name ][ 'name' ] = $name;
+            }
         }
 
         $settings[ 'multi_part' ] = array_merge( $settings[ 'multi_part' ], $part_styles );
