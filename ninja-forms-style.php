@@ -46,11 +46,13 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
     include 'styles/ninja-forms-styles.php';
 
     add_action( 'admin_init', 'ninja_forms_layout_styles_setup_license' );
-    function ninja_forms_layout_styles_setup_license()
-    {
-        if ( ! class_exists( 'NF_Extension_Updater' ) ) return;
+    if( ! function_exists( 'ninja_forms_layout_styles_setup_license' ) ) {
+        function ninja_forms_layout_styles_setup_license()
+        {
+            if (!class_exists('NF_Extension_Updater')) return;
 
-        new NF_Extension_Updater( 'Layout and Styles', NINJA_FORMS_STYLE_VERSION, 'WP Ninjas', __FILE__, 'style' );
+            new NF_Extension_Updater('Layout and Styles', NINJA_FORMS_STYLE_VERSION, 'WP Ninjas', __FILE__, 'style');
+        }
     }
 }
 

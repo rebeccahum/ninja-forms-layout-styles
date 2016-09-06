@@ -185,9 +185,11 @@ final class NF_Layouts
  * @since 3.0
  * @return {class} Highlander Instance
  */
-function NF_Layouts()
-{
-    return NF_Layouts::instance();
+if( ! function_exists( 'NF_Layouts' ) ) {
+    function NF_Layouts()
+    {
+        return NF_Layouts::instance();
+    }
 }
 
 NF_Layouts();

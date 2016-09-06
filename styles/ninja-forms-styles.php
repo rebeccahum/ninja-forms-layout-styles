@@ -881,9 +881,11 @@ final class NF_Styles
  * @since 3.0
  * @return NF_Styles Highlander Instance
  */
-function NF_Styles()
-{
-    return NF_Styles::instance();
+if( ! function_exists( 'NF_Styles' ) ) {
+    function NF_Styles()
+    {
+        return NF_Styles::instance();
+    }
 }
 
 NF_Styles();
