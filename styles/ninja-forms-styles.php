@@ -437,6 +437,9 @@ final class NF_Styles
         foreach( $part_styles as &$part ){
             foreach( self::config( 'CommonSettings' ) as $common_setting ) {
                 $name =  $part[ 'name' ] . '_' . $common_setting[ 'name' ];
+
+                if( ! isset( $settings[ $name ] ) || ! $settings[ $name ] ) continue;
+
                 $selector = $part[ 'selector' ];
                 $rule = $common_setting[ 'name' ];
                 $styles[$selector][$rule] = $settings[ $name ];
