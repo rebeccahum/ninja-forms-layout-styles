@@ -43,9 +43,15 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3.0', '>' ) 
 } else {
 
     include 'layouts/ninja-forms-layouts.php';
+    if( ! function_exists( 'NF_Layouts' ) ) {
+        function NF_Layouts() { return NF_Layouts::instance(); }
+    }
     NF_Layouts();
 
     include 'styles/ninja-forms-styles.php';
+    if( ! function_exists( 'NF_Styles' ) ) {
+        function NF_Styles() { return NF_Styles::instance(); }
+    }
     NF_Styles();
 
     add_action( 'admin_init', 'ninja_forms_layout_styles_setup_license' );

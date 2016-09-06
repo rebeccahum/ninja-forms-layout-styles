@@ -174,20 +174,3 @@ final class NF_Layouts
         new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
     }
 }
-
-/**
- * The main function responsible for returning The Highlander Plugin
- * Instance to functions everywhere.
- *
- * Use this function like you would a global variable, except without needing
- * to declare the global.
- *
- * @since 3.0
- * @return {class} Highlander Instance
- */
-if( ! function_exists( 'NF_Layouts' ) ) {
-    function NF_Layouts()
-    {
-        return NF_Layouts::instance();
-    }
-}
