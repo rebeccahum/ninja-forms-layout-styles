@@ -41,7 +41,7 @@ final class NF_Layouts
     public function __construct()
     {
         add_action( 'nf_admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
-        add_action( 'ninja_forms_enqueue_scripts', array( $this, 'display_scripts' ) );
+        add_action( 'nf_display_enqueue_scripts', array( $this, 'display_scripts' ) );
     }
 
     public function admin_scripts()
@@ -61,14 +61,29 @@ final class NF_Layouts
         if ( !$form_id ) {
             return false;
         }
-        wp_localize_script( 'nf-layout-builder', 'nfLayouts', array( 'rows' => $this->get_default_layout( $form_id ) ) );
+        $rows = array();
+        $form = Ninja_Forms()->form( $form_id );
+        foreach( $form->get_fields() as $field ) {
+            $rows[] = array(
+                'order' => absint( $field->get_setting( 'order' ) ),
+                'cells'	=> array(
+                    array(
+                        'order' => 0,
+                        'fields'	=> array(
+                            $field->get_setting( 'key' )
+                        ),
+                        'width'		=> '100'
+                    )
+                )
+            );
+        }
+        wp_localize_script( 'nf-layout-builder', 'nfLayouts', array( 'rows' => $rows ) );
     }
 
-    public function display_scripts( $data )
+    public function display_scripts()
     {
         wp_enqueue_style( 'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/css/display-structure.css' );
         wp_enqueue_script( 'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/js/min/front-end.js', array( 'nf-front-end' ) );
-        wp_localize_script( 'nf-layout-front-end', 'nfLayouts', array( 'rows' => $this->get_default_layout( $data[ 'form_id' ] ) ) );
         ?>
         <script id="nf-tmpl-cell" type="text/template">
             <nf-fields></nf-fields>
@@ -157,26 +172,5 @@ final class NF_Layouts
         if ( ! class_exists( 'NF_Extension_Updater' ) ) return;
 
         new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
-    }
-
-    public function get_default_layout( $form_id )
-    {
-        $rows = array();
-        $form = Ninja_Forms()->form( $form_id );
-        foreach( $form->get_fields() as $field ) {
-            $rows[] = array(
-                'order' => absint( $field->get_setting( 'order' ) ),
-                'cells'	=> array(
-                    array(
-                        'order' => 0,
-                        'fields'	=> array(
-                            $field->get_setting( 'key' )
-                        ),
-                        'width'		=> '100'
-                    )
-                )
-            );
-        }
-        return $rows;
     }
 }
