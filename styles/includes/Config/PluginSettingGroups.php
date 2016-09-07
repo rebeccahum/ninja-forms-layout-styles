@@ -57,17 +57,17 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'wrap' => array(
                 'name' => 'wrap',
                 'label' => __( 'Wrap Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-fields .nf-field-container .field-wrap'
+                'selector' => '.nf-form-content .nf-field-container .field-wrap'
             ),
             'label' => array(
                 'name' => 'label',
                 'label' => __( 'Label Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-fields .nf-field-label label'
+                'selector' => '.nf-form-content .nf-field-label label'
             ),
             'field' => array(
                 'name' => 'field',
                 'label' => __( 'Element Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-fields .nf-field-element .ninja-forms-field:not(select)'
+                'selector' => '.nf-form-content .nf-field-element .ninja-forms-field:not(select)'
             ),
         )
     ),
@@ -82,7 +82,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
         'name' => 'field_type',
         'label' => __( 'Field Type Styles', 'ninja-forms-layout-styles' ),
         'sections' => array(),
-        'selector' => '.nf-fields .nf-field-container.{field-type}-container'
+        'selector' => '.nf-form-content .nf-field-container.{field-type}-container'
     ),
 
     /*
@@ -103,7 +103,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'field_error_wrap' => array(
                 'name' => 'field_error_wrap',
                 'label' => __( 'Error Field Wrap Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-fields .nf-error-wrap'
+                'selector' => '.nf-form-content .nf-error-wrap'
             ),
             'field_error_label' => array(
                 'name' => 'field_error_label',
@@ -118,7 +118,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'field_error_msg' => array(
                 'name' => 'field_error_msg',
                 'label' => __( 'Error Message Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-fields .nf-error-wrap .nf-error-msg'
+                'selector' => '.nf-form-content .nf-error-wrap .nf-error-msg'
             ),
         )
     ),

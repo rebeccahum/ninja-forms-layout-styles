@@ -7,7 +7,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Wrap Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap'
+        'selector' => '.nf-form-content .nf-field-container #nf-field-{ID}-wrap'
     ),
 
     'label_styles' => array(
@@ -15,7 +15,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Label Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap .nf-field-label label'
+        'selector' => '.nf-form-content .nf-field-container #nf-field-{ID}-wrap .nf-field-label label'
     ),
 
     'element_styles' => array(
@@ -23,7 +23,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Element Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap .nf-field-element .ninja-forms-field'
+        'selector' => '.nf-form-content .nf-field-container #nf-field-{ID}-wrap .nf-field-element .ninja-forms-field'
     ),
 
 );

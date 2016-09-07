@@ -4,7 +4,7 @@
  * Plugin Name: Ninja Forms - Layout & Styles
  * Plugin URI: https://ninjaforms.com/extensions/layout-styles/
  * Description: Form layout and styling add-on for Ninja Forms.
- * Version: 3.0.2
+ * Version: 3.0.3
  * Author: The WP Ninjas
  * Author URI: http://ninjaforms.com
  * Text Domain: ninja-forms-layout-styles
@@ -25,7 +25,7 @@
 require_once 'lib/conversion.php';
 
 if( ! defined( 'NINJA_FORMS_STYLE_VERSION' ) ) {
-    define("NINJA_FORMS_STYLE_VERSION", "3.0.2");
+    define("NINJA_FORMS_STYLE_VERSION", "3.0.3");
 }
 
 if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
