@@ -7,7 +7,7 @@ if( class_exists( 'NF_Layouts', false ) ) return;
  */
 final class NF_Layouts
 {
-    const VERSION = '3.0.1';
+    const VERSION = '3.0.4';
     const SLUG    = 'layouts';
     const NAME    = 'Layouts';
     const AUTHOR  = 'WP Ninjas';
