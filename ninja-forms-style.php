@@ -22,7 +22,10 @@
  * GNU General Public License for more details.
  * 
  */
-require_once 'lib/conversion.php';
+
+if( ! class_exists( 'NF_Layouts_Conversion', false ) ) {
+    require_once 'lib/conversion.php';
+}
 
 if( ! defined( 'NINJA_FORMS_STYLE_VERSION' ) ) {
     define("NINJA_FORMS_STYLE_VERSION", "3.0.4");

@@ -1,7 +1,5 @@
 <?php
 
- if( class_exists( 'NF_Layouts_Conversion', false ) ) return;
-
 final class NF_Layouts_Conversion
 {
 	var $part_array = array();
