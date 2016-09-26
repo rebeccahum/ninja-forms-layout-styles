@@ -58,6 +58,10 @@ final class NF_Layouts_Conversion
         return $form_data;
     }
 
+    public function update_field_contents_data( $field ) {
+        return $field[ 'key' ];
+    }
+
     public function divider_check( $field, $index, $form_data )
     {
         if ( 'page_divider' == $field[ 'type' ] ) {
@@ -94,7 +98,7 @@ final class NF_Layouts_Conversion
         /*
          * If we have no columns, return a default formContentData
          */
-        if ( empty( $cols ) ) return $fields;
+        if ( empty( $cols ) ) return array_map( array( $this, 'update_field_contents_data' ), $fields );
 
         /*
          * Try to catch any bad layout errors.
