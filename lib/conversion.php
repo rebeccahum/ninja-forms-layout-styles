@@ -44,6 +44,7 @@ final class NF_Layouts_Conversion
             /*
              * Remove any page_divider types we have in our array.
              */
+            usort( $form_data[ 'fields' ], array( $this, 'sort_fields' ) );
             $form_data[ 'fields' ] = array_filter( $form_data[ 'fields' ], array( $this, 'remove_dividers' ) );
             $form_data[ 'settings' ][ 'formContentData' ] = $this->part_array;
             $form_data[ 'settings' ][ 'conditions' ] = $this->conditions;
@@ -94,7 +95,26 @@ final class NF_Layouts_Conversion
         /*
          * If we have no columns, return a default formContentData
          */
-        if ( empty( $cols ) ) return $fields;
+        if ( empty( $cols ) ) {
+            usort( $fields, array( $this, 'sort_fields' ) );
+            $formContentData = array();
+            for( $i = 0; $i < count( $fields ); $i++ ){
+                $formContentData[] = array(
+                    'order' => 0,
+                    'cells' => array(
+                        array(
+                            'order' => 0,
+                            'fields' => array(
+                                $fields[ $i ][ 'key' ]
+                            ),
+                            'width' => 100
+                        )
+                    )
+                );
+            }
+
+            return $formContentData;
+        }
 
         /*
          * Try to catch any bad layout errors.
@@ -297,6 +317,10 @@ final class NF_Layouts_Conversion
                 'type'  => 'part'
             );
         }
+    }
+
+    private function sort_fields($a, $b) {
+        return $a['order'] - $b['order'];
     }
 } // End of Class
 
