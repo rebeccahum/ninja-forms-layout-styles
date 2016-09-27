@@ -7,7 +7,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Element Hover Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-fields .nf-field-container #nf-field-{ID}-wrap .nf-field-element .ninja-forms-field:hover'
+        'selector' => '.nf-form-content .nf-field-container #nf-field-{ID}-wrap .nf-field-element .ninja-forms-field:hover'
     ),
 
 );
