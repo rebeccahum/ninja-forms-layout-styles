@@ -247,8 +247,9 @@ define( [], function() {
 		},
 
 		receiveCurrentField: function( e, ui, rowsView, sortable ) {
-			var oldCID = ui.item.fieldCollection.options.cellModel.collection.options.rowModel.cid;			
-			var droppedOrder = jQuery( ui.item ).index() + 1;
+			var oldCID = ui.item.fieldCollection.options.cellModel.collection.options.rowModel.cid;
+			var prevOrder = ui.item.fieldCollection.options.cellModel.collection.options.rowModel.get( 'order' );		
+			var droppedOrder = ( prevOrder < jQuery( ui.item ).index() ) ? jQuery( ui.item ).index() : jQuery( ui.item ).index() + 1;
 			var fieldID = jQuery( ui.item ).data( 'id' );
 
 			var oldOrder = [];
