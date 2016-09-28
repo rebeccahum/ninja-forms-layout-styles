@@ -425,7 +425,7 @@ define( [], function() {
 				// receiverOldOrder.push( fieldModel.get( 'cellOrder' ) );
 			} );
 
-			cellView.collection.add( fieldModel );
+			cellView.collection.add( fieldModel, { silent: true } );
 
 			var order = jQuery( sortable ).sortable( 'toArray' );
 			this.sortFields( order, cellView.collection );
@@ -448,7 +448,6 @@ define( [], function() {
 				receiverOldOrder: receiverOldOrder
 			};
 			
-
 			/*
 			 * Disable Layouts changes
 			 */
