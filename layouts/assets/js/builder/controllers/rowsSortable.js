@@ -98,6 +98,7 @@ define( [], function() {
 			if( ! jQuery( ui.item ).hasClass( 'nf-stage' ) && ! jQuery( ui.item ).hasClass( 'nf-field-wrap' ) && ! this.dropping ) {
 				var order = jQuery( sortable ).sortable( 'toArray' );
 				var oldOrder = [];
+				console.log( order );
 				// var rowCollection = nfRadio.channel( 'layouts-row' ).request( 'get:collection' );
 				_.each( order, function( cid, index ) {
 					oldOrder[ rowsView.collection.get( { cid: cid } ).get( 'order' ) ] = cid;

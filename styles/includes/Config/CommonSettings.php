@@ -13,7 +13,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'color',
         'label' => __( 'Background Color', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -27,7 +27,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Border Width', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -41,7 +41,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'select',
         'label' => __( 'Border Style', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
         'options' => array(
             array(
                 'label' => '- ' . __( 'None', 'ninja-forms-layout-styles' ),
@@ -73,7 +73,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'color',
         'label' => __( 'Border Color', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -87,7 +87,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'color',
         'label' => __( 'Text Color', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -101,7 +101,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Height', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -115,7 +115,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Width', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -129,7 +129,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Font Size', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -143,7 +143,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Margin', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -157,7 +157,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Padding', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -171,7 +171,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'select',
         'label' => __( 'Display', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
         'options' => array(
             array(
                 'label' => '- ' . __( 'Default', 'ninja-forms-layout-styles' ),
@@ -203,7 +203,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'type' => 'textbox',
         'label' => __( 'Float', 'ninja-forms-layout-styles' ),
         'width' => 'one-half',
-        'value' => '',
+        'value' => null,
     ),
 
     /*
@@ -224,7 +224,7 @@ return apply_filters( 'ninja_forms_styles_common_settings', array(
         'name' => 'advanced',
         'type' => 'textarea',
         'label' => __( 'Advanced CSS', 'ninja-forms-layout-styles' ),
-        'value' => '',
+        'value' => null,
         'width' => 'full',
         'deps' => array(
             'show_advanced_css' => 1
