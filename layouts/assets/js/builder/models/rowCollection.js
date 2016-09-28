@@ -78,18 +78,6 @@ define( ['models/rowModel'], function( rowModel ) {
 
 		appendField: function( fieldModel ) {
 			nfRadio.channel( 'layouts' ).request( 'add:row', this, { field: fieldModel.get( 'key' ) } );
-			// var order = 9999;
-			
-			// this.add( {
-			// 	order: order,
-			// 	cells: [
-			// 		{
-			// 			order: 0,
-			// 			fields: [ fieldModel.get( 'key' ) ],
-			// 			width: '100'
-			// 		}
-			// 	]
-			// } );
 		}
 	} );
 	return collection;
