@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 
 License: GPLv2 or later
 
@@ -23,6 +23,15 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.8 (28 September 2016) =
+
+*Bugs:*
+
+* Fixed a bug that caused field order to randomise when sorting fields between cells and rows.
+* Fixed a bug with template imports that caused templates to fail.
+* Added version number to script inclusion to help prevent caching issues.
+* Fixed a bug with hover styles not being applied to submit buttons.
 
 = 3.0.7 (26 September 2016) =
 
