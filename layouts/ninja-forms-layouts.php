@@ -46,9 +46,10 @@ final class NF_Layouts
 
     public function admin_scripts()
     {
-        wp_enqueue_style( 'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/css/builder.css' );
-        wp_enqueue_script( 'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/js/min/builder.js', array( 'nf-builder' ) );
-        wp_enqueue_script( 'jquery-split', plugin_dir_url( __FILE__ ) . 'assets/js/lib/split.js', array( 'jquery' ) );
+        $ver = self::VERSION;
+        wp_enqueue_style(  'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/css/builder.css', array(), $ver );
+        wp_enqueue_script( 'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/js/min/builder.js', array( 'nf-builder' ), $ver );
+        wp_enqueue_script( 'jquery-split',      plugin_dir_url( __FILE__ ) . 'assets/js/lib/split.js',   array( 'jquery' ),     $ver );
         ?>
         <script id="nf-tmpl-empty-cell" type="text/template">
             <div class="no-fields">
@@ -82,8 +83,9 @@ final class NF_Layouts
 
     public function display_scripts()
     {
-        wp_enqueue_style( 'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/css/display-structure.css' );
-        wp_enqueue_script( 'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/js/min/front-end.js', array( 'nf-front-end' ) );
+        $ver = self::VERSION;
+        wp_enqueue_style(  'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/css/display-structure.css', array(), $ver );
+        wp_enqueue_script( 'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/js/min/front-end.js', array( 'nf-front-end' ), $ver );
         ?>
         <script id="nf-tmpl-cell" type="text/template">
             <nf-fields></nf-fields>
