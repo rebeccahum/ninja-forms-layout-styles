@@ -13,7 +13,7 @@ define( [], function() {
 
 		maybeAddRow: function( model ) {
 			if ( ! model.get( 'cellcid' ) ) {
-				var order = ( ! model.get( 'order' ) ) ? 999 : model.get( 'order' );
+				var order = ( ! model.get( 'order' ) || 999 == model.get( 'order' ) ) ? null : model.get( 'order' );
 				nfRadio.channel( 'layouts' ).request( 'add:row', null, { order: order, field: model } );
 			}
 		},

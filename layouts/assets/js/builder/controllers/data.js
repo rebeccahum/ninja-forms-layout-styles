@@ -24,8 +24,12 @@ define( [ 'models/rowCollection' ], function( RowCollection ) {
 				if ( false === rowCollection instanceof RowCollection ) return false;
 			}
 
-			if ( 'undefined' == typeof data.order ) {
-				data.order = 999;
+			if ( 'undefined' == typeof data.order || null == data.order ) {
+				/*
+				 * Get the order of the last item in our row collection.
+				 */
+				rowOrder = rowCollection.pluck( 'order' );
+				data.order = ( 0 < rowOrder.length ) ? _.max( rowOrder ) + 1 : 1;
 			}
 
 			var rowModel = rowCollection.add( {

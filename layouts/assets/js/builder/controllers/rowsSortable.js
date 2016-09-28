@@ -98,7 +98,6 @@ define( [], function() {
 			if( ! jQuery( ui.item ).hasClass( 'nf-stage' ) && ! jQuery( ui.item ).hasClass( 'nf-field-wrap' ) && ! this.dropping ) {
 				var order = jQuery( sortable ).sortable( 'toArray' );
 				var oldOrder = [];
-				console.log( order );
 				// var rowCollection = nfRadio.channel( 'layouts-row' ).request( 'get:collection' );
 				_.each( order, function( cid, index ) {
 					oldOrder[ rowsView.collection.get( { cid: cid } ).get( 'order' ) ] = cid;
@@ -265,6 +264,10 @@ define( [], function() {
 			var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', fieldID );
 			ui.item.fieldCollection.remove( fieldModel );
 
+			rowsView.collection.each( function( model, index ) {
+				model.set( 'order', index + 1 );
+			} );
+
 			var rowModel = this.addRow( droppedOrder, rowsView.collection, [ fieldID ] );
 
 			oldOrder[ oldOrder.indexOf( oldCID ) ] = rowModel.cid;
@@ -342,7 +345,7 @@ define( [], function() {
 					rowModel.set( 'order', newOrder );
 				}
 			} );
-
+			
 			// Add a row model into our collection.
 			var newRow = collection.add( {
 				order: order,
