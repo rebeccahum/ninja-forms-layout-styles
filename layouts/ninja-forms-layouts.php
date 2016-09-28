@@ -47,7 +47,7 @@ final class NF_Layouts
     public function admin_scripts()
     {
         $ver = self::VERSION;
-        wp_enqueue_style(  'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/css/builder.css', $ver );
+        wp_enqueue_style(  'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/css/builder.css', array(),  $ver );
         wp_enqueue_script( 'nf-layout-builder', plugin_dir_url( __FILE__ ) . 'assets/js/min/builder.js', array( 'nf-builder' ), $ver );
         wp_enqueue_script( 'jquery-split',      plugin_dir_url( __FILE__ ) . 'assets/js/lib/split.js',   array( 'jquery' ),     $ver );
         ?>
@@ -84,7 +84,7 @@ final class NF_Layouts
     public function display_scripts()
     {
         $ver = self::VERSION;
-        wp_enqueue_style(  'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/css/display-structure.css', $ver );
+        wp_enqueue_style(  'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/css/display-structure.css', array(),  $ver );
         wp_enqueue_script( 'nf-layout-front-end', plugin_dir_url( __FILE__ ) . 'assets/js/min/front-end.js', array( 'nf-front-end' ), $ver );
         ?>
         <script id="nf-tmpl-cell" type="text/template">
