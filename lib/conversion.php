@@ -130,7 +130,7 @@ final class NF_Layouts_Conversion
              * If we don't have a colspan set, it should be equal to our cols.
              */
             if ( ! isset( $fields[ $i ][ 'style' ][ 'colspan' ] ) ) {
-                $fields[ $i ][ 'style' ][ 'colspan' ] = 1;
+                $fields[ $i ][ 'style' ][ 'colspan' ] = $cols;
             }
 
             if ( $fields[ $i ][ 'style' ][ 'colspan' ] > $cols ) {
