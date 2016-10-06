@@ -212,7 +212,8 @@ var global = this
              * This library has been modified for our use-case.
              * We are only interested in whole-numbers, so we're rounding all cell widths up if they have any remainders.
              */
-            this.percentage = Math.min( Math.ceil( this.size / parentSize * 100 ), 100)
+            // this.percentage = Math.min( Math.ceil( this.size / parentSize * 100 ), 100)
+            this.percentage = Math.min(this.size / parentSize * 100, 100)
 
             // if( isNaN( this.percentage ) ) {
             //     this.percentage = ( 100 / options.cellCollection.length ) * 2;
@@ -413,7 +414,6 @@ var global = this
                 size = options.sizes[i] + '%'
             }
         }
-
         el.style[dimension] = size
 
         if (i > 0) {

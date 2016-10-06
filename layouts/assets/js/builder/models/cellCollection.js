@@ -41,6 +41,10 @@ define( ['models/cellModel'], function( cellModel ) {
 			// Calculate a new width for our cells.
 			var width = Math.round( 100 / this.models.length );
 
+			if ( 100 < width * this.models.length ) {
+				width = Math.floor( 100 / this.models.length );
+			}
+
 			// Set our width for each cell.
 			_.each( this.models, function( cell ) {
 				cell.set( 'width', width );
