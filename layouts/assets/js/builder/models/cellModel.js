@@ -14,7 +14,10 @@ define( ['models/cellFieldCollection'], function( CellFieldCollection) {
 
 			_.each( this.get( 'fields' ), function( search ) {
 				if ( 'undefined' == typeof fieldCollection.get( search ) ) {
-					fieldModels.push( fieldCollection.findWhere( { key: search } ) );
+					var findField = fieldCollection.findWhere( { key: search } );
+					if ( 'undefined' != typeof findField ) {
+						fieldModels.push( findField );
+					}
 				} else {
 					fieldModels.push( fieldCollection.get( search ) );
 				}
