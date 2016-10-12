@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 3.0.8
+Stable tag: 3.0.9
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.9 (12 October 2016) =
+
+*Changes:*
+
+* Added better error handling for missing field types. This should prevent some JS errors from being thrown on display.
 
 = 3.0.8 (28 September 2016) =
 
