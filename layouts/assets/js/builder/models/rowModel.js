@@ -13,6 +13,7 @@ define( ['models/cellCollection'], function( CellCollection ) {
 			this.options = options;
 			this.set( 'cells', new CellCollection( this.get( 'cells' ), { rowModel: this } ) );
 			this.on( 'change:cells', this.checkEmptyCells, this );
+
 		},
 
 		checkEmptyCells: function( model ) {
@@ -28,7 +29,10 @@ define( ['models/cellCollection'], function( CellCollection ) {
 
 			if ( remove && 'undefined' != typeof this.collection ) {
 				this.collection.remove( this );
+				return false;
 			}
+
+			return true;
 		}		
 	} );
 	
