@@ -105,6 +105,15 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 				rowArray = formContentData;
 			}
 
+			/*
+			 Ensure that our rows don't have any empty fields
+			 */
+			rowArray = _.filter( rowArray, function( row ) {
+				return _.every( row.cells, function( cell ) { 
+					return 0 < cell.fields.length;
+				} );
+			} );
+
 			return new RowCollection( rowArray );
 		}
 	});

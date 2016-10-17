@@ -30,10 +30,14 @@ define( ['views/rowItem'], function( RowItemView ) {
 		 * @return {bool}					Should this row be output in the collection view?
 		 */
 		filter: function( rowModel, index, rowCollection ) {
-			if ( 'undefined' != typeof rowModel ) {
-				return rowModel.checkEmptyCells();
-			}
-			return false;
+			var show = false;
+			_.each( rowModel.get( 'cells' ).models, function( cell ) {
+				if ( 0 != cell.get( 'fields' ).length ) {
+					show = true;
+				}
+			} );
+
+			return show;
 		},
 
 		/**
