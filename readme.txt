@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 3.0.10
+Stable tag: 3.0.11
 
 License: GPLv2 or later
 
@@ -23,6 +23,13 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.11 (26 October 2016) =
+
+*Bugs:*
+
+* Fixed a bug that was introduced in version 3.0.10 that caused rows with empty columns to be removed.
+* Sometimes column widths were totalling over 100%. This caused fields to wrap around to a new row.
 
 = 3.0.10 (17 October 2016) =
 
