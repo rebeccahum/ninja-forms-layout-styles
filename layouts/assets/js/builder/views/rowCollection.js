@@ -21,6 +21,26 @@ define( ['views/rowItem'], function( RowItemView ) {
 		},
 
 		/**
+		 * Remove any rows that are completely empty.
+		 * 
+		 * @since  3.0
+		 * @param  {Backbone.Model} 		rowModel
+		 * @param  {int} index
+		 * @param  {Backbone.Collection} 	rowCollection [description]
+		 * @return {bool}					Should this row be output in the collection view?
+		 */
+		filter: function( rowModel, index, rowCollection ) {
+			var show = false;
+			_.each( rowModel.get( 'cells' ).models, function( cell ) {
+				if ( 0 != cell.get( 'fields' ).length ) {
+					show = true;
+				}
+			} );
+
+			return show;
+		},
+
+		/**
 		 * When we render this view, init our rows collection sortable.
 		 * 
 		 * @since  3.0
