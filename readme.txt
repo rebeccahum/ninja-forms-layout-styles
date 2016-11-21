@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 3.0.11
+Stable tag: 3.0.12
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.12 (21 November 2016) =
+
+*Bugs:*
+
+* Field styles should apply properly on the front-end in all cases.
 
 = 3.0.11 (26 October 2016) =
 
