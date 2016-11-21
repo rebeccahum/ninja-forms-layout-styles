@@ -475,7 +475,11 @@ final class NF_Styles
         $styles = array();
         foreach( $fields as $field ){
 
-            if( isset( $field[ 'settings' ] ) ) $field = array_merge( $field, $field[ 'settings' ] );
+            if( is_object( $field ) ){
+                $field->get_settings(); // Initialize object settigns.
+            } else {
+                if (isset($field['settings'])) $field = array_merge($field, $field['settings']);
+            }
 
             foreach( $field_settings_groups as $field_settings_group ){
 
