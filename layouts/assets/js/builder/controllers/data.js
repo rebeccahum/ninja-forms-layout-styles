@@ -8,6 +8,12 @@ define( [ 'models/rowCollection' ], function( RowCollection ) {
 		initialize: function() {
 			// Respond to requests to add a row to our collection.
 			nfRadio.channel( 'layouts' ).reply( 'add:row', this.addRow, this );
+
+			/*
+			 * After we init our form in the builder, we need to check for items in the field collection that don't appear in the formContentData.
+			 * NOTE: We only need to do this if Multi-Part isn't enabled.
+			 */
+			this.listenTo( nfRadio.channel( 'main' ), 'render:main', this.checkBadData );
 		},
 
 		addRow: function( rowCollection, data ) {
@@ -68,6 +74,48 @@ define( [ 'models/rowCollection' ], function( RowCollection ) {
 
 		getOverCell: function() {
 			return this.overCell;
+		},
+
+		/**
+		 * Loop through our fields and make sure that they are in our formContentData.
+		 * If they aren't, delete them and update the database.
+		 *
+		 * NOTE: If Multi-Part is enabled, we don't need to run this.
+		 * 
+		 * @since  3.0.8
+		 * @return void
+		 */
+		checkBadData: function( app ) {
+			/*
+			 * TODO: Bandaid fix for making sure that we interpret fields correclty when Multi-Part is active.
+			 * Basically, if MP is active, we don't want to ever use the nfLayouts.rows.
+			 */
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+			var mpEnabled = ( 'undefined' != typeof formContentLoadFilters[1] ) ? true : false;
+			if ( mpEnabled ) {
+				return false;
+			}
+
+			var formContentData = nfRadio.channel( 'settings' ).request( 'get:setting', 'formContentData' );
+			var formContentDataString = JSON.stringify( formContentData );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			var needToUpdate = false;
+
+			fieldCollection.each( function( fieldModel ) {
+				if ( 'undefined' == typeof fieldModel ) {
+					return false;
+				}
+
+				if ( -1 == formContentDataString.indexOf( '"key":"' + fieldModel.get( 'key' ) + '"' ) ) {
+					fieldCollection.remove( fieldModel );
+					needToUpdate = true;
+				}
+			} );
+
+			if ( needToUpdate ) {
+				nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
+				nfRadio.channel( 'app' ).request( 'update:db', 'publish' );				
+			}
 		}
 	});
 
