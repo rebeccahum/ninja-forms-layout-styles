@@ -286,7 +286,7 @@ define( [], function() {
 		 */
 		receiveNewField: function( e, ui, cellView, sortable ) {
 			// Get our type string
-			var type = jQuery( ui.item ).data( 'id' );
+			var type = nfRadio.channel( 'fields' ).request( 'get:type', jQuery( ui.item ).data( 'id' ) );
 			/*
 			 * Add a field.
 			 * Passing the cid of our current cell model causes the field to be added to our cell.

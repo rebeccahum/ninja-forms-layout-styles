@@ -135,7 +135,8 @@ define( [], function() {
 		 */
 		dropNewField: function( e, ui, rowView, droppable, newCell ) {
 			// Get our type string
-			var type = jQuery( ui.draggable ).data( 'id' );
+			var type = nfRadio.channel( 'fields' ).request( 'get:type', jQuery( ui.draggable ).data( 'id' ) );
+			
 			// Add a field (returns the tmp ID )
 			var newModel = this.addField( type, newCell, false );
 			// Remove our dragged element.
