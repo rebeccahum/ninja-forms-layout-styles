@@ -189,7 +189,7 @@ define( [], function() {
 			// Get the location where we've dropped the item.	
 			var order = ui.helper.index() + 1;
 			// Get our type string
-			var type = nfRadio.channel( 'fields' ).request( 'get:type', jQuery( ui.item ).data( 'id' ) );
+			var type = jQuery( ui.item ).data( 'id' );
 			// Add a new field for our type, returning its tmp id.
 			var fieldModel = this.addField( type, order, true );
 
