@@ -3,8 +3,8 @@ Contributors: kstover, jameslaws, kbjohnson90
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.4
-Tested up to: 4.6.1
-Stable tag: 3.0.12
+Tested up to: 4.7.1
+Stable tag: 3.0.13
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.13 (19 January 2016) =
+
+*Bugs:*
+
+* Saved fields can now be properly dragged onto rows and dividers.
 
 = 3.0.12 (21 November 2016) =
 
