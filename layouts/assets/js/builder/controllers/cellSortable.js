@@ -5,6 +5,7 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		// By default, we aren't dropping on a gutter/divider
 		dropping: false,
+		received: false,
 
 		initialize: function() {
 			/*
@@ -164,9 +165,19 @@ define( [], function() {
 			/*
 			 * Both the receive event above and the update event are fired when we drag items from one list to another.
 			 * We only want to fire this event if we are dragging within the same list.
+			 *
+			 * Also, if we're dragging a saved field, make sure that receive is triggered.
 			 */
-			if ( sortable === ui.item.parent()[0]) { // Make sure that we are dragging within the same list
-				var fieldID = jQuery( ui.item ).data( 'id' );
+			var fieldID = jQuery( ui.item ).data( 'id' );
+			var type = nfRadio.channel( 'fields' ).request( 'get:type', fieldID );
+
+			if ( 'undefined' !== typeof type && ! this.received ) {
+				this.receive( e, ui, cellView, sortable );
+				this.received = false;
+				return false;
+			}
+
+			if ( sortable === ui.item.parent()[0] && 'undefined' == typeof type ) { // Make sure that we are dragging within the same list
 				var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', fieldID );
 
 				// Get our sortable order.
@@ -227,6 +238,7 @@ define( [], function() {
 
 				var newChange = nfRadio.channel( 'changes' ).request( 'register:change', 'cellSorting', fieldModel, null, label, data );
 			}
+			this.received = false;
 		},
 
 		/**
@@ -256,10 +268,10 @@ define( [], function() {
 				return false;
 			}
 
-			if( jQuery( ui.item ).hasClass( 'nf-field-wrap' ) ) { // An item from another cell sortable.
-				this.receiveCurrentField( e, ui, cellView, sortable );
-			} else if ( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) { // New Field Type Draggable
+			if ( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) { // New Field Type Draggable
 				this.receiveNewField( e, ui, cellView, sortable );
+			} else if ( jQuery( ui.item ).hasClass( 'nf-field-wrap' ) ) { // An item from another cell sortable.
+				this.receiveCurrentField( e, ui, cellView, sortable );
 			} else { // Staging
 				this.receiveFieldStaging( e, ui, cellView, sortable );						
 			}
@@ -268,7 +280,9 @@ define( [], function() {
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 			// Update our preview
-			nfRadio.channel( 'app' ).request( 'update:db' );			
+			nfRadio.channel( 'app' ).request( 'update:db' );
+
+			this.received = true;		
 		},
 
 		/**
@@ -304,6 +318,10 @@ define( [], function() {
 			nfRadio.channel( 'fields' ).trigger( 'drop:fieldType', type, newModel );
 			// Remove the helper. Gets rid of a weird type artifact.
 			jQuery( ui.helper ).remove();
+			if ( null === ui.helper ) {
+				jQuery( ui.item ).remove();
+			}
+
 			/**
 			 * TODO: Add in support for undoing adding a new field.
 			 */
