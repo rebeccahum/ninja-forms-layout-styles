@@ -84,7 +84,11 @@ define( ['views/rowCollection', 'controllers/loadControllers', 'models/rowCollec
 				/* 
 				 * Get our layout data from inside MP
 				 */
+				
 				formContentData = _.flatten( _.pluck( formContentData, 'formContentData' ) );
+				_.each( formContentData, function( row, index ) {
+					row.order = index + 1;
+				}, this );
 			}
 
 			if ( _.isArray( formContentData ) && 0 != formContentData.length && 'undefined' == typeof formContentData[0].cells ) {
