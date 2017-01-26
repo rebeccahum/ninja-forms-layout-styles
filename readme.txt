@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.4
 Tested up to: 4.7.1
-Stable tag: 3.0.13
+Stable tag: 3.0.14
 
 License: GPLv2 or later
 
@@ -24,7 +24,13 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 
 == Changelog ==
 
-= 3.0.13 (19 January 2016) =
+= 3.0.14 (26 January 2017) =
+
+*Changes:*
+
+* Added a filter for Ninja Forms version 3.0.25 that allows Layout & Styles to correctly order fields in submissions.
+
+= 3.0.13 (19 January 2017) =
 
 *Bugs:*
 
