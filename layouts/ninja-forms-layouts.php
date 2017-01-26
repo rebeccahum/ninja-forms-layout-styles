@@ -42,6 +42,11 @@ final class NF_Layouts
     {
         add_action( 'nf_admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
         add_action( 'nf_display_enqueue_scripts', array( $this, 'display_scripts' ) );
+
+        /* 
+         * We need to sort fields in a different order than core.
+         */
+        add_filter( 'ninja_forms_get_fields_sorted', array( $this, 'filter_field_order' ), 10, 4 );
     }
 
     public function admin_scripts()
@@ -67,13 +72,13 @@ final class NF_Layouts
         foreach( $form->get_fields() as $field ) {
             $rows[] = array(
                 'order' => absint( $field->get_setting( 'order' ) ),
-                'cells'	=> array(
+                'cells' => array(
                     array(
                         'order' => 0,
-                        'fields'	=> array(
+                        'fields'    => array(
                             $field->get_setting( 'key' )
                         ),
-                        'width'		=> '100'
+                        'width'     => '100'
                     )
                 )
             );
@@ -174,5 +179,57 @@ final class NF_Layouts
         if ( ! class_exists( 'NF_Extension_Updater' ) ) return;
 
         new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
+    }
+
+    public function filter_field_order( $order, $fields, $fields_by_key, $form_id ) {
+        $form = Ninja_Forms()->form( $form_id )->get();
+        $formContentData = $form->get_setting( 'formContentData' );
+        
+        $new_order = array();
+
+        // If Not a Multi-Part Form, return original order.
+        if( ! $formContentData ) return $order;
+
+        if ( isset ( $formContentData[0][ 'cells' ] ) ) {
+            /*
+             * If we don't have Multi-Part data, general decode.
+             */            
+            foreach( $formContentData as $row ) {
+                foreach ( $row['cells'] as $cell ) {
+                     foreach ( $cell[ 'fields' ] as $field_key ) {
+                        $field = $fields_by_key[ $field_key ];
+                        $new_order[ $field->get_id() ] = $field;
+                    }
+                }
+            }
+        } else {
+            /* 
+             * If we have Multi-Part data, decode that.
+             */            
+            foreach( $formContentData as $part ) {
+                $part_content = $part[ 'formContentData' ];
+
+                /*
+                 * If we have part_content['cells'], then we know we're dealing with Layout & Styles data.
+                 */
+                if ( isset ( $part_content[ 0 ][ 'cells' ] ) ) {
+                    foreach ( $part_content as $row ) {
+                        foreach ( $row['cells'] as $cell ) {
+                             foreach ( $cell[ 'fields' ] as $field_key ) {
+                                $field = $fields_by_key[ $field_key ];
+                                $new_order[ $field->get_id() ] = $field;
+                            }
+                        }
+                    }
+                } else {
+                    foreach ( $part_content as $field_key ) {
+                        $field = $fields_by_key[ $field_key ];
+                        $new_order[ $field->get_id() ] = $field;
+                    }
+                }
+            }
+        }
+
+        return $new_order;
     }
 }
