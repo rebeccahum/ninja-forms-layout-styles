@@ -20,6 +20,11 @@ define( [], function( ) {
 			this.listenTo( this.cellModel.collection.rowModel.collection, 'validate:fields', this.validateFields );
 			this.listenTo( this.cellModel.collection.rowModel.collection, 'show:fields', this.showFields );
 			this.listenTo( this.cellModel.collection.rowModel.collection, 'hide:fields', this.hideFields );
+		
+			var fieldCollection = this.cellModel.collection.formModel.get( 'fields' );
+
+			// When we remove a model from our main field collection, make sure it's removed from this collection as well.
+			fieldCollection.on( 'reset', this.resetCollection, this );
 		},
 
 		validateFields: function() {
@@ -34,6 +39,25 @@ define( [], function( ) {
 
 		hideFields: function() {
 			this.invoke( 'set', { visible: false } );
+		},
+
+		/**
+		 * When we reset our main field collection, we need to reset any of those fields in this collection.
+		 * 
+		 * @since  3.0.12
+		 * @param  Backbone.Collection 		collection
+		 * @return void
+		 */
+		resetCollection: function( collection ) {
+			var fieldModels = [];
+			_.each( this.models, function( fieldModel ) {
+				if ( 'submit' != fieldModel.get( 'type' ) ) {
+					fieldModels.push( collection.findWhere( { key: fieldModel.get( 'key' ) } ) );
+				} else {
+					fieldModels.push( fieldModel );
+				}
+			} );
+			this.reset( fieldModels );
 		}
 
 	} );
