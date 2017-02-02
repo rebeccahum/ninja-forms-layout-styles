@@ -43,7 +43,7 @@ final class NF_Layouts
         add_action( 'nf_admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
         add_action( 'nf_display_enqueue_scripts', array( $this, 'display_scripts' ) );
 
-        /* 
+        /*
          * We need to sort fields in a different order than core.
          */
         add_filter( 'ninja_forms_get_fields_sorted', array( $this, 'filter_field_order' ), 10, 4 );
@@ -184,7 +184,7 @@ final class NF_Layouts
     public function filter_field_order( $order, $fields, $fields_by_key, $form_id ) {
         $form = Ninja_Forms()->form( $form_id )->get();
         $formContentData = $form->get_setting( 'formContentData' );
-        
+
         $new_order = array();
 
         // If Not a Multi-Part Form, return original order.
@@ -193,20 +193,23 @@ final class NF_Layouts
         if ( isset ( $formContentData[0][ 'cells' ] ) ) {
             /*
              * If we don't have Multi-Part data, general decode.
-             */            
+             */
             foreach( $formContentData as $row ) {
                 foreach ( $row['cells'] as $cell ) {
                      foreach ( $cell[ 'fields' ] as $field_key ) {
                         $field = $fields_by_key[ $field_key ];
-                        $new_order[ $field->get_id() ] = $field;
+                        $field_id = ( is_object( $field ) ) ? $field->get_id() : $field[ 'id' ];
+                        $new_order[ $field_id ] = $field;
                     }
                 }
             }
         } else {
-            /* 
+            /*
              * If we have Multi-Part data, decode that.
-             */            
+             */
             foreach( $formContentData as $part ) {
+
+                if( ! isset( $part[ 'formContentData' ] ) ) continue;
                 $part_content = $part[ 'formContentData' ];
 
                 /*
@@ -217,14 +220,16 @@ final class NF_Layouts
                         foreach ( $row['cells'] as $cell ) {
                              foreach ( $cell[ 'fields' ] as $field_key ) {
                                 $field = $fields_by_key[ $field_key ];
-                                $new_order[ $field->get_id() ] = $field;
+                                $field_id = ( is_object( $field ) ) ? $field->get_id() : $field[ 'id' ];
+                                $new_order[ $field_id ] = $field;
                             }
                         }
                     }
                 } else {
                     foreach ( $part_content as $field_key ) {
                         $field = $fields_by_key[ $field_key ];
-                        $new_order[ $field->get_id() ] = $field;
+                        $field_id = ( is_object( $field ) ) ? $field->get_id() : $field[ 'id' ];
+                        $new_order[ $field_id ] = $field;
                     }
                 }
             }
