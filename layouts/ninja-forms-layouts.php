@@ -70,18 +70,20 @@ final class NF_Layouts
         $rows = array();
         $form = Ninja_Forms()->form( $form_id );
         foreach( $form->get_fields() as $field ) {
-            $rows[] = array(
-                'order' => absint( $field->get_setting( 'order' ) ),
-                'cells' => array(
-                    array(
-                        'order' => 0,
-                        'fields'    => array(
-                            $field->get_setting( 'key' )
-                        ),
-                        'width'     => '100'
+            if ( ! is_null( $field ) && is_object( $field ) ) {
+                $rows[] = array(
+                    'order' => absint( $field->get_setting( 'order' ) ),
+                    'cells' => array(
+                        array(
+                            'order' => 0,
+                            'fields'    => array(
+                                $field->get_setting( 'key' )
+                            ),
+                            'width'     => '100'
+                        )
                     )
-                )
-            );
+                );
+            }
         }
         wp_localize_script( 'nf-layout-builder', 'nfLayouts', array( 'rows' => $rows ) );
     }
