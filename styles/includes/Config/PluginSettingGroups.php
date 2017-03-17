@@ -25,6 +25,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'required-message' => array(
                 'name' => 'required-message',
                 'label' => __( 'Required Message Styles', 'ninja-forms-layout-styles' ),
+                'selector' => '.nf-form-fields-required'
             ),
             'row' => array(
                 'name' => 'row',
@@ -97,7 +98,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
         'sections' => array(
             'error_msg' => array(
                 'name' => 'error_msg',
-                'label' => __( 'Error Message Main Wrap Styles', 'ninja-forms-layout-styles' ),
+                'label' => __( 'Main Error Message Wrap Styles', 'ninja-forms-layout-styles' ),
                 'selector' => '.nf-form-errors .nf-error-msg'
             ),
             'field_error_wrap' => array(
@@ -113,7 +114,7 @@ return apply_filters( 'ninja_forms_styles_setting_groups', array(
             'field_error_element' => array(
                 'name' => 'field_error_element',
                 'label' => __( 'Error Element Styles', 'ninja-forms-layout-styles' ),
-                'selector' => '.nf-error .nf-field-element .ninja_forms_field'
+                'selector' => '.nf-error .nf-field-element .nf-element'
             ),
             'field_error_msg' => array(
                 'name' => 'field_error_msg',

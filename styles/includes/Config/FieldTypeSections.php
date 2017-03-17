@@ -9,7 +9,9 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'except' => array(
             'hr',
             'html',
-            'passwordconfirm'
+            'password',
+            'passwordconfirm',
+            'file_upload'
         )
     ),
     
@@ -21,7 +23,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
             'hr',
             'html',
             'password',
-            'passwordconfirm'
+            'passwordconfirm',
+            'file_upload'
         )
     ),
     
@@ -34,7 +37,14 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
             'html',
             'starrating',
             'password',
-            'passwordconfirm'
+            'passwordconfirm',
+            'checkbox',
+            'listcheckbox',
+            'listradio',
+            'terms',
+            'mailchimp-optin',
+            'recaptcha',
+            'file_upload'
         )
     ),
 
@@ -65,7 +75,8 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'selector' => 'li',
         'only' => array(
             'listcheckbox',
-            'listradio'
+            'listradio',
+            'terms'
         )
     ),
 
@@ -75,19 +86,22 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'selector' => 'li label',
         'only' => array(
             'listcheckbox',
-            'listradio'
+            'listradio',
+            'terms'
         )
     ),
 
-    'list-item-element' => array(
+    // Removed these because I'm fairly certian they're not being applied anyway.
+    /*'list-item-element' => array(
         'name' => 'list-item-element',
         'label' => __( 'List Item Element', 'ninja-forms-layout-styles' ),
-        'selector' => 'li label',
+        'selector' => 'li input',
         'only' => array(
             'listcheckbox',
-            'listradio'
+            'listradio',
+            'terms'
         )
-    ),
+    ),*/
 
     /*
     |--------------------------------------------------------------------------
@@ -98,7 +112,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'rating-item' => array(
         'name' => 'rating-item',
         'label' => __( 'Item', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.starrating-wrap .star',
         'only' => array(
             'starrating',
         )
@@ -107,7 +121,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'rating-item-hover' => array(
         'name' => 'rating-item-hover',
         'label' => __( 'Item Hover', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.starrating-wrap .tmp_fs',
         'only' => array(
             'starrating',
         )
@@ -116,13 +130,14 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'rating-item-selected' => array(
         'name' => 'rating-item-selected',
         'label' => __( 'Item Selected', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.starrating-wrap .fullStar',
         'only' => array(
             'starrating',
         )
     ),
 
-    'rating-cancel' => array(
+    // Not currently using these...
+    /*'rating-cancel' => array(
         'name' => 'rating-cancel',
         'label' => __( 'Cancel', 'ninja-forms-layout-styles' ),
         'selector' => '',
@@ -138,8 +153,23 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'only' => array(
             'starrating',
         )
-    ),
+    ),*/
 
+    /*
+    |--------------------------------------------------------------------------
+    | Product Specific Sections
+    |--------------------------------------------------------------------------
+     */
+
+    'product-quantity' => array(
+        'name' => 'product-quantity',
+        'label' => __( 'Quantity', 'ninja-forms-layout-styles' ),
+        'selector' => '.nf-product-field .nf-product-quantity .nf-element',
+        'only' => array(
+            'product',
+        )
+    ),
+    
     /*
     |--------------------------------------------------------------------------
     | Password Specific Sections
@@ -149,7 +179,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'password-wrap' => array(
         'name' => 'password-wrap',
         'label' => __( 'Wrap', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.password-wrap',
         'only' => array(
             'password',
         )
@@ -158,7 +188,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'password-label' => array(
         'name' => 'password-label',
         'label' => __( 'Label', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.password-wrap .nf-field-label label',
         'only' => array(
             'password',
         )
@@ -167,7 +197,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'password-element' => array(
         'name' => 'password-element',
         'label' => __( 'Field', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.password-wrap .nf-field-element .nf-element',
         'only' => array(
             'password',
         )
@@ -176,7 +206,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'confirm-wrap' => array(
         'name' => 'confirm-wrap',
         'label' => __( 'Wrap', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.passwordconfirm-wrap',
         'only' => array(
             'passwordconfirm',
         )
@@ -185,7 +215,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'confirm-label' => array(
         'name' => 'confirm-label',
         'label' => __( 'Label', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.passwordconfirm-wrap .nf-field-label label',
         'only' => array(
             'passwordconfirm',
         )
@@ -194,13 +224,14 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'confirm-element' => array(
         'name' => 'confirm-element',
         'label' => __( 'Field', 'ninja-forms-layout-styles' ),
-        'selector' => '',
+        'selector' => '.passwordconfirm-wrap .nf-field-element .nf-element',
         'only' => array(
             'passwordconfirm',
         )
     ),
 
-    'strength-indicator' => array(
+    // Not currently using these...
+    /*'strength-indicator' => array(
         'name' => 'strength-indicator',
         'label' => __( 'Strength Indicator', 'ninja-forms-layout-styles' ),
         'selector' => '',
@@ -252,7 +283,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
         'only' => array(
             'password',
         )
-    ),
+    ),*/
 
     /*
     |--------------------------------------------------------------------------
@@ -263,7 +294,7 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     'hr-element' => array(
         'name' => 'hr-element',
         'label' => __( 'Element', 'ninja-forms-layout-styles' ),
-        'selector' => '.nf-field-element .ninja-forms-field:hover',
+        'selector' => '.nf-field-element .ninja-forms-field',
         'only' => array(
             'hr'
         )
@@ -275,13 +306,73 @@ return apply_filters( 'ninja_forms_styles_field_type_section', array(
     |--------------------------------------------------------------------------
     */
 
-    'desc_field' => array(
-        'name' => 'desc_field',
+    'html_element' => array(
+        'name' => 'html_element',
         'label' => __( 'Element', 'ninja-forms-layout-styles' ),
-        'selector' => '.nf-field-element .ninja-forms-field:hover',
+        'selector' => '.html-wrap .nf-field-element',
         'only' => array(
             'html'
         )
     ),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | File Uploads Sections
+    |--------------------------------------------------------------------------
+     */
+    
+    'upload_wrap' => array(
+        'name' => 'upload_wrap',
+        'label' => __( 'Wrap', 'ninja-forms-layout-styles' ),
+        'selector' => '.file_upload-wrap',
+        'only' => array(
+            'file_upload'
+        )
+    ),
+    
+    'upload_label' => array(
+        'name' => 'upload_label',
+        'label' => __( 'Label', 'ninja-forms-layout-styles' ),
+        'selector' => '.file_upload-wrap .nf-field-label label',
+        'only' => array(
+            'file_upload'
+        )
+    )
+    
+    /*'upload_element' => array(
+        'name' => 'upload_element',
+        'label' => __( 'Element', 'ninja-forms-layout-styles' ),
+        'selector' => '.file_upload-wrap .nf-field-element button.fileinput-button',
+        'only' => array(
+            'file_upload'
+        )
+    ),
+    
+    'upload_hover' => array(
+        'name' => 'upload_hover',
+        'label' => __( 'Element Hover', 'ninja-forms-layout-styles' ),
+        'selector' => '.file_upload-wrap .nf-field-element .btn:hover',
+        'only' => array(
+            'file_upload'
+        )
+    ),
+    
+    'upload_progress' => array(
+        'name' => 'upload_progress',
+        'label' => __( 'Progress Bar', 'ninja-forms-layout-styles' ),
+        'selector' => '.file_upload-wrap .nf-field-element .progress .progress-bar',
+        'only' => array(
+            'file_upload'
+        )
+    ),
+    
+    'upload_files' => array(
+        'name' => 'upload_files',
+        'label' => __( 'File List', 'ninja-forms-layout-styles' ),
+        'selector' => '.file_upload-wrap .nf-field-element .files_uploaded',
+        'only' => array(
+            'file_upload'
+        )
+    )*/
 
 ));

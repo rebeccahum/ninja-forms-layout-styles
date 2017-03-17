@@ -15,7 +15,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Breadcrumb Container Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-breadcrumbs',
+        'selector' => '.nf-form-content .nf-mp-header .nf-breadcrumbs',
     ),
 
     'breadcrumb_buttons_styles' => array(
@@ -23,7 +23,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Breadcrumb Buttons Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-breadcrumb',
+        'selector' => '.nf-breadcrumbs li a.nf-breadcrumb',
     ),
 
     'breadcrumb_button_hover_styles' => array(
@@ -31,7 +31,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Breadcrumb Button Hover Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => 'nf-breadcrumb:hover',
+        'selector' => '.nf-breadcrumbs li a.nf-breadcrumb:hover',
     ),
 
     'breadcrumb_active_button_styles' => array(
@@ -39,7 +39,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Breadcrumb Active Button Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.active .nf-breadcrumb',
+        'selector' => '.nf-breadcrumbs .active > .nf-breadcrumb',
     ),
 
     'progress_bar_container_styles' => array(
@@ -47,7 +47,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Progress Bar Container Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-mp-header progress::-webkit-progress-bar, .nf-mp-header progress::-moz-progress-bar',
+        'selector' => '.nf-mp-header .nf-progress-container',
     ),
 
     'progress_bar_fill_styles' => array(
@@ -55,7 +55,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Progress Bar Fill Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-mp-header progress::-webkit-progress-value, .nf-mp-header progress::-moz-progress-value',
+        'selector' => '.nf-mp-header .nf-progress',
     ),
 
     'part_titles_styles' => array(
@@ -71,7 +71,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Navigation Container Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-next-previous',
+        'selector' => '.nf-mp-footer .nf-next-previous',
     ),
 
     'previous_button_styles' => array(
@@ -79,7 +79,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Previous Button Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-previous',
+        'selector' => '.nf-previous-item > .nf-previous',
     ),
 
     'next_button_styles' => array(
@@ -87,7 +87,7 @@ return array(
         'type' => 'fieldset',
         'label' => __( 'Next Button Styles', 'ninja-forms-layout-styles' ),
         'width' => 'full',
-        'selector' => '.nf-next',
+        'selector' => '.nf-next-item .nf-next',
     ),
 
     'navigation_hover_styles' => array(

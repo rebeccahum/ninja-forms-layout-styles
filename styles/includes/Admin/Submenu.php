@@ -149,14 +149,22 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
         $plugin_settings = Ninja_Forms()->get_setting( 'style' );
         
-        list( $section, $subsection ) = explode( '_', $section );
+        if( false !== strpos( $section, 'file_upload' ) ) {
+            $stack = explode( '_', $section );
+            $section = '_' . $stack[1];
+            $subsection = $stack[3];
+        } else {
+            list( $section, $subsection ) = explode( '_', $section );
+        }
 
         $section = apply_filters( 'ninja_forms_style_field_type', $section );
 
-        if( 'html' == $section ) {
+        // TODO: What is this block of code for?
+        // Seems unnecessary.
+        /*if( 'html' == $section ) {
             $section = '_desc';
             $subsection = 'desc_field';
-        }
+        }*/
 
         if( isset( $plugin_settings[ $tab ][ $section ][ $subsection ][ $name ] ) ){
             $value = $plugin_settings[ $tab ][ $section ][ $subsection ][ $name ];
@@ -168,8 +176,13 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
     public function filter_get_plugin_setting_name( $name, $tab, $section, $name_raw )
     {
         if( 'field_type' != $tab ) return $name;
-
-        list( $section, $subsection ) = explode( '_', $section );
+        if( 'false' !== strpos( $section, 'file_upload' ) ) {
+            $stack = explode( '_', $section );
+            $section = '_' . $stack[1];
+            $subsection = $stack[3];
+        } else {
+            list( $section, $subsection ) = explode( '_', $section );
+        }
 
         $section = apply_filters( 'ninja_forms_style_field_type', $section );
 

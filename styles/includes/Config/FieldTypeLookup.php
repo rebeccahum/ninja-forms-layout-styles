@@ -14,5 +14,6 @@ return array(
     'starrating' => '_rating',
     'listcountry' => '_country',
     'number' => '_number',
-    'hr' => '_hr'
+    'hr' => '_hr',
+    'file_upload' => '_upload'
 );

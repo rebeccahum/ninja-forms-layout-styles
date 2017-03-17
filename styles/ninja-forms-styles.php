@@ -59,6 +59,7 @@ final class NF_Styles
 
 
         add_filter( 'ninja_forms_styles_output_rule_border', array( $this, 'filter_output_rule_border' ) );
+        add_filter( 'ninja_forms_styles_apply_standard_units', array( $this, 'apply_standard_units' ) );
 
         add_action( 'ninja_forms_save_form', array( $this, 'bust_form_styles_cache' ), 10, 1 );
         add_action( 'ninja_forms_save_form', array( $this, 'bust_field_styles_cache' ), 10, 1 );
@@ -103,6 +104,23 @@ final class NF_Styles
 
             foreach( self::config( 'CommonSettings' ) as $common_setting ){
 
+                switch( $name ){
+                    case 'container_styles':
+                        $blacklist = array( 'color', 'font-size', 'width' );
+                        break;
+                    case 'row_styles':
+                    case 'odd_styles':
+                        $blacklist = array( 'height', 'color' );
+                        break;
+                    case 'error_msg_styles':
+                        $blacklist = array( 'height' );
+                        break;
+                    default:
+                        $blacklist = array();
+                }
+
+                if( in_array( $common_setting[ 'name' ], $blacklist ) ) continue;
+
                 if( 'float' == $common_setting[ 'name' ] && in_array( $form_setting[ 'name' ], array( 'row_styles', 'row-odd_styles', 'success-msg_styles', 'error_msg_styles' ) ) ){
                     continue;
                 }
@@ -136,18 +154,50 @@ final class NF_Styles
         $style_settings = self::config( 'FieldSettings' );
 
         if( 'list' == $field_parent_type ){
-            $style_settings = array_merge( $style_settings, self::config( 'ListFieldSettings' ) );
+            if( 'listselect' != $field_type && 'listmultiselect' != $field_type ) {
+                $style_settings = array_merge( $style_settings, self::config( 'ListFieldSettings' ) );
+            }
+        }
+        
+        if('starrating' == $field_type ){
+            $style_settings = array_merge( $style_settings, self::config( 'RatingFieldSettings' ) );
         }
 
         if( 'submit' == $field_type ){
             $style_settings = array_merge( $style_settings, self::config( 'ButtonFieldSettings' ) );
+            if( isset( $style_settings[ 'label_styles' ] ) ){
+                unset( $style_settings[ 'label_styles' ] );
+            }
         }
 
         foreach( $style_settings as $name => $style_setting ){
 
             $style_setting[ 'group' ] = 'styles';
 
+            if( 'recaptcha' == $field_type && 'element_styles' == $name ) continue;
+            if( 'hr' == $field_type && 'label_styles' == $name ) continue;
+
             foreach( self::config( 'CommonSettings' ) as $common_setting ){
+
+                switch( $name ){
+                    case 'wrap_styles':
+                        $blacklist = array( 'color', 'font-size', 'height' );
+                        break;
+                    case 'label_styles':
+                    case 'element_styles':
+                    case 'submit_element_hover_styles':
+                        $blacklist = array( 'height' );
+                        break;
+                    default:
+                        $blacklist = array();
+                }
+
+                if( 'hr' == $field_type && 'element_styles' == $name ){
+                    $blacklist = array_merge( $blacklist, array( 'color', 'font-size', 'padding') );
+                    if( isset( $blacklist[ 'height' ] ) ) unset( $blacklist[ 'height' ] );
+                }
+
+                if( in_array( $common_setting[ 'name' ], $blacklist ) ) continue;
 
                 $common_setting[ 'name' ] = $name . '_' . $common_setting[ 'name' ];
 
@@ -393,7 +443,7 @@ final class NF_Styles
             }
         }
 
-        
+
         ob_start();
         $this->localize_styles( $styles, 'Plugin Wide Styles' );
         $output = ob_get_clean();
@@ -468,6 +518,10 @@ final class NF_Styles
         $field_settings_groups = self::config( 'FieldSettings' );
 
         $field_settings_groups = array_merge( $field_settings_groups, self::config( 'ButtonFieldSettings' ) );
+        
+        $field_settings_groups = array_merge( $field_settings_groups, self::config( 'ListFieldSettings' ) );
+        
+        $field_settings_groups = array_merge( $field_settings_groups, self::config( 'RatingFieldSettings' ) );
 
 
         $common_settings = self::config( 'CommonSettings' );
@@ -542,7 +596,7 @@ final class NF_Styles
                                     $styles[ str_replace( '.ninja-forms-field', '', $selector ) . ' .nf-field-element label::after' ][ 'color' ] = $field_setting;
                                 }
                         }
-                        
+
                         if( 'listselect' == $field_type ){
                             switch ($rule) {
                                 case 'background-color':
@@ -622,6 +676,7 @@ final class NF_Styles
     private function localize_styles( $styles, $title = '' )
     {
         // $styles[ $selector ][ $element ] = $style;
+        $styles = apply_filters( 'ninja_forms_styles_apply_standard_units', $styles );
         if( $styles ) self::template( 'display-form-styles.css.php', compact( 'styles', 'title' ) );
     }
 
@@ -638,6 +693,39 @@ final class NF_Styles
     public function bust_plugin_styles_cache( $style_settings )
     {
         delete_transient( 'ninja_forms_styles_plugin_styles' );
+    }
+    
+    /**
+     * Function to apply standard units to non-specific css rules.
+     * @param (Object) $styles[ $selector ][ $element ] = $style
+     * @return (Object) the filtered rules
+     */
+    public function apply_standard_units( $styles )
+    {
+        foreach( $styles as $style => $rules ){
+            foreach( $rules as $rule => $value ) {
+                $important = '';
+                if ( 'border' == $rule || 'height' == $rule || 'width' == $rule || 'margin' == $rule || 'padding' == $rule ) {
+                    if ( false !== strpos( $value, ' !important' ) ) {
+                        $value = substr( $value, 0, strpos( $value, ' !important' ) );
+                        $important = ' !important';
+                    }
+                    if ( is_numeric( $value ) ) {
+                        $styles[ $style ][ $rule ] = $value . 'px' . $important;
+                    }
+                }
+                elseif ( 'font-size' == $rule ) {
+                    if ( false !== strpos( $value, ' !important' ) ) {
+                        $value = substr( $value, 0, strpos( $value, ' !important' ) );
+                        $important = ' !important';
+                    }
+                    if ( is_numeric( $value ) ) {
+                        $styles[ $style ][ $rule ] = $value . 'pt' . $important;
+                    }
+                }
+            }
+        }
+        return $styles;
     }
 
     public function filter_output_rule_border( $rule )
@@ -756,7 +844,7 @@ final class NF_Styles
             'nf_import_export_styles'
         );
     }
-    
+
     /**
      * Output our import metabox content
      */
@@ -764,7 +852,7 @@ final class NF_Styles
          NF_Styles::template( 'admin-settings-import-metabox.html.php' );
     }
 
-    
+
     /**
      * Output our export metabox content
      */
@@ -774,7 +862,7 @@ final class NF_Styles
 
     /**
      * Handle import/export when the user clicks the appropriate button.
-     * 
+     *
      * @since  3.0
      * @return bool
      */
@@ -813,7 +901,7 @@ final class NF_Styles
              * If we have an array, update our style settings with the imported array.
              */
             if ( is_array( $import ) ) {
-               Ninja_Forms()->update_setting( 'style', $import ); 
+               Ninja_Forms()->update_setting( 'style', $import );
             }
         }
     }
@@ -865,7 +953,35 @@ final class NF_Styles
         foreach( $part_styles as &$part ){
             $part[ 'group' ] = 'styles';
 
+            switch( $part[ 'name' ] ){
+                case 'breadcrumb_container_styles':
+                case 'progress_bar_container_styles':
+                case 'navigation_container_styles':
+                    $blacklist = array( 'color', 'font-size' );
+                    break;
+                case 'progress_bar_fill_styles':
+                    $blacklist = array( 'color', 'font-size', 'width', 'display', 'float' );
+                    break;
+                case 'next_button_styles':
+                case 'previous_button_styles':
+                case 'navigation_hover_styles':
+                    $blacklist = array( 'display', 'float' );
+                    break;
+                default:
+                    $blacklist = array();
+            }
+
             foreach( self::config( 'CommonSettings' ) as $common_setting ) {
+
+                if( in_array( $common_setting[ 'name' ], $blacklist ) ) continue;
+
+                if ( isset ( $common_setting[ 'deps' ] ) ) {
+                    foreach( $common_setting[ 'deps' ] as $dep_name => $val ) {
+                        $common_setting[ 'deps' ][ $part[ 'name' ] . '_' . $dep_name ] = $val;
+                        unset( $common_setting[ 'deps' ][ $dep_name ] );
+                    }
+                }
+
                 $name =  $part[ 'name' ] . '_' . $common_setting[ 'name' ];
                 $part[ 'settings' ][ $name ] = $common_setting;
                 $part[ 'settings' ][ $name ][ 'name' ] = $name;
