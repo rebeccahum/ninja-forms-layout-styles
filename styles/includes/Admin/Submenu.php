@@ -176,7 +176,7 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
     public function filter_get_plugin_setting_name( $name, $tab, $section, $name_raw )
     {
         if( 'field_type' != $tab ) return $name;
-        if( 'false' !== strpos( $section, 'file_upload' ) ) {
+        if( false !== strpos( $section, 'file_upload' ) ) {
             $stack = explode( '_', $section );
             $section = '_' . $stack[1];
             $subsection = $stack[3];
