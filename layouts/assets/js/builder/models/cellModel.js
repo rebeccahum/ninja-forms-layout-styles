@@ -26,6 +26,7 @@ define( ['models/cellFieldCollection'], function( CellFieldCollection) {
 			if ( false === this.get( 'fields' ) instanceof Backbone.Collection ) {
 				this.set( 'fields', new CellFieldCollection( fieldModels, { cellModel: this } ) );
 			}
+            this.set( 'order', Number( this.get( 'order' ) ) );
 		}
 		
 	} );

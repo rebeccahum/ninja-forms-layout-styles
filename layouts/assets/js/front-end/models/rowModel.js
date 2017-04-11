@@ -10,6 +10,7 @@ define( ['models/cellCollection'], function( CellCollection ) {
 	var model = Backbone.Model.extend( {
 		initialize: function() {
 			this.set( 'cells', new CellCollection( this.get( 'cells' ), { rowModel: this, formModel: this.collection.formModel } ) );
+            this.set( 'order', Number( this.get( 'order' ) ) );
 			this.listenTo( this.get( 'cells' ), 'change:errors', this.triggerErrors );
 		},
 

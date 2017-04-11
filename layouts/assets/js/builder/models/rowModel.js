@@ -13,6 +13,7 @@ define( ['models/cellCollection'], function( CellCollection ) {
 			this.options = options;
 			this.set( 'cells', new CellCollection( this.get( 'cells' ), { rowModel: this } ) );
 			this.on( 'change:cells', this.checkEmptyCells, this );
+            this.set( 'order', Number( this.get( 'order' ) ) );
 		},
 
 		checkEmptyCells: function( model ) {

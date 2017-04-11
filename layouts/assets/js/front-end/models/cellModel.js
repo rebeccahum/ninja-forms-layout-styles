@@ -23,6 +23,7 @@ define( ['models/cellFieldCollection'], function( CellFieldCollection) {
 				
 			} );
 			this.set( 'fields', new CellFieldCollection( fieldModels, { cellModel: this } ) );
+            this.set( 'order', Number( this.get( 'order' ) ) );
 			this.listenTo( this.get( 'fields' ), 'change:errors', this.triggerErrors );
 		},
 
