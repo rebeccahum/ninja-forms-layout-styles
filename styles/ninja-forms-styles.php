@@ -7,7 +7,7 @@ if( class_exists( 'NF_Styles', false ) ) return;
  */
 final class NF_Styles
 {
-    const VERSION = '3.0.5';
+    const VERSION = '3.0.19';
     const SLUG    = 'styles';
     const NAME    = 'Styles';
     const AUTHOR  = 'WP Ninjas';
