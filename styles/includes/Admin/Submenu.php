@@ -41,6 +41,10 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
 
         $tab = ( isset( $_GET[ 'tab' ] ) ) ? WPN_Helper::sanitize_text_field( $_GET[ 'tab' ] ) : 'form_settings';
         $groups = NF_Styles::config( 'PluginSettingGroups' );
+        
+        if( ! class_exists( 'NF_MultiPart', false ) ) {
+            unset( $groups[ 'multipart_settings' ] );
+        }
 
         if( 'field_type' == $tab ) {
 
