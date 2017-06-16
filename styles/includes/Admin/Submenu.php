@@ -22,10 +22,8 @@ final class NF_Styles_Admin_Submenu extends NF_Abstracts_Submenu
         add_filter( 'ninja_forms_styles_get_plugin_style', array( $this, 'filter_get_plugin_style' ), 10, 4 );
         add_filter( 'ninja_forms_styles_get_plugin_setting_name', array( $this, 'filter_get_plugin_setting_name' ), 10, 4 );
 
-        if( defined( 'NF_DEV' ) && NF_DEV ){
-            if( isset( $_POST[ 'nuke_styles' ] ) && $_POST[ 'nuke_styles' ] ){
-                add_action( 'admin_init', array( $this, 'developer_nuke_styles' ) );
-            }
+        if( isset( $_POST[ 'nuke_styles' ] ) && $_POST[ 'nuke_styles' ] ){
+            add_action( 'admin_init', array( $this, 'developer_nuke_styles' ) );
         }
     }
 

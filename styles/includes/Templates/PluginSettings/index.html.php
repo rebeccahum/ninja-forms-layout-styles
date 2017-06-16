@@ -32,9 +32,11 @@
             <input type="hidden" name="update_ninja_forms_style_settings">
             <input type="submit" class="button button-primary" value="Save Settings">
 
-            <?php if( defined( 'NF_DEV' ) && NF_DEV ): ?>
-            <input type="submit" class="button button-default" name="nuke_styles" value="Clear All Styles">
-            <?php endif; ?>
+            <div style="float:right;">
+                <input
+                        onClick="return confirm('This will clear ALL styles. Are you sure?');"
+                        type="submit" class="button button-default" name="nuke_styles" value="Clear All Styles">
+            </div>
 
         </form>
     </div>
