@@ -2,9 +2,9 @@
 Contributors: kstover, jameslaws, kbjohnson90
 Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
-Requires at least: 4.4
-Tested up to: 4.7.3
-Stable tag: 3.0.19
+Requires at least: 4.6
+Tested up to: 4.8
+Stable tag: 3.0.20
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.20 (21 June 2017) =
+
+*Changes:*
+
+* Added a button to "remove all styles" from the plugin-wide styling section.
 
 = 3.0.19 (02 May 2017) =
 
