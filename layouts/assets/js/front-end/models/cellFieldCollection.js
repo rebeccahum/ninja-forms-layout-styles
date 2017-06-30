@@ -35,10 +35,16 @@ define( [], function( ) {
 
 		showFields: function() {
 			this.invoke( 'set', { visible: true } );
+            this.invoke( function() {
+                this.trigger( 'change:value', this );
+            });
 		},
 
 		hideFields: function() {
 			this.invoke( 'set', { visible: false } );
+            this.invoke( function() {
+                this.trigger( 'change:value', this );
+            });
 		},
 
 		/**
