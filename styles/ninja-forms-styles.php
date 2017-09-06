@@ -705,6 +705,9 @@ final class NF_Styles
         foreach( $styles as $style => $rules ){
             foreach( $rules as $rule => $value ) {
                 $important = '';
+                // To prevent PHP warnings in the output buffer,
+                // bail if our value is an array instead of a string.
+                if ( is_array( $value ) ) continue;
                 if ( 'border' == $rule || 'height' == $rule || 'width' == $rule || 'margin' == $rule || 'padding' == $rule ) {
                     if ( false !== strpos( $value, ' !important' ) ) {
                         $value = substr( $value, 0, strpos( $value, ' !important' ) );
