@@ -13,7 +13,8 @@ define( [], function() {
 
 		maybeAddRow: function( model ) {
             var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
-			if ( ! model.get( 'cellcid' && 'undefined' == typeof formContentLoadFilters[1] ) ) {
+            // If we don't have a cellcid AND multi-part is not enabled...
+			if ( ! model.get( 'cellcid' && 'undefined' == typeof formContentLoadFilters[ 1 ] ) ) {
 				var order = ( ! model.get( 'order' ) || 999 == model.get( 'order' ) ) ? null : model.get( 'order' );
 				nfRadio.channel( 'layouts' ).request( 'add:row', null, { order: order, field: model } );
 			}
