@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.6
 Tested up to: 4.8
-Stable tag: 3.0.23
+Stable tag: 3.0.22
 
 License: GPLv2 or later
 
@@ -24,13 +24,7 @@ For help and video tutorials, please visit our website: [NinjaForms.com](http://
 
 == Changelog ==
 
-= 3.0.23 (14 September 2017) =
-
-*Changes:*
-
-* Re-release with missing files.
-
-= 3.0.22 (13 September 2017) =
+= 3.0.22 (03 September 2017) =
 
 *Bugs:*
 
