@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms, CSS
 Requires at least: 4.6
 Tested up to: 4.8
-Stable tag: 3.0.24
+Stable tag: 3.0.25
 
 License: GPLv2 or later
 
@@ -23,6 +23,12 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.25 (19 September 2017) =
+
+*Bugs:*
+
+* Fixed a bug with Required Fields not being properly validated on submission.
 
 = 3.0.24 (15 September 2017) =
 
