@@ -29,6 +29,7 @@ define( [], function( ) {
 
 		validateFields: function() {
 			_.each( this.models, function( fieldModel ) {
+				fieldModel.set( 'clean', false ); // @todo remove after this is released in core.
 				nfRadio.channel( 'submit' ).trigger( 'validate:field', fieldModel );
 			}, this );
 		},
