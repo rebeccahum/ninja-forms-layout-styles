@@ -281,7 +281,7 @@ final class NF_Styles
                                     break;
                                 case 'display':
                                 case 'float':
-                                    continue;
+                                    break;
                                 default:
                                     $selector = '.ninja-forms-field';
                                     $styles[ '.nf-field-element > div' ][ $element ] = $style;
@@ -344,7 +344,7 @@ final class NF_Styles
                                         case 'float':
                                         case 'height':
                                         case 'width':
-                                            continue;
+                                            break;
                                     }
                                 }
                             }
@@ -365,7 +365,7 @@ final class NF_Styles
                                         case 'float':
                                         case 'height':
                                         case 'width':
-                                            continue;
+                                            break;
                                     }
                                 }
                             }
@@ -386,7 +386,7 @@ final class NF_Styles
                                         case 'float':
                                         case 'height':
                                         case 'width':
-                                            continue;
+                                            break;
                                     }
 
                                     if( 'color' == $rule ){
@@ -414,7 +414,7 @@ final class NF_Styles
                                             break;
                                         case 'display':
                                         case 'float':
-                                            continue;
+                                            break;
                                         default:
                                             $selector = '.ninja-forms-field';
                                             $styles[ str_replace( '{field-type}' , $field_type, $base_selector ) . ' .nf-field-element > div' ][ $rule ] = $value;
@@ -585,7 +585,7 @@ final class NF_Styles
                                     case 'float':
                                     case 'height':
                                     case 'width':
-                                        continue;
+                                        break;
                                 }
 
                                 if( 'color' == $rule ){
@@ -611,7 +611,7 @@ final class NF_Styles
                                     break;
                                 case 'display':
                                 case 'float':
-                                    continue;
+                                    break;
                                 default:
                                     $selector = '.ninja-forms-field';
                                     $styles[ ' .nf-field-element > div' ][ $rule ] = $field_setting;
@@ -636,7 +636,7 @@ final class NF_Styles
                                     break;
                                 case 'display':
                                 case 'float':
-                                    continue;
+                                    break;
                             }
                         }
 
@@ -655,7 +655,7 @@ final class NF_Styles
                                 case 'float':
                                 case 'height':
                                 case 'width':
-                                    continue;
+                                    break;
                             }
                         }
                     }
